@@ -1,0 +1,29 @@
+/*--------------------------------------*\
+    Project name: FishEye
+    Author: Adelino ARAUJO
+\*------------------------------------- */
+
+@charset "UTF-8";
+
+@import "abstracts/variables";
+@import "abstracts/mixins";
+@import "abstracts/functions";
+@import "abstracts/placeholders";
+
+@import "layout/body";
+@import "layout/container";
+@import "base/reset";
+@import "base/typography";
+
+@import "components/buttons";
+@import "components/card";
+@import "components/animations";
+
+@import "layout/header";
+@import "layout/navigation";
+@import "layout/footer";
+@import "layout/forms";
+@import "layout/grid";
+
+@import "pages/home";
+
