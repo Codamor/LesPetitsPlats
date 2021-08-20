@@ -1,0 +1,23 @@
+{
+  "name": "lespetitsplats",
+  "version": "1.0.0",
+  "description": "Catalogue de recettes de cuisine avec moteur de recherche",
+  "main": "app.js",
+  "dependencies": {
+    "node-sass": "^6.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "sass": "sass --watch public/css/scss/main.scss:public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenClassRoomsProjects/AdelinoAraujo_7_23082021.git"
+  },
+  "author": "Adelino ARAUJO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OpenClassRoomsProjects/AdelinoAraujo_7_23082021/issues"
+  },
+  "homepage": "https://github.com/OpenClassRoomsProjects/AdelinoAraujo_7_23082021#readme"
+}
