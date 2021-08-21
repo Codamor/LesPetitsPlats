@@ -38,6 +38,40 @@ body {
 }
 
 /*-----------------------*\
+         Grid
+\*---------------------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+/*-----------------------*\
+          HEADER
+\*---------------------- */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 270px;
+  height: 100px;
+}
+.header__logo {
+  width: 50px;
+  height: 50px;
+}
+.header__title {
+  font-size: 2.25em;
+  text-align: center;
+  font-weight: 700;
+  color: #d04e4e;
+}
+
+/*-----------------------*\
+           FORMS
+\*---------------------- */
+/*-----------------------*\
           RESET
 \*---------------------- */
 * {
@@ -136,11 +170,12 @@ body {
   height: auto;
   padding: 25px 0;
 }
-.search__bar {
+.search__container {
   width: 100%;
-  height: 70px;
+  height: auto;
+  margin-bottom: 20px;
 }
-.search__form {
+.search__bar {
   display: flex;
   justify-content: space-between;
   border-radius: 5px;
@@ -160,55 +195,58 @@ body {
   width: 70px;
 }
 .search__button:before {
-  color: #000;
   content: "";
   font-family: "Font Awesome 5 Free";
   font-size: 1.7em;
   font-weight: 700;
-}
-.search__filters {
-  width: 100%;
-  height: 200px;
+  color: #000;
 }
 
 /*-----------------------*\
          FILTERS
 \*---------------------- */
-/*-----------------------*\
-          HEADER
-\*---------------------- */
-.header {
+.filters {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 270px;
-  height: 100px;
-}
-.header__logo {
-  width: 50px;
-  height: 50px;
-}
-.header__title {
-  font-size: 2.25em;
-  text-align: center;
-  font-weight: 700;
-  color: #d04e4e;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-/*-----------------------*\
-        NAVIGATION
-\*---------------------- */
-/*-----------------------*\
-          FOOTER
-\*-----------------------*/
-/*-----------------------*\
-           FORMS
-\*---------------------- */
-/*-----------------------*\
-          GRIDS
-\*---------------------- */
-/*-----------------------*\
-          Home
-\*---------------------- */
+.filter__interaction {
+  display: flex;
+  align-items: center;
+  width: 170px;
+  height: 69px;
+  margin-right: 20px;
+  padding: 20px;
+  border-radius: 5px;
+}
+.filter__interaction input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+.filter__interaction input::placeholder {
+  opacity: 1;
+  font-weight: 500;
+  color: #fff;
+}
+.filter__interaction--option-one, .filter__interaction--option-one > input {
+  background-color: #3282f7;
+}
+.filter__interaction--option-two, .filter__interaction--option-two > input {
+  background-color: #68D9A4;
+}
+.filter__interaction--option-three, .filter__interaction--option-three > input {
+  background-color: #ED6454;
+}
+.filter__interaction-icon::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #fff;
+}
 
 /*# sourceMappingURL=style.css.map */

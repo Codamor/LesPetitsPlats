@@ -1,0 +1,47 @@
+/*-----------------------*\
+         FILTERS
+\*---------------------- */
+
+.filters{
+  display: flex;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.filter__interaction{
+  display: flex;
+  align-items: center;
+  width: 170px;
+  height: 69px;
+  margin-right: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  & input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    &::placeholder{
+      opacity: 1;
+      font-weight: 500;
+      color: #fff;
+    }
+  }
+  &--option-one, &--option-one > input{
+    background-color: #3282f7;
+  }
+  &--option-two, &--option-two > input{
+    background-color: #68D9A4;
+  }
+  &--option-three, &--option-three > input{
+    background-color: #ED6454;
+  }
+  &-icon::before{
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #fff;
+  }
+}

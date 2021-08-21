@@ -26,8 +26,8 @@
 
     <section class="search">
 
-        <div id="search-bar" class="search__bar">
-            <form class="search__form" action="#">
+        <div class="search__container">
+            <form id="search-bar" class="search__bar" action="#">
                 <input id="search" class="search__input" name="search"type="text" placeholder="Rechercher un ingrédient, appareil, ustensil ou une recette">
                 <button id="submit" class="search__button">
                 </button>
@@ -35,23 +35,49 @@
 
         </div>
 
-        <div id="search-filters" class="search__filters">
+        <div class="search__container">
 
-            <div id="filters" class="filters">
-                <div id="filter-one" class="filters__option-one">
+            <div class="filters">
+                <div class="filter">
+                    <div class="filter__interaction filter__interaction--option-one">
+                        <input type="text" id="ingredients" placeholder="Ingredients" ></input>
+                        <span class="filter__interaction-icon"></span>
+                    </div>
+
+                    <div class="filter__content">
+
+                    </div>
 
                 </div>
-                <div id="filter-two" class="filters__option-two">
 
+                <div class="filter">
+                    <div class="filter__interaction filter__interaction--option-two">
+                        <input type="text" id="devices" placeholder="Appareil"></input>
+                        <span class="filter__interaction-icon"></span>
+                    </div>
+
+                    <div class="filter__content">
+
+                    </div>
                 </div>
-                <div id="filter-three" class="filters__option-three">
 
+                <div class="filter">
+                    <div class="filter__interaction filter__interaction--option-three">
+                        <input type="text" id="utensils" placeholder="Ustensiles"></input>
+                        <span class="filter__interaction-icon"></span>
+                    </div>
+
+                    <div class="filter__content">
+
+                    </div>
                 </div>
 
             </div>
 
-            <div id="filters-selected" class="filters__selected">
+            <div class="filters">
+                <div class="filter--selected">
 
+                </div>
             </div>
 
         </div>
