@@ -1,3 +1,55 @@
 /*-----------------------*\
            CARD
 \*---------------------- */
+
+
+.card{
+  width: 380px;
+  height: 364px;
+  border-radius: 5px;
+  overflow: hidden;
+    &__media{
+    height: 50%;
+    background-color: $color-dark-grey;
+  }
+  &__data{
+    width: 100%;
+    height: 50%;
+
+    background-color: $color-medium-grey;
+  }
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    padding:  10px;
+  }
+  &__title, &__time{
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+  &__time:before{
+    content: "\f017";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 500;
+  }
+  &__ingredient-title{
+    font-weight: 500;
+  }
+  &__cols-box{
+    display: flex;
+    width: 100%;
+    height: auto;
+  }
+  &__col{
+    width: 50%;
+    height:auto;
+    padding:  10px;
+    font-size: 0.9em;
+    line-height: 1;
+    &--col-1{
+    }
+    &--col-2{
+    }
+  }
+}
