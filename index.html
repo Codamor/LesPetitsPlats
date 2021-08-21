@@ -28,8 +28,9 @@
 
         <div class="search__container">
             <form id="search-bar" class="search__bar" action="#">
-                <input id="search" class="search__input" name="search"type="text" placeholder="Rechercher un ingrédient, appareil, ustensil ou une recette">
-                <button id="submit" class="search__button">
+                <input id="search" class="search__input" name="search"type="text" placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette"
+                       aria-label="Rechercher un ingrédient, appareil, ustensile ou une recette">
+                <button id="submit" class="search__button" aria-label="Valider votre recherche">
                 </button>
             </form>
 
@@ -38,36 +39,157 @@
         <div class="search__container">
 
             <div class="filters">
-                <div class="filter">
-                    <div class="filter__interaction filter__interaction--option-one">
-                        <input type="text" id="ingredients" placeholder="Ingredients" ></input>
+                <div class="filter filter__option-one">
+                    <div class="filter__interaction">
+                        <input type="text" id="ingredients" placeholder="Ingredients" aria-label="Rechercher par ingrédient"></input>
                         <span class="filter__interaction-icon"></span>
                     </div>
 
                     <div class="filter__content">
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
 
                     </div>
 
                 </div>
 
-                <div class="filter">
-                    <div class="filter__interaction filter__interaction--option-two">
-                        <input type="text" id="devices" placeholder="Appareil"></input>
+                <div class="filter filter__option-two">
+                    <div class="filter__interaction">
+                        <input type="text" id="devices" placeholder="Appareil" aria-label="Rechercher par appareil"></input>
                         <span class="filter__interaction-icon"></span>
                     </div>
 
                     <div class="filter__content">
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
 
                     </div>
                 </div>
 
-                <div class="filter">
-                    <div class="filter__interaction filter__interaction--option-three">
-                        <input type="text" id="utensils" placeholder="Ustensiles"></input>
+                <div class="filter filter__option-three">
+                    <div class="filter__interaction ">
+                        <input type="text" id="utensils" placeholder="Ustensiles" aria-label="Rechercher par ustensil"></input>
                         <span class="filter__interaction-icon"></span>
                     </div>
 
                     <div class="filter__content">
+
 
                     </div>
                 </div>
@@ -86,9 +208,9 @@
 
     <main id="main" class="main">
 
-        <div id="gallery" class="gallery">
+        <div id="gallery" class="gallery" aria-label="Résultats de votre recherche">
 
-            <div class="card">
+            <div class="card" aria-label="Recette de cuisine">
                 <div class="card__media">
 
                 </div>
