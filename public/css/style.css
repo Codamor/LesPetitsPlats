@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*--------------------------------------*\
     Project name: FishEye
     Author: Adelino ARAUJO
@@ -24,8 +25,18 @@ body {
 }
 
 /*-----------------------*\
-    CONTAINER
+       CONTAINER
 \*---------------------- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1440px;
+  height: auto;
+  margin: 0 auto;
+  padding: 50px 100px;
+}
+
 /*-----------------------*\
           RESET
 \*---------------------- */
@@ -59,7 +70,7 @@ h1, h2, h3, h4 {
         TYPOGRAPHY
 \*---------------------- */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-weight: 400;
 }
 
@@ -69,12 +80,121 @@ body {
 /*-----------------------*\
            CARD
 \*---------------------- */
+.card {
+  width: 380px;
+  height: 364px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.card__media {
+  height: 50%;
+  background-color: #c6bebe;
+}
+.card__data {
+  width: 100%;
+  height: 50%;
+  background-color: #e8e8e8;
+}
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  padding: 10px;
+}
+.card__title, .card__time {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+.card__time:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 500;
+}
+.card__ingredient-title {
+  font-weight: 500;
+}
+.card__cols-box {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+.card__col {
+  width: 50%;
+  height: auto;
+  padding: 10px;
+  font-size: 0.9em;
+  line-height: 1;
+}
 /*-----------------------*\
        ANIMATIONS
 \*---------------------- */
 /*-----------------------*\
+         SEARCH
+\*---------------------- */
+.search {
+  width: 1240px;
+  height: auto;
+  padding: 25px 0;
+}
+.search__bar {
+  width: 100%;
+  height: 70px;
+}
+.search__form {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.search__input, .search__button {
+  width: 100%;
+  height: 70px;
+  border: none;
+  background-color: #e8e8e8;
+}
+.search__input {
+  padding: 0 20px;
+  font-size: 1.1em;
+}
+.search__button {
+  width: 70px;
+}
+.search__button:before {
+  color: #000;
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.7em;
+  font-weight: 700;
+}
+.search__filters {
+  width: 100%;
+  height: 200px;
+}
+
+/*-----------------------*\
+         FILTERS
+\*---------------------- */
+/*-----------------------*\
           HEADER
 \*---------------------- */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 270px;
+  height: 100px;
+}
+.header__logo {
+  width: 50px;
+  height: 50px;
+}
+.header__title {
+  font-size: 2.25em;
+  text-align: center;
+  font-weight: 700;
+  color: #d04e4e;
+}
+
 /*-----------------------*\
         NAVIGATION
 \*---------------------- */
