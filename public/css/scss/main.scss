@@ -12,6 +12,10 @@
 
 @import "layout/body";
 @import "layout/container";
+@import "layout/grid";
+@import "layout/header";
+@import "layout/forms";
+
 @import "base/reset";
 @import "base/typography";
 
@@ -20,12 +24,4 @@
 @import "components/animations";
 @import "components/search";
 @import "components/filters";
-
-@import "layout/header";
-@import "layout/navigation";
-@import "layout/footer";
-@import "layout/forms";
-@import "layout/grid";
-
-@import "pages/home";
 
