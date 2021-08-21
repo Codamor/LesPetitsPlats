@@ -211,14 +211,26 @@ body {
   margin-bottom: 20px;
 }
 
-.filter__interaction {
-  display: flex;
-  align-items: center;
+.filter {
+  position: relative;
   width: 170px;
   height: 69px;
   margin-right: 20px;
-  padding: 20px;
   border-radius: 5px;
+}
+.filter__option-one, .filter__option-one input, .filter__option-one ul {
+  background-color: #3282f7;
+}
+.filter__option-two, .filter__option-two input, .filter__option-two ul {
+  background-color: #68D9A4;
+}
+.filter__option-three, .filter__option-three input, .filter__option-three ul {
+  background-color: #ED6454;
+}
+.filter__interaction {
+  display: flex;
+  align-items: center;
+  padding: 20px;
 }
 .filter__interaction input {
   width: 100%;
@@ -232,21 +244,29 @@ body {
   font-weight: 500;
   color: #fff;
 }
-.filter__interaction--option-one, .filter__interaction--option-one > input {
-  background-color: #3282f7;
-}
-.filter__interaction--option-two, .filter__interaction--option-two > input {
-  background-color: #68D9A4;
-}
-.filter__interaction--option-three, .filter__interaction--option-three > input {
-  background-color: #ED6454;
-}
 .filter__interaction-icon::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-size: 1.2em;
   font-weight: 700;
   color: #fff;
+}
+.filter__content {
+  display: none;
+  width: auto;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+}
+.filter__content ul {
+  width: 200px;
+  padding: 0 0 20px 20px;
+  color: #fff;
+}
+.filter:hover {
+  width: auto;
+}
+.filter:hover .filter__content {
+  display: flex;
 }
 
 /*# sourceMappingURL=style.css.map */
