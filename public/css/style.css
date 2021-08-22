@@ -224,8 +224,6 @@ body {
 
 .filter {
   position: relative;
-  justify-content: center;
-  align-items: center;
   width: 170px;
   height: auto;
   margin-right: 20px;
