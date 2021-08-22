@@ -256,13 +256,13 @@ body {
   padding: 0 0 20px 20px;
   color: #fff;
 }
-.filter:hover {
+.filter--option:hover {
   width: auto;
 }
-.filter:hover .filter__content {
+.filter--option:hover .filter__content {
   display: flex;
 }
-.filter:hover .filter__interaction-icon:before {
+.filter--option:hover .filter__interaction-icon:before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-size: 1.2em;

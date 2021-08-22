@@ -17,17 +17,19 @@
   margin-right: 20px;
   border-radius: 5px;
   color: #fff;
-    &__interaction{
+  &__interaction {
     display: flex;
     align-items: center;
     padding: 20px;
-    & input{
+
+    & input {
       width: 100%;
       height: 100%;
       border: none;
       outline: none;
       color: #fff;
-      &::placeholder{
+
+      &::placeholder {
         opacity: 1;
         font-weight: 500;
         color: #fff;
@@ -52,18 +54,20 @@
       color: #fff;
     }
   }
-  &:hover{
-    width: auto;
-  }
-  &:hover .filter__content{
-    display: flex;
-  }
-  &:hover .filter__interaction-icon:before{
-    content: "\f077";
-    font-family: "Font Awesome 5 Free";
-    font-size: 1.2em;
-    font-weight: 700;
-    color: #fff;
+  &--option{
+    &:hover{
+      width: auto;
+    }
+    &:hover .filter__content{
+      display: flex;
+    }
+    &:hover .filter__interaction-icon:before{
+      content: "\f077";
+      font-family: "Font Awesome 5 Free";
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #fff;
+    }
   }
   &--option-one, &--option-one input, &--option-one ul{
     background-color: #3282f7;
