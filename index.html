@@ -2,10 +2,265 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Les Petits Plats</title>
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<div id="container" class="container">
+
+    <header id="header" class="header">
+        <div class="header__logo">
+            <img src="public/media/logo.png"
+                 alt="Les Petits Plats, votre site de recette de cuisines"
+                 title="Les Petits Plats, votre site de recette de cuisines">
+        </div>
+        <h1 class="header__title" aria-label="Les Petits Plats, votre site de recette de cuisines">
+            Les Petits Plats
+        </h1>
+    </header>
+
+    <section class="search">
+
+        <div class="search__container">
+            <form id="search-bar" class="search__bar" action="#">
+                <input id="search" class="search__input" name="search"type="text" placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette"
+                       aria-label="Rechercher un ingrédient, appareil, ustensile ou une recette">
+                <button id="submit" class="search__button" aria-label="Valider votre recherche">
+                </button>
+            </form>
+
+        </div>
+
+        <div class="search__container search__container--advanced">
+
+            <div class="filters filters--default">
+                <div class="filter filter--option filter--option-one">
+                    <div class="filter__interaction">
+                        <input type="text" id="ingredients" placeholder="Ingredients" aria-label="Rechercher par ingrédient"></input>
+                        <span class="filter__icon"></span>
+                    </div>
+
+                    <div class="filter__content">
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="filter filter--option filter--option-two">
+                    <div class="filter__interaction">
+                        <input type="text" id="devices" placeholder="Appareil" aria-label="Rechercher par appareil"></input>
+                        <span class="filter__icon"></span>
+                    </div>
+
+                    <div class="filter__content">
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+                        <ul class="filter__list">
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                            <li class="filter__element">
+                                noix de coco
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="filter filter--option filter--option-three">
+                    <div class="filter__interaction ">
+                        <input type="text" id="utensils" placeholder="Ustensiles" aria-label="Rechercher par ustensil"></input>
+                        <span class="filter__icon"></span>
+                    </div>
+
+                    <div class="filter__content">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="filters filters--selected">
+                <div class="filter filter--option-one filter--selected">
+                    Coco
+                    <span class="filter__icon"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <main id="main" class="main">
+
+        <div id="gallery" class="gallery" aria-label="Résultats de votre recherche">
+
+            <div class="card" aria-label="Recette de cuisine">
+                <div class="card__media">
+
+                </div>
+
+                <div class="card__data">
+                    <div class="card__header">
+                        <h2 class="card__title">
+                            Limonade de coco
+                        </h2>
+
+                        <div class="card__time">
+                            10 min
+                        </div>
+                    </div>
+
+                    <div class="card__cols-box">
+                        <div class="card__col card__col--col-1">
+                            <div class="card__ingredient">
+                                <span class="card__ingredient-title">Jus de citro</span>n: <span class="card__ingredient-value">2</span>
+                            </div>
+                            <div class="card__ingredient">
+                                <span class="card__ingredient-title">Jus de citro</span>n: <span class="card__ingredient-value">2</span>
+                            </div>
+                            <div class="card__ingredient">
+                                <span class="card__ingredient-title">Jus de citron à la meringue</span>: <span class="card__ingredient-value">2</span>
+                            </div>
+
+                        </div>
+
+                        <div class="card__col card__col--col-2">
+                            <p class="card__description">
+                                Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert
+                                (mieux vaut prendre un plat large et peu profond).
+                                Laisser reposer au réfrigérateur au moins 2 heures.
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
 
 <script src="app.js"></script>
 </body>

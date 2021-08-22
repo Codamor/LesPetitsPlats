@@ -1,0 +1,97 @@
+/*-----------------------*\
+         FILTERS
+\*---------------------- */
+
+.filters{
+  display: flex;
+  height: auto;
+  margin-bottom: 20px;
+  &--default{
+    order: 2;
+  }
+  &--selected{
+    order: 1;
+  }
+}
+.filter{
+  position: relative;
+  width: 170px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+  color: #fff;
+  &__interaction {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    & input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      color: #fff;
+      &::placeholder {
+        opacity: 1;
+        font-weight: 500;
+        color: #fff;
+      }
+    }
+  }
+  &__icon::before{
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #fff;
+  }
+  &__content{
+    display: none;
+    width: auto;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    & ul{
+      width: 200px;
+      padding: 0 0 20px 20px;
+      color: #fff;
+    }
+  }
+  &--option{
+    &:hover{
+      width: auto;
+    }
+    &:hover .filter__content{
+      display: flex;
+    }
+    &:hover .filter__icon:before{
+      content: "\f077";
+      font-family: "Font Awesome 5 Free";
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+  &--option-one, &--option-one input, &--option-one ul{
+    background-color: #3282f7;
+  }
+  &--option-two, &--option-two input, &--option-two ul{
+    background-color: #68D9A4;
+  }
+  &--option-three, &--option-three input, &--option-three ul{
+    background-color: #ED6454;
+  }
+  &--selected{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    height: 40px;
+    & .filter__icon::before{
+      margin-left: 10px;
+      content: "\f057";
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+}
+
+
