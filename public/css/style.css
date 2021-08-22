@@ -200,6 +200,7 @@ body {
   font-size: 1.7em;
   font-weight: 700;
   color: #000;
+  cursor: pointer;
 }
 
 /*-----------------------*\
@@ -262,7 +263,7 @@ body {
 .filter--option:hover .filter__content {
   display: flex;
 }
-.filter--option:hover .filter__interaction-icon:before {
+.filter--option:hover .filter__icon:before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-size: 1.2em;
@@ -289,6 +290,7 @@ body {
   margin-left: 10px;
   content: "";
   font-weight: 500;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
