@@ -10,11 +10,10 @@
 
 .filter{
   position: relative;
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 170px;
-  height: 69px;
+  height: auto;
   margin-right: 20px;
   border-radius: 5px;
   color: #fff;
@@ -76,6 +75,9 @@
     background-color: #ED6454;
   }
   &--selected{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 110px;
     height: 40px;
     & .filter__icon::before{
