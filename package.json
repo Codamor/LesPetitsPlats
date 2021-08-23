@@ -6,7 +6,9 @@
   "dependencies": {
     "node-sass": "^6.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  },
   "scripts": {
     "sass": "sass --watch public/css/scss/main.scss:public/css/style.css"
   },
