@@ -6,4 +6,9 @@ export class Controller{
         this._view = view ;
     }
 
+    displayHomePage(){
+        let allRecipes = this._model.getAllRecipes() ;
+        this._view.displayAllRecipes(allRecipes) ;
+    }
+
 }
