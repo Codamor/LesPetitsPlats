@@ -1,5 +1,8 @@
 "use strict"
 
+//DOM ELEMENTS
+export let gallery = document.getElementById("gallery") ;
+
 
 //TO CLEAN TEXT
 let stopWords = [" a ", " au ", " aux ", " le ", " la ", " les ", " un ", " une ", " des ", " du ", " dans ",
