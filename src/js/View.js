@@ -2,7 +2,7 @@
 
 
 
-import {gallery} from "./helpers.js";
+import {gallery, search, submit} from "./helpers.js";
 
 export class View{
     constructor() {
@@ -70,5 +70,22 @@ export class View{
             htmlAllRecipes += this.displayOneRecipe(allRecipesObjectList[i]) ;
         }
     gallery.innerHTML = htmlAllRecipes ;
+    }
+
+    onSearch(){
+        search.addEventListener("keydown", event => {
+            if (event.key === "Enter"){
+                event.preventDefault() ;
+                let userSearch = event.target.value ;
+            }
+        }) ;
+
+    }
+
+    onSubmit(){
+        submit.addEventListener("click", event => {
+            event.preventDefault() ;
+            let userSearch = search.value ;
+        }) ;
     }
 }
