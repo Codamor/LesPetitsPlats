@@ -2,6 +2,8 @@
 
 //DOM ELEMENTS
 export let gallery = document.getElementById("gallery") ;
+export let search = document.getElementById("search") ;
+export let submit = document.getElementById("submit") ;
 
 
 //TO CLEAN TEXT
