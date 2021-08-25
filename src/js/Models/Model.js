@@ -108,4 +108,17 @@ export class Model{
 
         return allMatchedIngredientsWithoutDuplicates ;
     }
+
+    getDevices(oneMatchedRecipe){
+        return oneMatchedRecipe.appliance ;
+    }
+
+    getAllDevices(allMatchedRecipes){
+        let matchedDevices = [] ;
+
+        for (let i = 0; i < allMatchedRecipes.length; i++) {
+            matchedDevices.push(allMatchedRecipes[i].appliance) ;
+        }
+    }
+
 }
