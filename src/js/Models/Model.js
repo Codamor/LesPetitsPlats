@@ -92,4 +92,18 @@ export class Model{
 
         return matchedIngredients ;
     }
+
+    getAllIngredients(allMatchedRecipes){
+        let allMatchedIngredients = [] ;
+
+        for (let i = 0; i < allMatchedRecipes.length; i++) {
+            let thisRecipeIngredientsList = this.getIngredients(allMatchedRecipes[i]) ;
+
+            for (let j = 0; j < thisRecipeIngredientsList.length; j++) {
+                allMatchedIngredients.push(thisRecipeIngredientsList[j]) ;
+            }
+        }
+
+        return allMatchedIngredients ;
+    }
 }
