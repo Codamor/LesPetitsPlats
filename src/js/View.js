@@ -8,25 +8,23 @@ export class View{
     constructor() {
     }
 
-    displayOneRecipeIngredients(ingredients){
-
+    createHTMLIngredientsList(ingredients){
         let htmlIngredients = `` ;
 
         for (let i = 0; i < ingredients.length; i++) {
             htmlIngredients +=
-                `<div class="card__ingredient">
-                    ${ingredients[i].quantity ? `<span class="card__ingredient-title">${ingredients[i].ingredient}</span>:` : `<span class="card__ingredient-title">${ingredients[i].ingredient}</span>`}
+                `<li class="card__ingredient">
+                    ${ingredients[i].quantity ? `<h3 class="card__ingredient-title">${ingredients[i].ingredient}</h3>:` : `<span class="card__ingredient-title">${ingredients[i].ingredient}</span>`}
                     ${ingredients[i].quantity ? `<span className="card__ingredient-value">${ingredients[i].quantity}</span>` : `<span className="card__ingredient-value"></span>` }
                     ${ingredients[i].unit ? `<span class="card__ingredient-unit">${ingredients[i].unit}</span>` : `<span class="card__ingredient-unit"></span>` }
-                </div>` ;
+                </li>` ;
         }
         return htmlIngredients ;
     }
 
-    displayOneRecipe(recipeObject){
-
+    createHTMLRecipe(recipeObject){
         let htmlRecipe = `` ;
-        let htmlIngredientsList = this.displayOneRecipeIngredients(recipeObject.ingredients) ;
+        let htmlIngredientsList = this.createHTMLIngredientsList(recipeObject.ingredients) ;
 
         htmlRecipe =
             `<div class="card" aria-label="Recette de cuisine">
@@ -46,9 +44,9 @@ export class View{
                     </div>
 
                     <div class="card__cols-box">
-                        <div class="card__col card__col--col-1">
+                        <ul class="card__col card__col--col-1">
                             ${htmlIngredientsList}
-                        </div>
+                        </ul>
 
                         <div class="card__col card__col--col-2">
                             <p class="card__description">
@@ -63,11 +61,13 @@ export class View{
         return htmlRecipe ;
     }
 
-    displayAllRecipes(allRecipesObjectList){
+    displayRecipes(allRecipesObjectList){
+
+        gallery.innerHTML = `` ;
 
         let htmlAllRecipes = `` ;
         for (let i = 0; i < allRecipesObjectList.length; i++) {
-            htmlAllRecipes += this.displayOneRecipe(allRecipesObjectList[i]) ;
+            htmlAllRecipes += this.createHTMLRecipe(allRecipesObjectList[i]) ;
         }
     gallery.innerHTML = htmlAllRecipes ;
     }
