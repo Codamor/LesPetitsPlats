@@ -2,7 +2,7 @@
 
 
 
-import {gallery, search, submit} from "./helpers.js";
+import {cleanText, gallery, search, splitText, submit} from "./helpers.js";
 
 export class View{
     constructor() {
@@ -72,11 +72,15 @@ export class View{
     gallery.innerHTML = htmlAllRecipes ;
     }
 
-    onSearch(){
+    onSearch(handlerOnSearch){
         search.addEventListener("keydown", event => {
             if (event.key === "Enter"){
                 event.preventDefault() ;
-                let userSearch = event.target.value ;
+
+                let userInput = event.target.value ;
+                let userSearch = splitText(cleanText(userInput)) ;
+
+                handlerOnSearch(userSearch) ;
             }
         }) ;
 
