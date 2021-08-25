@@ -86,10 +86,13 @@ export class View{
 
     }
 
-    onSubmit(){
+    onSubmit(handlerOnSearch){
         submit.addEventListener("click", event => {
             event.preventDefault() ;
-            let userSearch = search.value ;
+            let userInput = search.value ;
+            let userSearch = splitText(cleanText(userInput)) ;
+
+            handlerOnSearch(userSearch) ;
         }) ;
     }
 }
