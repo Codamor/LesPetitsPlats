@@ -61,6 +61,19 @@ export class View{
         return htmlRecipe ;
     }
 
+    createHTMLTagsList(tagsList){
+        let htmlTagsList = `` ;
+
+        for (let i = 0; i < tagsList.length; i++) {
+            htmlTagsList +=
+                `<li class="filter__element">
+                    ${tagsList[i]}
+                </li>` ;
+        }
+
+        return htmlTagsList ;
+    }
+
     displayRecipes(recipesObjectsList){
 
         gallery.innerHTML = `` ;
