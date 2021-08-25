@@ -45,4 +45,11 @@ export class Model{
 
         return allIngredients;
     }
+
+    getNormalizedDescriptionFromRecipe(recipe){
+        let description = [] ;
+        description.push(splitText(cleanText(recipe.description))) ;
+
+        return description ;
+    }
 }
