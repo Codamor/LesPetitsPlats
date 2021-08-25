@@ -82,4 +82,14 @@ export class Model{
 
         return matchedRecipes ;
     }
+
+    getMatchedIngredientsFromOneRecipe(oneMatchedRecipe){
+        let matchedIngredients = [] ;
+
+        for (let i = 0; i < oneMatchedRecipe.ingredients.length; i++) {
+            matchedIngredients.push(oneMatchedRecipe.ingredients[i].ingredient) ;
+        }
+
+        return matchedIngredients ;
+    }
 }
