@@ -70,7 +70,7 @@ export class View{
         return htmlTag ;
     }
 
-    displayIngredientsList(matchedIngredients){
+    displayTagsList(matchedIngredients){
         let htmlIngredientsLists = `` ;
 
         while (matchedIngredients.length){
