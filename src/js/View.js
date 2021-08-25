@@ -2,7 +2,7 @@
 
 
 
-import {cleanText, gallery, search, splitText, submit} from "./helpers.js";
+import {cleanText, gallery, search, splitText, submit, ingredientsList} from "./helpers.js";
 
 export class View{
     constructor() {
@@ -61,18 +61,37 @@ export class View{
         return htmlRecipe ;
     }
 
-    createHTMLTagsList(tagsList){
-        let htmlTagsList = `` ;
+    createHTMLTag(oneTag){
+        let htmlTag =
+            `<li class="filter__element">
+                ${oneTag}
+            </li>` ;
 
-        for (let i = 0; i < tagsList.length; i++) {
-            htmlTagsList +=
-                `<li class="filter__element">
-                    ${tagsList[i]}
-                </li>` ;
-        }
-
-        return htmlTagsList ;
+        return htmlTag ;
     }
+
+    displayIngredientsList(matchedIngredients){
+        let htmlIngredientsLists = `` ;
+
+        while (matchedIngredients.length){
+            let ingredientsBatch = matchedIngredients.splice(0, 10) ;
+            let liElement = `` ;
+            let ulElement = `` ;
+
+            for (let i = 0; i < ingredientsBatch.length; i++) {
+                liElement += this.createHTMLTag(ingredientsBatch[i])
+            }
+
+            ulElement =
+                `<ul class="filter__list">
+                    ${liElement}
+                 </ul>`
+
+            htmlIngredientsLists += ulElement ;
+        }
+        ingredientsList.innerHTML = htmlIngredientsLists ;
+    }
+
 
     displayRecipes(recipesObjectsList){
 
