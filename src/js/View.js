@@ -61,13 +61,13 @@ export class View{
         return htmlRecipe ;
     }
 
-    displayRecipes(allRecipesObjectList){
+    displayRecipes(recipesObjectsList){
 
         gallery.innerHTML = `` ;
 
         let htmlAllRecipes = `` ;
-        for (let i = 0; i < allRecipesObjectList.length; i++) {
-            htmlAllRecipes += this.createHTMLRecipe(allRecipesObjectList[i]) ;
+        for (let i = 0; i < recipesObjectsList.length; i++) {
+            htmlAllRecipes += this.createHTMLRecipe(recipesObjectsList[i]) ;
         }
     gallery.innerHTML = htmlAllRecipes ;
     }
