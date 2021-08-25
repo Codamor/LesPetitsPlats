@@ -64,3 +64,19 @@ export function arrayMatch(array1, array2){
     }
     return matchNumber ;
 }
+
+export function removeDuplicatesFromArray(array){
+    let normalizedElements = [] ;
+    let arrayWithoutDuplicates = [] ;
+
+    for (let i = 0; i < array.length; i++) {
+        let ingredient = cleanText(array[i]) ;
+
+        if (!normalizedElements.includes(ingredient)){
+            normalizedElements.push(ingredient) ;
+            arrayWithoutDuplicates.push(array[i]) ;
+        }
+    }
+
+    return arrayWithoutDuplicates ;
+}

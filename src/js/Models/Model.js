@@ -1,7 +1,7 @@
 "use strict"
 
 import {Recipe} from "./Recipe.js";
-import {arrayMatch, cleanText, splitText} from "../helpers.js";
+import {arrayMatch, cleanText, removeDuplicatesFromArray, splitText} from "../helpers.js";
 
 export class Model{
 
@@ -104,17 +104,7 @@ export class Model{
             }
         }
 
-        let normalizedMatchedIngredients = [] ;
-        let allMatchedIngredientsWithoutDuplicates = [] ;
-
-        for (let i = 0; i < matchedIngredients.length; i++) {
-            let ingredient = cleanText(matchedIngredients[i]) ;
-
-            if (!normalizedMatchedIngredients.includes(ingredient)){
-                normalizedMatchedIngredients.push(ingredient) ;
-                allMatchedIngredientsWithoutDuplicates.push(matchedIngredients[i]) ;
-            }
-        }
+        let allMatchedIngredientsWithoutDuplicates = removeDuplicatesFromArray(matchedIngredients) ;
 
         return allMatchedIngredientsWithoutDuplicates ;
     }
