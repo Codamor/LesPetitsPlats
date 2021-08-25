@@ -28,17 +28,17 @@ export class Model{
         return allRecipes ;
     }
 
-    getNormalizedNameFromRecipe(recipe){
-        let name = splitText(cleanText(recipe._name)) ;
+    getNormalizedName(oneRecipe){
+        let name = splitText(cleanText(oneRecipe._name)) ;
 
         return name ;
     }
 
-    getNormalizedIngredientsFromRecipe(recipe) {
+    getNormalizedIngredients(oneRecipe) {
         let allIngredients = [];
 
-        for (let i = 0; i < recipe.ingredients.length; i++) {
-            let ingredient = splitText(cleanText(recipe.ingredients[i].ingredient)) ;
+        for (let i = 0; i < oneRecipe.ingredients.length; i++) {
+            let ingredient = splitText(cleanText(oneRecipe.ingredients[i].ingredient)) ;
             for (let j = 0; j < ingredient.length; j++) {
                 allIngredients.push(ingredient[j]) ;
             }
@@ -47,18 +47,18 @@ export class Model{
         return allIngredients;
     }
 
-    getNormalizedDescriptionFromRecipe(recipe){
-        let description = splitText(cleanText(recipe.description)) ;
+    getNormalizedDescription(oneRecipe){
+        let description = splitText(cleanText(oneRecipe.description)) ;
 
         return description ;
     }
 
 
-    getRecipeMatchScore(userInput, recipe){
+    defineRecipeMatchScore(userInput, oneRecipe){
         let recipeScore = 0 ;
-        let recipeName = this.getNormalizedNameFromRecipe(recipe) ;
-        let recipeIngredients = this.getNormalizedIngredientsFromRecipe(recipe) ;
-        let recipeDescription = this.getNormalizedDescriptionFromRecipe(recipe) ;
+        let recipeName = this.getNormalizedName(oneRecipe) ;
+        let recipeIngredients = this.getNormalizedIngredients(oneRecipe) ;
+        let recipeDescription = this.getNormalizedDescription(oneRecipe) ;
 
         let nameScore = arrayMatch(recipeName, userInput) ;
         let ingredientScore = arrayMatch(recipeIngredients, userInput) ;
@@ -74,7 +74,7 @@ export class Model{
         let allRecipes = this.getAllRecipes() ;
 
         for (let i = 0; i < allRecipes.length; i++) {
-            let recipeScore = this.getRecipeMatchScore(userInput, allRecipes[i]) ;
+            let recipeScore = this.defineRecipeMatchScore(userInput, allRecipes[i]) ;
             if (recipeScore >= 1){
                 matchedRecipes.push(allRecipes[i]) ;
             }
@@ -83,7 +83,7 @@ export class Model{
         return matchedRecipes ;
     }
 
-    getMatchedIngredientsFromOneRecipe(oneMatchedRecipe){
+    getIngredients(oneMatchedRecipe){
         let matchedIngredients = [] ;
 
         for (let i = 0; i < oneMatchedRecipe.ingredients.length; i++) {
