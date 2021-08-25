@@ -59,7 +59,7 @@ export class Model{
         let recipeName = this.getNormalizedNameFromRecipe(recipe) ;
         let recipeIngredients = this.getNormalizedIngredientsFromRecipe(recipe) ;
         let recipeDescription = this.getNormalizedDescriptionFromRecipe(recipe) ;
-        
+
         let nameScore = arrayMatch(recipeName, userInput) ;
         let ingredientScore = arrayMatch(recipeIngredients, userInput) ;
         let descriptionScore = arrayMatch(recipeDescription, userInput) ;
@@ -67,5 +67,19 @@ export class Model{
         recipeScore =  nameScore + ingredientScore + descriptionScore ;
 
         return recipeScore ;
+    }
+
+    getMatchedRecipes(userInput){
+        let matchedRecipes = [] ;
+        let allRecipes = this.getAllRecipes() ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            let recipeScore = this.getRecipeMatchScore(userInput, allRecipes[i]) ;
+            if (recipeScore >= 1){
+                matchedRecipes.push(allRecipes[i]) ;
+            }
+        }
+
+        return matchedRecipes ;
     }
 }
