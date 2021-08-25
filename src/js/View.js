@@ -1,8 +1,6 @@
 "use strict"
 
-
-
-import {cleanText, gallery, search, splitText, submit, ingredientsList} from "./helpers.js";
+import {cleanText, gallery, search, splitText, submit, ingredientsList, devicesList, utensilsList} from "./helpers.js";
 
 export class View{
     constructor() {
@@ -70,11 +68,11 @@ export class View{
         return htmlTag ;
     }
 
-    displayTagsList(matchedIngredients){
-        let htmlIngredientsLists = `` ;
+    displayTagsList(matchedElements, tagsType){
+        let htmlLists = `` ;
 
-        while (matchedIngredients.length){
-            let ingredientsBatch = matchedIngredients.splice(0, 10) ;
+        while (matchedElements.length){
+            let ingredientsBatch = matchedElements.splice(0, 10) ;
             let liElement = `` ;
             let ulElement = `` ;
 
@@ -87,9 +85,17 @@ export class View{
                     ${liElement}
                  </ul>`
 
-            htmlIngredientsLists += ulElement ;
+            htmlLists += ulElement ;
         }
-        ingredientsList.innerHTML = htmlIngredientsLists ;
+
+        if (tagsType === "ingredients"){
+            ingredientsList.innerHTML = htmlLists ;
+        } else if (tagsType === "appliance"){
+            devicesList.innerHTML = htmlLists ;
+        } else if (tagsType === "utensils"){
+            utensilsList.innerHTML = htmlLists ;
+        }
+
     }
 
 
