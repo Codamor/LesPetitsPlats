@@ -1,6 +1,7 @@
 "use strict"
 
 import {Recipe} from "./Recipe.js";
+import {cleanText, splitText} from "../helpers.js";
 
 export class Model{
 
@@ -25,5 +26,12 @@ export class Model{
             allRecipes.push(recipe) ;
         }
         return allRecipes ;
+    }
+
+    getNormalizedNameFromRecipe(recipe){
+        let name = [] ;
+        name.push(splitText(cleanText(recipe._name))) ;
+
+        return name ;
     }
 }
