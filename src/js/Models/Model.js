@@ -34,4 +34,15 @@ export class Model{
 
         return name ;
     }
+
+    getNormalizedIngredientsFromRecipe(recipe) {
+
+        let allIngredients = [];
+
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+            allIngredients.push(cleanText(recipe.ingredients[i].ingredient)) ;
+        }
+
+        return allIngredients;
+    }
 }
