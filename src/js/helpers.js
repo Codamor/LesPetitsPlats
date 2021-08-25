@@ -7,9 +7,9 @@ export let submit = document.getElementById("submit") ;
 
 
 //TO CLEAN TEXT
-let stopWords = [" a ", " au ", " aux ", " le ", " la ", " les ", " un ", " une ", " des ", " du ", " dans ",
+let stopWords = [" a ", " au ", " aux ", " le ", " la ", " les ", " un ", " une ", " des ", " du ", " dans ", //TODO handle empty space more efficiently
     " l'", " d'", " en ", " de ", " et ", " pour ", " que ", " avec ", " plus ", " sans ", " ce ",
-    " ceci ", " ou ", " mais ", " donc ", " ni ", " etc "] ;
+    " ceci ", " ou ", " mais ", " donc ", " ni ", " etc ", " recette "] ;
 
 
 function toLowerCaseText(text){
@@ -47,3 +47,6 @@ export function cleanText(text){
     return text
 }
 
+export function splitText(text){
+    return text.split(" ") ;
+}
