@@ -38,7 +38,10 @@ export class Model{
         let allIngredients = [];
 
         for (let i = 0; i < recipe.ingredients.length; i++) {
-            allIngredients.push(cleanText(recipe.ingredients[i].ingredient)) ;
+            let ingredient = splitText(cleanText(recipe.ingredients[i].ingredient)) ;
+            for (let j = 0; j < ingredient.length; j++) {
+                allIngredients.push(ingredient[j]) ;
+            }
         }
 
         return allIngredients;
@@ -48,5 +51,21 @@ export class Model{
         let description = splitText(cleanText(recipe.description)) ;
 
         return description ;
+    }
+
+
+    getRecipeMatchScore(userInput, recipe){
+        let recipeScore = 0 ;
+        let recipeName = this.getNormalizedNameFromRecipe(recipe) ;
+        let recipeIngredients = this.getNormalizedIngredientsFromRecipe(recipe) ;
+        let recipeDescription = this.getNormalizedDescriptionFromRecipe(recipe) ;
+        
+        let nameScore = arrayMatch(recipeName, userInput) ;
+        let ingredientScore = arrayMatch(recipeIngredients, userInput) ;
+        let descriptionScore = arrayMatch(recipeDescription, userInput) ;
+
+        recipeScore =  nameScore + ingredientScore + descriptionScore ;
+
+        return recipeScore ;
     }
 }
