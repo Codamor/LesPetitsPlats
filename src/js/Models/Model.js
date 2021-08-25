@@ -109,7 +109,7 @@ export class Model{
         return allMatchedIngredientsWithoutDuplicates ;
     }
 
-    getDevices(oneMatchedRecipe){
+    getDevices(oneMatchedRecipe){ //TODO remove if useless
         return oneMatchedRecipe.appliance ;
     }
 
@@ -119,6 +119,10 @@ export class Model{
         for (let i = 0; i < allMatchedRecipes.length; i++) {
             matchedDevices.push(allMatchedRecipes[i].appliance) ;
         }
+
+        let allMatchedDevicesWithoutDuplicates = removeDuplicatesFromArray(matchedDevices) ;
+
+        return allMatchedDevicesWithoutDuplicates ;
     }
 
 }
