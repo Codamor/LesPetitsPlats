@@ -29,7 +29,6 @@ function removeMultipleSpaces(text){
 }
 
 function removeStopWords(text){
-
     for (let i = 0; i < stopWords.length; i++) {
         text = text.replaceAll(stopWords[i], " ")
     }
@@ -37,7 +36,6 @@ function removeStopWords(text){
 }
 
 export function cleanText(text){
-
     text = toLowerCaseText(text) ;
     text = removeAccents(text) ;
     text = removePunctuation(text) ;
@@ -49,4 +47,17 @@ export function cleanText(text){
 
 export function splitText(text){
     return text.split(" ") ;
+}
+
+export function arrayMatch(array1, array2){
+    let matchNumber = 0 ;
+
+    for (let i = 0; i < array1.length; i++) {
+        for (let j = 0; j < array2.length; j++) {
+            if(array1[i] === array2[j]){
+                matchNumber += 1 ;
+            }
+        }
+    }
+    return matchNumber ;
 }
