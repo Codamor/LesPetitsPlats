@@ -94,16 +94,28 @@ export class Model{
     }
 
     getAllIngredients(allMatchedRecipes){
-        let allMatchedIngredients = [] ;
+        let matchedIngredients = [] ;
 
         for (let i = 0; i < allMatchedRecipes.length; i++) {
             let thisRecipeIngredientsList = this.getIngredients(allMatchedRecipes[i]) ;
 
             for (let j = 0; j < thisRecipeIngredientsList.length; j++) {
-                allMatchedIngredients.push(thisRecipeIngredientsList[j]) ;
+                matchedIngredients.push(thisRecipeIngredientsList[j]) ;
             }
         }
 
-        return allMatchedIngredients ;
+        let normalizedMatchedIngredients = [] ;
+        let allMatchedIngredientsWithoutDuplicates = [] ;
+
+        for (let i = 0; i < matchedIngredients.length; i++) {
+            let ingredient = cleanText(matchedIngredients[i]) ;
+
+            if (!normalizedMatchedIngredients.includes(ingredient)){
+                normalizedMatchedIngredients.push(ingredient) ;
+                allMatchedIngredientsWithoutDuplicates.push(matchedIngredients[i]) ;
+            }
+        }
+
+        return allMatchedIngredientsWithoutDuplicates ;
     }
 }
