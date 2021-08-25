@@ -4,6 +4,9 @@
 export let gallery = document.getElementById("gallery") ;
 export let search = document.getElementById("search") ;
 export let submit = document.getElementById("submit") ;
+export let ingredientsList = document.getElementById("ingredients-list") ;
+export let devicesList = document.getElementById("devices-list") ;
+export let utensilsList = document.getElementById("utensils-list") ;
 
 
 //TO CLEAN TEXT
