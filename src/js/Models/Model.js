@@ -1,7 +1,7 @@
 "use strict"
 
 import {Recipe} from "./Recipe.js";
-import {cleanText, splitText} from "../helpers.js";
+import {arrayMatch, cleanText, splitText} from "../helpers.js";
 
 export class Model{
 
@@ -29,14 +29,12 @@ export class Model{
     }
 
     getNormalizedNameFromRecipe(recipe){
-        let name = [] ;
-        name.push(splitText(cleanText(recipe._name))) ;
+        let name = splitText(cleanText(recipe._name)) ;
 
         return name ;
     }
 
     getNormalizedIngredientsFromRecipe(recipe) {
-
         let allIngredients = [];
 
         for (let i = 0; i < recipe.ingredients.length; i++) {
@@ -47,8 +45,7 @@ export class Model{
     }
 
     getNormalizedDescriptionFromRecipe(recipe){
-        let description = [] ;
-        description.push(splitText(cleanText(recipe.description))) ;
+        let description = splitText(cleanText(recipe.description)) ;
 
         return description ;
     }
