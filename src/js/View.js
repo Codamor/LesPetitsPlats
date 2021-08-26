@@ -111,15 +111,13 @@ export class View{
     }
 
     onSearch(handlerOnSearch){
-        search.addEventListener("keydown", event => {
-            if (event.key === "Enter"){
-                event.preventDefault() ;
+        search.addEventListener("input", event => {
+            event.preventDefault() ;
 
-                let userInput = event.target.value ;
-                let userSearch = splitText(cleanText(userInput)) ;
+            let userInput = event.target.value ;
+            let userSearch = splitText(cleanText(userInput)) ;
 
-                handlerOnSearch(userSearch) ;
-            }
+            handlerOnSearch(userSearch) ;
         }) ;
 
     }
