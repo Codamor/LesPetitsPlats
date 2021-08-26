@@ -109,10 +109,6 @@ export class Model{
         return allMatchedIngredientsWithoutDuplicates ;
     }
 
-    getDevices(oneMatchedRecipe){ //TODO remove if useless
-        return oneMatchedRecipe.appliance ;
-    }
-
     getAllDevices(allMatchedRecipes){
         let matchedDevices = [] ;
 
