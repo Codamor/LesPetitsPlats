@@ -69,6 +69,7 @@ export class View{
     }
 
     displayTagsList(matchedElements, tagsType){
+
         let htmlLists = `` ;
 
         while (matchedElements.length){
@@ -90,7 +91,7 @@ export class View{
 
         if (tagsType === "ingredients"){
             ingredientsList.innerHTML = htmlLists ;
-        } else if (tagsType === "appliance"){
+        } else if (tagsType === "devices"){
             devicesList.innerHTML = htmlLists ;
         } else if (tagsType === "utensils"){
             utensilsList.innerHTML = htmlLists ;
