@@ -1,11 +1,11 @@
 "use strict"
 
 import {Recipe} from "./Recipe.js";
-import {arrayMatch, cleanText, removeDuplicatesFromArray, splitText} from "../helpers.js";
+import {arrayMatch, cleanText, removeDuplicatesFromArray, searchTextPattern, splitText} from "../helpers.js";
 
 export class Model{
 
-    constructor(db) {
+    constructor(db, search) {
         this._db = db ;
     }
 
@@ -53,20 +53,26 @@ export class Model{
         return description ;
     }
 
-
     defineRecipeMatchScore(userInput, oneRecipe){
         let recipeScore = 0 ;
         let recipeName = this.getNormalizedName(oneRecipe) ;
         let recipeIngredients = this.getNormalizedIngredients(oneRecipe) ;
         let recipeDescription = this.getNormalizedDescription(oneRecipe) ;
 
-        let nameScore = arrayMatch(recipeName, userInput) ;
-        let ingredientScore = arrayMatch(recipeIngredients, userInput) ;
-        let descriptionScore = arrayMatch(recipeDescription, userInput) ;
+        let nameScore = arrayMatch(recipeName, userInput) * 5 ;
+        /*if (nameScore > 0){console.log(recipeName, "name score", nameScore)}*/
+        let ingredientScore = arrayMatch(recipeIngredients, userInput) * 0.2  ;
+        /*if (ingredientScore > 0){console.log(recipeName, "ingredient score", ingredientScore)}*/
+        let descriptionScore = arrayMatch(recipeDescription, userInput) * 0 ;
+        /*if (descriptionScore > 0){console.log(recipeName, "description score", descriptionScore)}*/
 
         recipeScore =  nameScore + ingredientScore + descriptionScore ;
 
-        return recipeScore ;
+        oneRecipe.recipeScore = recipeScore ;
+
+        /*if (oneRecipe.recipeScore > 0){console.log("recipeTotal score", oneRecipe.recipeScore)}*/
+
+        return oneRecipe ;
     }
 
     getMatchedRecipes(userInput){
@@ -75,12 +81,34 @@ export class Model{
 
         for (let i = 0; i < allRecipes.length; i++) {
             let recipeScore = this.defineRecipeMatchScore(userInput, allRecipes[i]) ;
-            if (recipeScore >= 1){
+            if (recipeScore.recipeScore >= 1){
                 matchedRecipes.push(allRecipes[i]) ;
             }
         }
 
-        return matchedRecipes ;
+        return matchedRecipes.sort((a,b) => {
+            return b.recipeScore - a.recipeScore ;
+        }) ;
+    }
+
+    getMatchedRecipesByIngredient(userSearch){
+
+        let matchRecipesByIngredient = [] ;
+        let allRecipes = this.getAllRecipes() ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < allRecipes[i].ingredients.length; j++) {
+                let ingredient = cleanText(allRecipes[i].ingredients[j].ingredient) ;
+
+                if (searchTextPattern(ingredient, userSearch)){
+                    if (!matchRecipesByIngredient.includes(allRecipes[i])){
+                        matchRecipesByIngredient.push(allRecipes[i]) ;
+                    }
+                }
+            }
+        }
+
+        return matchRecipesByIngredient ;
     }
 
     getIngredients(oneMatchedRecipe){
@@ -122,16 +150,16 @@ export class Model{
     }
 
     getAllUtensils(allMatchedRecipes){
-        let allutensils = [] ;
+        let allUtensils = [] ;
 
         for (let i = 0; i < allMatchedRecipes.length; i++) {
             for (let j = 0; j < allMatchedRecipes[i].utensils.length; j++) {
-                allutensils.push(allMatchedRecipes[i].utensils[j]) ;
+                allUtensils.push(allMatchedRecipes[i].utensils[j]) ;
             }
         }
 
-        let allutensilsWithoutDuplicates = removeDuplicatesFromArray(allutensils) ;
+        let allUtensilsWithoutDuplicates = removeDuplicatesFromArray(allUtensils) ;
 
-        return allutensilsWithoutDuplicates ;
+        return allUtensilsWithoutDuplicates ;
     }
 }

@@ -11,6 +11,7 @@ export class Recipe{
         this._description = description ;
         this._appliance = appliance ;
         this._utensils = utensils ;
+        this._recipeScore = 0 ;
     }
 
     get id() {
@@ -75,6 +76,15 @@ export class Recipe{
 
     set utensils(value) {
         this._utensils = value;
+    }
+
+
+    get recipeScore() {
+        return this._recipeScore;
+    }
+
+    set recipeScore(value) {
+        this._recipeScore = value;
     }
 }
 
