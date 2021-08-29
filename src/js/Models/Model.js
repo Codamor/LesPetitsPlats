@@ -1,6 +1,6 @@
 "use strict"
 
-import {Recipe} from "./Recipe.js";
+import {Recipe} from "../Entity/Recipe.js";
 import {arrayMatch, cleanText, removeDuplicatesFromArray, searchTextPattern, splitText} from "../helpers.js";
 
 export class Model{
@@ -28,13 +28,13 @@ export class Model{
         return allRecipes ;
     }
 
-    getNormalizedName(oneRecipe){
+    formatName(oneRecipe){
         let name = splitText(cleanText(oneRecipe._name)) ;
 
         return name ;
     }
 
-    getNormalizedIngredients(oneRecipe) {
+    formatIngredients(oneRecipe) {
         let allIngredients = [];
 
         for (let i = 0; i < oneRecipe.ingredients.length; i++) {
@@ -47,23 +47,23 @@ export class Model{
         return allIngredients;
     }
 
-    getNormalizedDescription(oneRecipe){
+    formatDescription(oneRecipe){
         let description = splitText(cleanText(oneRecipe.description)) ;
 
         return description ;
     }
 
-    defineRecipeMatchScore(userInput, oneRecipe){
+    defineScore(userSearch, oneRecipe){
         let recipeScore = 0 ;
-        let recipeName = this.getNormalizedName(oneRecipe) ;
-        let recipeIngredients = this.getNormalizedIngredients(oneRecipe) ;
-        let recipeDescription = this.getNormalizedDescription(oneRecipe) ;
+        let recipeName = this.formatName(oneRecipe) ;
+        let recipeIngredients = this.formatIngredients(oneRecipe) ;
+        let recipeDescription = this.formatDescription(oneRecipe) ;
 
-        let nameScore = arrayMatch(recipeName, userInput) * 5 ;
+        let nameScore = arrayMatch(recipeName, userSearch) * 5 ;
         /*if (nameScore > 0){console.log(recipeName, "name score", nameScore)}*/
-        let ingredientScore = arrayMatch(recipeIngredients, userInput) * 0.2  ;
+        let ingredientScore = arrayMatch(recipeIngredients, userSearch) * 0.2  ;
         /*if (ingredientScore > 0){console.log(recipeName, "ingredient score", ingredientScore)}*/
-        let descriptionScore = arrayMatch(recipeDescription, userInput) * 0 ;
+        let descriptionScore = arrayMatch(recipeDescription, userSearch) * 0 ;
         /*if (descriptionScore > 0){console.log(recipeName, "description score", descriptionScore)}*/
 
         recipeScore =  nameScore + ingredientScore + descriptionScore ;
@@ -80,7 +80,7 @@ export class Model{
         let allRecipes = this.getAllRecipes() ;
 
         for (let i = 0; i < allRecipes.length; i++) {
-            let recipeScore = this.defineRecipeMatchScore(userInput, allRecipes[i]) ;
+            let recipeScore = this.defineScore(userInput, allRecipes[i]) ;
             if (recipeScore.recipeScore >= 1){
                 matchedRecipes.push(allRecipes[i]) ;
             }
