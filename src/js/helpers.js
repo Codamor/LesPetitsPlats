@@ -52,12 +52,31 @@ export function splitText(text){
     return text.split(" ") ;
 }
 
+function searchTextPattern(text, word) {
+    let wordLength = word.length;
+    let textLength = text.length;
+
+    for (let i = 0; i <= textLength - wordLength; i++) {
+        let j;
+
+        for (j = 0; j < wordLength; j++) {
+            if (text[i + j] !== word[j]) {
+                break;
+            }
+        }
+
+        if (j == wordLength) {
+            return true
+        }
+    }
+}
+
 export function arrayMatch(array1, array2){
     let matchNumber = 0 ;
 
     for (let i = 0; i < array1.length; i++) {
         for (let j = 0; j < array2.length; j++) {
-            if(array1[i] === array2[j]){
+            if (searchTextPattern(array1[i], array2[j])){
                 matchNumber += 1 ;
             }
         }
@@ -80,3 +99,4 @@ export function removeDuplicatesFromArray(array){
 
     return arrayWithoutDuplicates ;
 }
+
