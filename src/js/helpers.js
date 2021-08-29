@@ -7,9 +7,9 @@ export let submit = document.getElementById("submit") ;
 export let ingredientsList = document.getElementById("ingredients-list") ;
 export let devicesList = document.getElementById("devices-list") ;
 export let utensilsList = document.getElementById("utensils-list") ;
-export let searchByIngredient = document.getElementById("ingredients-input") ;
-export let searchByDevices = document.getElementById("devices-input") ;
-export let searchByutensil = document.getElementById("utensils-input")
+export let ingredientsInput = document.getElementById("ingredients-input") ;
+export let devicesInput = document.getElementById("devices-input") ;
+export let utensilsInput = document.getElementById("utensils-input")
 
 
 //TO CLEAN TEXT
@@ -48,14 +48,14 @@ export function cleanText(text){
     text = removeMultipleSpaces(text) ;
     text = removeStopWords(text) ;
 
-    return text
+    return text ;
 }
 
 export function splitText(text){
     return text.split(" ") ;
 }
 
-function searchTextPattern(text, word) {
+export function searchTextPattern(text, word) {
     let wordLength = word.length;
     let textLength = text.length;
 
@@ -92,7 +92,7 @@ export function removeDuplicatesFromArray(array){
     let arrayWithoutDuplicates = [] ;
 
     for (let i = 0; i < array.length; i++) {
-        let ingredient = cleanText(array[i]) ;
+        let ingredient = cleanText(array[i]) ; //TODO generalize element
 
         if (!normalizedElements.includes(ingredient)){
             normalizedElements.push(ingredient) ;
