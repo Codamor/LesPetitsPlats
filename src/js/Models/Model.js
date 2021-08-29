@@ -121,4 +121,13 @@ export class Model{
         return allMatchedDevicesWithoutDuplicates ;
     }
 
+    getUstensils(oneRecipe){
+        let ustentils = [] ;
+
+        for (let i = 0; i < oneRecipe.ustensils.length; i++) {
+            ustentils.push(oneRecipe.ustensils[i]) ;
+        }
+        return ustentils ;
+    }
+
 }
