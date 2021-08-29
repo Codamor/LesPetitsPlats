@@ -130,4 +130,17 @@ export class Model{
         return ustentils ;
     }
 
+    getAllUstensils(allMatchedRecipes){
+        let allUstensils = [] ;
+
+        for (let i = 0; i < allMatchedRecipes.length; i++) {
+            for (let j = 0; j < allMatchedRecipes[i].ustensils.length; j++) {
+                allUstensils.push(allMatchedRecipes[i].ustensils[j]) ;
+            }
+        }
+
+        let allUstensilsWithoutDuplicates = removeDuplicatesFromArray(allUstensils) ;
+
+        return allUstensilsWithoutDuplicates ;
+    }
 }
