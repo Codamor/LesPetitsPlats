@@ -121,7 +121,7 @@ export class Model{
         return allMatchedDevicesWithoutDuplicates ;
     }
 
-    getAllutensils(allMatchedRecipes){
+    getAllUtensils(allMatchedRecipes){
         let allutensils = [] ;
 
         for (let i = 0; i < allMatchedRecipes.length; i++) {
