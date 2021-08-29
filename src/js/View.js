@@ -111,7 +111,7 @@ export class View{
     gallery.innerHTML = htmlAllRecipes ;
     }
 
-    onSearch(handlerOnSearch){
+    onSearchBar(handlerOnSearch){
         search.addEventListener("input", event => {
             event.preventDefault() ;
 
@@ -123,7 +123,7 @@ export class View{
 
     }
 
-    onSubmit(handlerOnSearch){
+    onSubmitButton(handlerOnSearch){
         submit.addEventListener("click", event => {
             event.preventDefault() ;
             let userInput = search.value ;
@@ -131,5 +131,9 @@ export class View{
 
             handlerOnSearch(userSearch) ;
         }) ;
+    }
+
+    onIngredientsInput(handlerOnTags, tagtype){
+        ingredientsList
     }
 }

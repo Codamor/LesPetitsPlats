@@ -21,7 +21,7 @@ export class Model{
                                 this._db[i].time,
                                 this._db[i].description,
                                 this._db[i].appliance,
-                                this._db[i].ustensils)
+                                this._db[i].utensils)
 
             allRecipes.push(recipe) ;
         }
@@ -121,26 +121,26 @@ export class Model{
         return allMatchedDevicesWithoutDuplicates ;
     }
 
-    getUstensils(oneRecipe){
+    getutensils(oneRecipe){
         let ustentils = [] ;
 
-        for (let i = 0; i < oneRecipe.ustensils.length; i++) {
-            ustentils.push(oneRecipe.ustensils[i]) ;
+        for (let i = 0; i < oneRecipe.utensils.length; i++) {
+            ustentils.push(oneRecipe.utensils[i]) ;
         }
         return ustentils ;
     }
 
-    getAllUstensils(allMatchedRecipes){
-        let allUstensils = [] ;
+    getAllutensils(allMatchedRecipes){
+        let allutensils = [] ;
 
         for (let i = 0; i < allMatchedRecipes.length; i++) {
-            for (let j = 0; j < allMatchedRecipes[i].ustensils.length; j++) {
-                allUstensils.push(allMatchedRecipes[i].ustensils[j]) ;
+            for (let j = 0; j < allMatchedRecipes[i].utensils.length; j++) {
+                allutensils.push(allMatchedRecipes[i].utensils[j]) ;
             }
         }
 
-        let allUstensilsWithoutDuplicates = removeDuplicatesFromArray(allUstensils) ;
+        let allutensilsWithoutDuplicates = removeDuplicatesFromArray(allutensils) ;
 
-        return allUstensilsWithoutDuplicates ;
+        return allutensilsWithoutDuplicates ;
     }
 }

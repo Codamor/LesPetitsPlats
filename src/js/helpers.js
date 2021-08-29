@@ -7,6 +7,9 @@ export let submit = document.getElementById("submit") ;
 export let ingredientsList = document.getElementById("ingredients-list") ;
 export let devicesList = document.getElementById("devices-list") ;
 export let utensilsList = document.getElementById("utensils-list") ;
+export let searchByIngredient = document.getElementById("ingredients-input") ;
+export let searchByDevices = document.getElementById("devices-input") ;
+export let searchByutensil = document.getElementById("utensils-input")
 
 
 //TO CLEAN TEXT

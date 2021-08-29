@@ -14,8 +14,8 @@ export class Controller{
 
         this._view.displayRecipes(recipesList) ;
 
-        this._view.onSearch(this.handleSearchRecipe) ;
-        this._view.onSubmit(this.handleSearchRecipe) ;
+        this._view.onSearchBar(this.handleSearchRecipe) ;
+        this._view.onSubmitButton(this.handleSearchRecipe) ;
     }
 
     handleSearchRecipe = (userInput) => {
@@ -23,12 +23,12 @@ export class Controller{
         let matchedRecipes = this._model.getMatchedRecipes(userInput) ;
         let matchedIngredients = this._model.getAllIngredients(matchedRecipes) ;
         let matchedDevices = this._model.getAllDevices(matchedRecipes) ;
-        let matchedUstensils = this._model.getAllUstensils(matchedRecipes) ;
+        let matchedUtensils = this._model.getAllutensils(matchedRecipes) ;
 
         this._view.displayRecipes(matchedRecipes) ;
 
         this._view.displayTagsList(matchedIngredients, "ingredients") ;
         this._view.displayTagsList(matchedDevices, "devices") ;
-        this._view.displayTagsList(matchedUstensils, "ustensils") ;
+        this._view.displayTagsList(matchedUtensils, "utensils") ;
     }
 }
