@@ -92,6 +92,7 @@ export class Model{
         return recipesArray ;
     }
 
+
     getMatchedRecipesByIngredient(userSearch){
 
         let matchRecipesByIngredient = [] ;
@@ -135,7 +136,7 @@ export class Model{
 
         let allMatchedIngredientsWithoutDuplicates = removeDuplicatesFromArray(matchedIngredients) ;
 
-        return allMatchedIngredientsWithoutDuplicates ;
+        return allMatchedIngredientsWithoutDuplicates.sort() ;
     }
 
     getAllDevices(allMatchedRecipes){
@@ -147,7 +148,7 @@ export class Model{
 
         let allMatchedDevicesWithoutDuplicates = removeDuplicatesFromArray(matchedDevices) ;
 
-        return allMatchedDevicesWithoutDuplicates ;
+        return allMatchedDevicesWithoutDuplicates.sort() ;
     }
 
     getAllUtensils(allMatchedRecipes){
@@ -161,6 +162,6 @@ export class Model{
 
         let allUtensilsWithoutDuplicates = removeDuplicatesFromArray(allUtensils) ;
 
-        return allUtensilsWithoutDuplicates ;
+        return allUtensilsWithoutDuplicates.sort() ;
     }
 }
