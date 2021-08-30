@@ -99,7 +99,6 @@ export class View{
 
     }
 
-
     displayRecipes(recipesObjectsList){
 
         gallery.innerHTML = `` ;

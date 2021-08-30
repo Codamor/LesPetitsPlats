@@ -31,7 +31,8 @@ function removePunctuation(text){
 }
 
 function removeMultipleSpaces(text){
-    return text.replace(/\s\s+/g, ' ');
+    /*return text.replace(/\s\s+/g, ' ');*/ //TODO remove after testing results
+    return text.trim() ;
 }
 
 function removeStopWords(text){
@@ -47,7 +48,6 @@ export function cleanText(text){
     text = removePunctuation(text) ;
     text = removeMultipleSpaces(text) ;
     text = removeStopWords(text) ;
-
     return text ;
 }
 
@@ -99,7 +99,5 @@ export function removeDuplicatesFromArray(array){
             arrayWithoutDuplicates.push(array[i]) ;
         }
     }
-
     return arrayWithoutDuplicates ;
 }
-
