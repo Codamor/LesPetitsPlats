@@ -59,18 +59,13 @@ export class Model{
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let recipeDescription = this.formatDescription(oneRecipe) ;
 
-        let nameScore = arrayMatch(recipeName, userSearch) * 5 ;
-        /*if (nameScore > 0){console.log(recipeName, "name score", nameScore)}*/
+        let nameScore = arrayMatch(recipeName, userSearch) * 3 ;
         let ingredientScore = arrayMatch(recipeIngredients, userSearch) * 0.2  ;
-        /*if (ingredientScore > 0){console.log(recipeName, "ingredient score", ingredientScore)}*/
-        let descriptionScore = arrayMatch(recipeDescription, userSearch) * 0 ;
-        /*if (descriptionScore > 0){console.log(recipeName, "description score", descriptionScore)}*/
+        let descriptionScore = arrayMatch(recipeDescription, userSearch) ;
 
-        recipeScore =  nameScore + ingredientScore + descriptionScore ;
+        recipeScore =  nameScore + ingredientScore  ;
 
         oneRecipe.recipeScore = recipeScore ;
-
-        /*if (oneRecipe.recipeScore > 0){console.log("recipeTotal score", oneRecipe.recipeScore)}*/
 
         return oneRecipe ;
     }
@@ -86,9 +81,15 @@ export class Model{
             }
         }
 
-        return matchedRecipes.sort((a,b) => {
+        return matchedRecipes ;
+    }
+
+    sortRecipesByScore(recipesArray){
+        recipesArray.sort((a,b) => {
             return b.recipeScore - a.recipeScore ;
         }) ;
+
+        return recipesArray ;
     }
 
     getMatchedRecipesByIngredient(userSearch){
