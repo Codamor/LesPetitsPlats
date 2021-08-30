@@ -39,6 +39,5 @@ export class Controller{
         let matchedRecipesByIngredient = this._model.getMatchedRecipesByIngredient(userSearch) ;
 
         this._view.displayRecipes(matchedRecipesByIngredient) ;
-
     }
 }

@@ -81,7 +81,7 @@ export class Model{
             }
         }
 
-        return matchedRecipes ;
+        return this.sortRecipesByScore(matchedRecipes) ;
     }
 
     sortRecipesByScore(recipesArray){
