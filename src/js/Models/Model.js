@@ -81,7 +81,7 @@ export class Model{
 
         for (let i = 0; i < allRecipes.length; i++) {
             let recipeScore = this.defineScore(userInput, allRecipes[i]) ;
-            if (recipeScore.recipeScore >= 1){
+            if (recipeScore.recipeScore > 0){
                 matchedRecipes.push(allRecipes[i]) ;
             }
         }
