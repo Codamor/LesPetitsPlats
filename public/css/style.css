@@ -229,7 +229,7 @@ body {
   height: auto;
   margin-right: 20px;
   border-radius: 5px;
-  color: #fff;
+  color: white;
 }
 .filter__interaction {
   display: flex;
@@ -241,19 +241,19 @@ body {
   height: 100%;
   border: none;
   outline: none;
-  color: #fff;
+  color: white;
 }
 .filter__interaction input::placeholder {
   opacity: 1;
   font-weight: 500;
-  color: #fff;
+  color: white;
 }
 .filter__icon::before {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-size: 1.2em;
   font-weight: 700;
-  color: #fff;
+  color: white;
 }
 .filter__content {
   display: none;
@@ -261,13 +261,14 @@ body {
   border-radius: 0 0 5px 5px;
   overflow: hidden;
 }
-.filter__content ul {
+.filter__list {
   width: 200px;
   padding: 0 0 20px 20px;
-  color: #fff;
+  color: white;
 }
 .filter--option:hover {
   width: auto;
+  cursor: pointer;
 }
 .filter--option:hover .filter__content {
   display: flex;
@@ -277,16 +278,47 @@ body {
   font-family: "Font Awesome 5 Free";
   font-size: 1.2em;
   font-weight: 700;
-  color: #fff;
+  color: white;
+}
+.filter--option .filter__element {
+  display: inline-block;
+  margin: 4px 0;
+  padding: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.filter--option-one .filter__element:hover {
+  background-color: #0a64eb;
+  transition: 0.2s;
+}
+.filter--option-two .filter__element:hover {
+  background-color: #3fcf8c;
+  transition: 0.2s;
+}
+.filter--option-three .filter__element:hover {
+  background-color: #e83926;
+  transition: 0.2s;
 }
 .filter--option-one, .filter--option-one input, .filter--option-one ul {
-  background-color: #3282f7;
+  background-color: #3180f6;
+}
+.filter--option-one:hover, .filter--option-one:hover .filter--option-one__interaction, .filter--option-one:hover input {
+  background-color: #0a64eb;
+  transition: 0.2s;
 }
 .filter--option-two, .filter--option-two input, .filter--option-two ul {
-  background-color: #68D9A4;
+  background-color: #68d9a4;
+}
+.filter--option-two:hover, .filter--option-two:hover .filter--option-two__interaction, .filter--option-two:hover input {
+  background-color: #3fcf8c;
+  transition: 0.2s;
 }
 .filter--option-three, .filter--option-three input, .filter--option-three ul {
-  background-color: #ED6454;
+  background-color: #ed6454;
+}
+.filter--option-three:hover, .filter--option-three:hover .filter--option-three__interaction, .filter--option-three:hover input {
+  background-color: #e83926;
+  transition: 0.2s;
 }
 .filter--selected {
   display: flex;

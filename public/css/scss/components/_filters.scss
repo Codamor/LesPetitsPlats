@@ -19,7 +19,7 @@
   height: auto;
   margin-right: 20px;
   border-radius: 5px;
-  color: #fff;
+  color: hsl(0, 0%, 100%);
   &__interaction {
     display: flex;
     align-items: center;
@@ -29,11 +29,11 @@
       height: 100%;
       border: none;
       outline: none;
-      color: #fff;
+      color: hsl(0, 0%, 100%);
       &::placeholder {
         opacity: 1;
         font-weight: 500;
-        color: #fff;
+        color: hsl(0, 0%, 100%);
       }
     }
   }
@@ -42,22 +42,23 @@
     font-family: "Font Awesome 5 Free";
     font-size: 1.2em;
     font-weight: 700;
-    color: #fff;
+    color: hsl(0, 0%, 100%);
   }
   &__content{
     display: none;
     width: auto;
     border-radius: 0 0 5px 5px;
     overflow: hidden;
-    & ul{
-      width: 200px;
-      padding: 0 0 20px 20px;
-      color: #fff;
-    }
+  }
+  &__list{
+    width: 200px;
+    padding: 0 0 20px 20px;
+    color: hsl(0, 0%, 100%);
   }
   &--option{
     &:hover{
       width: auto;
+      cursor: pointer;
     }
     &:hover .filter__content{
       display: flex;
@@ -67,18 +68,59 @@
       font-family: "Font Awesome 5 Free";
       font-size: 1.2em;
       font-weight: 700;
-      color: #fff;
+      color: hsl(0, 0%, 100%);
     }
   }
+  &--option &__element{
+    display: inline-block;
+    margin: 4px 0;
+    padding: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  &--option-one &__element:hover{
+    background-color: hsl(216, 92%, 48%);
+    transition: 0.2s;
+  }
+  &--option-two &__element:hover{
+    background-color: hsl(152, 60%, 53%);
+    transition: 0.2s;
+  }
+  &--option-three &__element:hover{
+    background-color: hsl(6, 81%, 53%);
+    transition: 0.2s;
+  }
+
   &--option-one, &--option-one input, &--option-one ul{
-    background-color: #3282f7;
+    background-color: hsl(216, 92%, 58%);
   }
+  &--option-one{
+    &:hover, &:hover &__interaction, &:hover input{
+      background-color: hsl(216, 92%, 48%);
+      transition: 0.2s;
+    }
+  }
+
   &--option-two, &--option-two input, &--option-two ul{
-    background-color: #68D9A4;
+    background-color: hsl(152, 60%, 63%);
   }
+  &--option-two{
+    &:hover, &:hover &__interaction, &:hover input{
+      background-color: hsl(152, 60%, 53%);
+      transition: 0.2s;
+    }
+  }
+
   &--option-three, &--option-three input, &--option-three ul{
-    background-color: #ED6454;
+    background-color: hsl(6, 81%, 63%);
   }
+  &--option-three{
+    &:hover, &:hover &__interaction, &:hover input{
+      background-color: hsl(6, 81%, 53%);
+      transition: 0.2s;
+    }
+  }
+
   &--selected{
     display: flex;
     justify-content: center;
