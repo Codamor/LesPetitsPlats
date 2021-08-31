@@ -118,7 +118,7 @@ export class View{
     createHTMLTagForHTMLTagList(oneTag, tagType){
         let htmlTag =
             `<li data-tag-name="${oneTag}">
-                <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__tag filter__tag--user">${oneTag}</span>
+                <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__tag">${oneTag}</span>
             </li>` ;
 
         return htmlTag ;
@@ -142,7 +142,7 @@ export class View{
         }
 
         htmlUserSelectedTag =
-            `<div class="filter ${filterOption} filter--selected" data-tag-type="${tagType}", data-tag-value="${oneTag}">
+            `<div class="filter ${filterOption} filter--selected" data-tag-type="${tagType}" data-tag-value="${oneTag}">
                 ${oneTag}
                 <span class="filter__icon filter__icon--tag"></span>
              </div>`
@@ -193,10 +193,12 @@ export class View{
         }
     }
 
-    onTagsIcon(){
+    onFilterTagsIcon(){
         for (let i = 0; i < allTagsIcon.length; i++) {
             allTagsIcon[i].addEventListener("click", event => {
-
+                let parentNode = event.target.parentNode.parentNode ;
+                let childNode = event.target.parentNode ;
+                parentNode.removeChild(childNode)
             })
         }
     }
