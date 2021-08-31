@@ -57,6 +57,14 @@ export class View{
     }
 
     displayUserSelectedTag(tag, tagType){
+        let displayedUserSelectedTags = this.getDisplayedUserSelectedTags() ;
+
+        for (let i = 0; i < displayedUserSelectedTags.length; i++) {
+            if (displayedUserSelectedTags[i].dataset.tagValue === tag){
+                return
+            }
+        }
+        
         let htmlTag = this.createHTMLUserSelectedTag(tag, tagType) ;
 
         userSelectedTags.innerHTML += htmlTag ;
@@ -158,6 +166,10 @@ export class View{
         }
 
         return displayedRecipesId ;
+    }
+
+    getDisplayedUserSelectedTags(){
+        return document.getElementsByClassName("filter--selected") ;
     }
 
    onSearchBar(handlerOnSearch){ //TODO merger this with onSubmitButton in onSearch method
