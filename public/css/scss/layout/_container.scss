@@ -11,3 +11,15 @@
   margin: 0 auto;
   padding: 50px 100px;
 }
+
+.filters-container{
+  display: flex;
+  height: auto;
+  margin-bottom: 20px;
+  &--default{
+    order: 2;
+  }
+  &--selected{
+    order: 1;
+  }
+}
