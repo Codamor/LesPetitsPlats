@@ -9,7 +9,7 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    ingredientsInput, allTags
+    ingredientsInput, allTags, displayedRecipes
 } from "./helpers.js";
 
 export class View{
@@ -120,7 +120,17 @@ export class View{
         return htmlTag ;
     }
 
-       onSearchBar(handlerOnSearch){
+    getDisplayedRecipesId(){
+        let displayedRecipesId = [] ;
+
+        for (let i = 0; i < displayedRecipes.length; i++) {
+            displayedRecipesId.push(displayedRecipes[i]) ;
+        }
+
+        return displayedRecipesId ;
+    }
+
+   onSearchBar(handlerOnSearch){ //TODO merger this with onSubmitButton in onSearch method
         search.addEventListener("input", event => {
             event.preventDefault() ;
 
@@ -137,8 +147,6 @@ export class View{
             event.preventDefault() ;
             let userInput = search.value ;
             let userSearch = splitText(cleanText(userInput)) ;
-
-
 
             handlerOnSearch(userSearch) ;
         }) ;
