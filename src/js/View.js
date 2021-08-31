@@ -16,6 +16,48 @@ export class View{
     constructor() {
     }
 
+    displayRecipes(recipesObjectsList){
+
+        gallery.innerHTML = `` ;
+
+        let htmlAllRecipes = `` ;
+        for (let i = 0; i < recipesObjectsList.length; i++) {
+            htmlAllRecipes += this.createHTMLRecipe(recipesObjectsList[i]) ;
+        }
+        gallery.innerHTML = htmlAllRecipes ;
+    }
+
+    displayTagsList(matchedElements, tagType){
+
+        let htmlLists = `` ;
+
+        while (matchedElements.length){
+            let elementsBatch = matchedElements.splice(0, 10) ;
+            let liElement = `` ;
+            let ulElement = `` ;
+
+            for (let i = 0; i < elementsBatch.length; i++) {
+                liElement += this.createHTMLTag(elementsBatch[i], tagType)
+            }
+
+            ulElement =
+                `<ul class="filter__list">
+                    ${liElement}
+                 </ul>`
+
+            htmlLists += ulElement ;
+        }
+
+        if (tagType === "ingredient"){
+            ingredientsList.innerHTML = htmlLists ;
+        } else if (tagType === "device"){
+            devicesList.innerHTML = htmlLists ;
+        } else if (tagType === "utensil"){
+            utensilsList.innerHTML = htmlLists ;
+        }
+
+    }
+
     createHTMLIngredientsList(ingredients){
         let htmlIngredients = `` ;
 
@@ -35,7 +77,7 @@ export class View{
         let htmlIngredientsList = this.createHTMLIngredientsList(recipeObject.ingredients) ;
 
         htmlRecipe =
-            `<div class="card" aria-label="Recette de cuisine">
+            `<div class="card" aria-label="Recette de cuisine" data-recipe-id="${recipeObject.id}">
                 <div class="card__media">
 
                 </div>
@@ -78,49 +120,7 @@ export class View{
         return htmlTag ;
     }
 
-    displayTagsList(matchedElements, tagType){
-
-        let htmlLists = `` ;
-
-        while (matchedElements.length){
-            let elementsBatch = matchedElements.splice(0, 10) ;
-            let liElement = `` ;
-            let ulElement = `` ;
-
-            for (let i = 0; i < elementsBatch.length; i++) {
-                liElement += this.createHTMLTag(elementsBatch[i], tagType)
-            }
-
-            ulElement =
-                `<ul class="filter__list">
-                    ${liElement}
-                 </ul>`
-
-            htmlLists += ulElement ;
-        }
-
-        if (tagType === "ingredient"){
-            ingredientsList.innerHTML = htmlLists ;
-        } else if (tagType === "device"){
-            devicesList.innerHTML = htmlLists ;
-        } else if (tagType === "utensil"){
-            utensilsList.innerHTML = htmlLists ;
-        }
-
-    }
-
-    displayRecipes(recipesObjectsList){
-
-        gallery.innerHTML = `` ;
-
-        let htmlAllRecipes = `` ;
-        for (let i = 0; i < recipesObjectsList.length; i++) {
-            htmlAllRecipes += this.createHTMLRecipe(recipesObjectsList[i]) ;
-        }
-    gallery.innerHTML = htmlAllRecipes ;
-    }
-
-    onSearchBar(handlerOnSearch){
+       onSearchBar(handlerOnSearch){
         search.addEventListener("input", event => {
             event.preventDefault() ;
 
@@ -148,7 +148,7 @@ export class View{
         for (let i = 0; i < allTags.length; i++) {
             allTags[i].addEventListener("click", event => {
                 let tagType = cleanText(event.target.dataset.tagType) ;
-                let tag = splitText(cleanText(event.target.dataset.value)) ;
+                let tag = cleanText(event.target.dataset.value) ;
 
                 handlerTags(tagType, tag) ;
             })
