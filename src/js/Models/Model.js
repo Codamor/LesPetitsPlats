@@ -28,6 +28,60 @@ export class Model{
         return allRecipes ;
     }
 
+    getMatchedRecipes(userInput){ //TODO refactor userSearch
+        let matchedRecipes = [] ;
+        let allRecipes = this.getAllRecipes() ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            let recipeScore = this.defineScore(userInput, allRecipes[i]) ;
+            if (recipeScore.recipeScore > 0){
+                matchedRecipes.push(allRecipes[i]) ;
+            }
+        }
+
+        return this.sortRecipesByScore(matchedRecipes) ;
+    }
+
+    getMatchedRecipesByTag(userTag, tagType){
+
+        console.log(userTag, tagType)
+
+        let allRecipes = this.getAllRecipes() ;
+        let matchRecipesByTag = [] ;
+
+        if (tagType ==="ingredient"){
+            this.getMatchedRecipesByIngredient(userTag) ;
+
+        } else if (tagType === "device"){
+            console.log("device")
+        } else if (tagType === "utensil"){
+            console.log("utensil")
+        }
+        
+        return matchRecipesByTag ;
+    }
+
+    getMatchedRecipesByIngredient(ingredient){
+        let allRecipes = this.getAllRecipes() ;
+        let matchRecipesByTag = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < allRecipes[i].ingredients.length; j++) {
+                let recipeIngredient = cleanText(allRecipes[i].ingredients[j].ingredient) ;
+
+                for (let k = 0; k < ingredient.length; k++) {
+                    if (searchTextPattern(recipeIngredient, ingredient[k])){
+                        if (!matchRecipesByTag.includes(allRecipes[i])){
+                            matchRecipesByTag.push(allRecipes[i]) ;
+                        }
+                    }
+                }
+            }
+        }
+        return matchRecipesByTag ;
+    }
+
+
     formatName(oneRecipe){
         let name = splitText(cleanText(oneRecipe._name)) ;
 
@@ -70,47 +124,12 @@ export class Model{
         return oneRecipe ;
     }
 
-    getMatchedRecipes(userInput){
-        let matchedRecipes = [] ;
-        let allRecipes = this.getAllRecipes() ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            let recipeScore = this.defineScore(userInput, allRecipes[i]) ;
-            if (recipeScore.recipeScore > 0){
-                matchedRecipes.push(allRecipes[i]) ;
-            }
-        }
-
-        return this.sortRecipesByScore(matchedRecipes) ;
-    }
-
     sortRecipesByScore(recipesArray){
         recipesArray.sort((a,b) => {
             return b.recipeScore - a.recipeScore ;
         }) ;
 
         return recipesArray ;
-    }
-
-
-    getMatchedRecipesByIngredient(userSearch){
-
-        let matchRecipesByIngredient = [] ;
-        let allRecipes = this.getAllRecipes() ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            for (let j = 0; j < allRecipes[i].ingredients.length; j++) {
-                let ingredient = cleanText(allRecipes[i].ingredients[j].ingredient) ;
-
-                if (searchTextPattern(ingredient, userSearch)){
-                    if (!matchRecipesByIngredient.includes(allRecipes[i])){
-                        matchRecipesByIngredient.push(allRecipes[i]) ;
-                    }
-                }
-            }
-        }
-
-        return matchRecipesByIngredient ;
     }
 
     getIngredients(oneMatchedRecipe){
