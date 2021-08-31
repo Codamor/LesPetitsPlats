@@ -1,6 +1,16 @@
 "use strict"
 
-import {cleanText, gallery, search, splitText, submit, ingredientsList, devicesList, utensilsList} from "./helpers.js";
+import {
+    cleanText,
+    gallery,
+    search,
+    splitText,
+    submit,
+    ingredientsList,
+    devicesList,
+    utensilsList,
+    ingredientsInput, allTags
+} from "./helpers.js";
 
 export class View{
     constructor() {
@@ -59,26 +69,26 @@ export class View{
         return htmlRecipe ;
     }
 
-    createHTMLTag(oneTag){
+    createHTMLTag(oneTag, tagType){
         let htmlTag =
-            `<li class="filter__element">
-                ${oneTag}
+            `<li data-tag-name="${oneTag}">
+                <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__element">${oneTag}</span>
             </li>` ;
 
         return htmlTag ;
     }
 
-    displayTagsList(matchedElements, tagsType){
+    displayTagsList(matchedElements, tagType){
 
         let htmlLists = `` ;
 
         while (matchedElements.length){
-            let ingredientsBatch = matchedElements.splice(0, 10) ;
+            let elementsBatch = matchedElements.splice(0, 10) ;
             let liElement = `` ;
             let ulElement = `` ;
 
-            for (let i = 0; i < ingredientsBatch.length; i++) {
-                liElement += this.createHTMLTag(ingredientsBatch[i])
+            for (let i = 0; i < elementsBatch.length; i++) {
+                liElement += this.createHTMLTag(elementsBatch[i], tagType)
             }
 
             ulElement =
@@ -89,11 +99,11 @@ export class View{
             htmlLists += ulElement ;
         }
 
-        if (tagsType === "ingredients"){
+        if (tagType === "ingredient"){
             ingredientsList.innerHTML = htmlLists ;
-        } else if (tagsType === "devices"){
+        } else if (tagType === "device"){
             devicesList.innerHTML = htmlLists ;
-        } else if (tagsType === "utensils"){
+        } else if (tagType === "utensil"){
             utensilsList.innerHTML = htmlLists ;
         }
 
@@ -128,11 +138,20 @@ export class View{
             let userInput = search.value ;
             let userSearch = splitText(cleanText(userInput)) ;
 
+
+
             handlerOnSearch(userSearch) ;
         }) ;
     }
 
-    onIngredientsInput(handlerOnTags, tagtype){
-        ingredientsList
+    onTags(handlerTags){
+        for (let i = 0; i < allTags.length; i++) {
+            allTags[i].addEventListener("click", event => {
+                let tagType = cleanText(event.target.dataset.tagType) ;
+                let tag = splitText(cleanText(event.target.dataset.value)) ;
+
+                handlerTags(tagType, tag) ;
+            })
+        }
     }
 }
