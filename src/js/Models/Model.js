@@ -56,7 +56,7 @@ export class Model{
             this.getRecipesByDevice(userTag) ;
 
         } else if (tagType === "utensil"){
-            console.log("utensil")
+            this.getRecipesByUtensil(userTag) ;
         }
 
         return matchRecipesByTag ;
@@ -97,6 +97,26 @@ export class Model{
             }
         }
 
+        return matchedRecipes ;
+    }
+
+    getRecipesByUtensil(utensil){
+        let allRecipes = this.getAllRecipes() ;
+        let matchedRecipes = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < allRecipes[i].utensils.length; j++) {
+                for (let k = 0; k < utensil.length; k++) {
+                    let recipeUtensil = cleanText(allRecipes[i].utensils[j]) ;
+                    if (searchTextPattern(recipeUtensil, utensil[k])){
+                        if (!matchedRecipes.includes(allRecipes[i])){
+                            matchedRecipes.push(allRecipes[i]) ;
+                        }
+                    }
+                }
+            }
+        }
+        
         return matchedRecipes ;
     }
 
