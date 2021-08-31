@@ -11,6 +11,7 @@ export let ingredientsInput = document.getElementById("ingredients-input") ;
 export let devicesInput = document.getElementById("devices-input") ;
 export let utensilsInput = document.getElementById("utensils-input") ;
 export let allTags = document.getElementsByClassName("filter__element") ;
+export let displayedRecipes = document.getElementsByClassName("card") ;
 
 
 //TO CLEAN TEXT
