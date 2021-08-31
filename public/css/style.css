@@ -37,6 +37,18 @@ body {
   padding: 50px 100px;
 }
 
+.filters-container {
+  display: flex;
+  height: auto;
+  margin-bottom: 20px;
+}
+.filters-container--default {
+  order: 2;
+}
+.filters-container--selected {
+  order: 1;
+}
+
 /*-----------------------*\
          Grid
 \*---------------------- */
@@ -280,22 +292,22 @@ body {
   font-weight: 700;
   color: white;
 }
-.filter--option .filter__element {
+.filter--option .filter__tag {
   display: inline-block;
   margin: 4px 0;
   padding: 2px;
   border-radius: 5px;
   cursor: pointer;
 }
-.filter--option-one .filter__element:hover {
+.filter--option-one .filter__tag:hover {
   background-color: #0a64eb;
   transition: 0.2s;
 }
-.filter--option-two .filter__element:hover {
+.filter--option-two .filter__tag:hover {
   background-color: #3fcf8c;
   transition: 0.2s;
 }
-.filter--option-three .filter__element:hover {
+.filter--option-three .filter__tag:hover {
   background-color: #e83926;
   transition: 0.2s;
 }

@@ -71,22 +71,22 @@
       color: hsl(0, 0%, 100%);
     }
   }
-  &--option &__element{
+  &--option &__tag{
     display: inline-block;
     margin: 4px 0;
     padding: 2px;
     border-radius: 5px;
     cursor: pointer;
   }
-  &--option-one &__element:hover{
+  &--option-one &__tag:hover{
     background-color: hsl(216, 92%, 48%);
     transition: 0.2s;
   }
-  &--option-two &__element:hover{
+  &--option-two &__tag:hover{
     background-color: hsl(152, 60%, 53%);
     transition: 0.2s;
   }
-  &--option-three &__element:hover{
+  &--option-three &__tag:hover{
     background-color: hsl(6, 81%, 53%);
     transition: 0.2s;
   }
