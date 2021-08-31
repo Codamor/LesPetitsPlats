@@ -44,7 +44,7 @@ export class Model{
 
     getRecipesByTag(userTag, tagType){
 
-        console.log(userTag, tagType)
+        /*console.log(userTag, tagType)*/
 
         let allRecipes = this.getAllRecipes() ;
         let matchRecipesByTag = [] ;
@@ -53,7 +53,8 @@ export class Model{
             this.getRecipesByIngredient(userTag) ;
 
         } else if (tagType === "device"){
-            console.log("device")
+            this.getRecipesByDevice(userTag) ;
+
         } else if (tagType === "utensil"){
             console.log("utensil")
         }
@@ -79,6 +80,24 @@ export class Model{
             }
         }
         return matchRecipesByTag ;
+    }
+
+    getRecipesByDevice(device){
+        let allRecipes = this.getAllRecipes() ;
+        let matchedRecipes = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < device.length; j++) {
+                let recipeDevice = cleanText(allRecipes[i].appliance) ;
+                if (searchTextPattern(recipeDevice, device[j])){
+                    if (!matchedRecipes.includes(allRecipes[i])){
+                        matchedRecipes.push(allRecipes[i]) ;
+                    }
+                }
+            }
+        }
+
+        return matchedRecipes ;
     }
 
 
