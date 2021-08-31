@@ -10,7 +10,9 @@ export let utensilsList = document.getElementById("utensils-list") ;
 export let ingredientsInput = document.getElementById("ingredients-input") ;
 export let devicesInput = document.getElementById("devices-input") ;
 export let utensilsInput = document.getElementById("utensils-input") ;
-export let allTags = document.getElementsByClassName("filter__element") ;
+export let allTags = document.getElementsByClassName("filter__tag") ;
+let allTagsIcon = document.getElementsByClassName("filter__icon--tag") ;
+export let userSelectedTags = document.getElementById("user-selected-filters") ;
 export let displayedRecipes = document.getElementsByClassName("card") ;
 
 
