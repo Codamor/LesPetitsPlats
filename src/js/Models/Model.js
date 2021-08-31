@@ -44,10 +44,6 @@ export class Model{
 
     getRecipesByTag(userTag, tagType){
 
-        console.log(userTag)
-
-        let allRecipes = this.getAllRecipes() ;
-
         if (tagType ==="ingredient"){
             return this.getRecipesByIngredient(userTag) ;
 
