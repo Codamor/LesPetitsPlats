@@ -9,7 +9,7 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    ingredientsInput, allTags, displayedRecipes, userSelectedTags
+    ingredientsInput, allTags, allTagsIcon, displayedRecipes, userSelectedTags
 } from "./helpers.js";
 
 export class View{
@@ -17,7 +17,6 @@ export class View{
     }
 
     displayRecipes(recipesObjectsList){
-
         gallery.innerHTML = `` ;
 
         let htmlAllRecipes = `` ;
@@ -57,8 +56,10 @@ export class View{
 
     }
 
-    displayUserSelectedTag(tag){
-        userSelectedTags.innerHTML += tag ;
+    displayUserSelectedTag(tag, tagType){
+        let htmlTag = this.createHTMLUserSelectedTag(tag, tagType) ;
+
+        userSelectedTags.innerHTML += htmlTag ;
     }
 
     createHTMLIngredientsList(ingredients){
@@ -117,7 +118,7 @@ export class View{
     createHTMLTagForHTMLTagList(oneTag, tagType){
         let htmlTag =
             `<li data-tag-name="${oneTag}">
-                <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__element">${oneTag}</span>
+                <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__tag filter__tag--user">${oneTag}</span>
             </li>` ;
 
         return htmlTag ;
@@ -125,12 +126,28 @@ export class View{
 
     createHTMLUserSelectedTag(oneTag, tagType){
         let htmlUserSelectedTag = `` ;
+        let filterOption ;
+
+        switch (tagType){
+            case tagType = "ingredient" :
+                filterOption = "filter--option-one" ;
+                break ;
+            case tagType = "device" :
+                filterOption = "filter--option-two" ;
+                break ;
+            case tagType = "utensil" :
+                filterOption = "filter--option-three"  ;
+                break ;
+
+        }
 
         htmlUserSelectedTag =
-            `<div class="filter filter--option-one filter--selected" data-tag-type="${tagType}", data-tag-value="${oneTag}">
+            `<div class="filter ${filterOption} filter--selected" data-tag-type="${tagType}", data-tag-value="${oneTag}">
                 ${oneTag}
-                <span class="filter__icon"></span>
+                <span class="filter__icon filter__icon--tag"></span>
              </div>`
+
+        return htmlUserSelectedTag ;
     }
 
     getDisplayedRecipesId(){
@@ -172,6 +189,14 @@ export class View{
                 let userTag = cleanText(event.target.dataset.value) ;
 
                 handlerTags(tagType, userTag) ;
+            })
+        }
+    }
+
+    onTagsIcon(){
+        for (let i = 0; i < allTagsIcon.length; i++) {
+            allTagsIcon[i].addEventListener("click", event => {
+
             })
         }
     }
