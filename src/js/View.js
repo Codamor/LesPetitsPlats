@@ -28,7 +28,6 @@ export class View{
     }
 
     displayTagsList(matchedElements, tagType){
-
         let htmlLists = `` ;
 
         while (matchedElements.length){
@@ -37,7 +36,7 @@ export class View{
             let ulElement = `` ;
 
             for (let i = 0; i < elementsBatch.length; i++) {
-                liElement += this.createHTMLTag(elementsBatch[i], tagType)
+                liElement += this.createHTMLTagForHTMLTagList(elementsBatch[i], tagType)
             }
 
             ulElement =
@@ -111,7 +110,7 @@ export class View{
         return htmlRecipe ;
     }
 
-    createHTMLTag(oneTag, tagType){
+    createHTMLTagForHTMLTagList(oneTag, tagType){
         let htmlTag =
             `<li data-tag-name="${oneTag}">
                 <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__element">${oneTag}</span>
@@ -120,11 +119,21 @@ export class View{
         return htmlTag ;
     }
 
+    createHTMLUserSelectedTag(oneTag, tagType){
+        let htmlUserSelectedTag = `` ;
+
+        htmlUserSelectedTag =
+            `<div class="filter filter--option-one filter--selected" data-tag-type="${tagType}", data-tag-value="${oneTag}">
+                ${oneTag}
+                <span class="filter__icon"></span>
+             </div>`
+    }
+
     getDisplayedRecipesId(){
         let displayedRecipesId = [] ;
 
         for (let i = 0; i < displayedRecipes.length; i++) {
-            displayedRecipesId.push(displayedRecipes[i]) ;
+            displayedRecipesId.push(Number(displayedRecipes[i].dataset.recipeId)) ;
         }
 
         return displayedRecipesId ;
@@ -156,9 +165,9 @@ export class View{
         for (let i = 0; i < allTags.length; i++) {
             allTags[i].addEventListener("click", event => {
                 let tagType = cleanText(event.target.dataset.tagType) ;
-                let tag = cleanText(event.target.dataset.value) ;
+                let userTag = [cleanText(event.target.dataset.value)] ;
 
-                handlerTags(tagType, tag) ;
+                handlerTags(tagType, userTag) ;
             })
         }
     }
