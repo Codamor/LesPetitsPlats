@@ -11,10 +11,9 @@ export let ingredientsInput = document.getElementById("ingredients-input") ;
 export let devicesInput = document.getElementById("devices-input") ;
 export let utensilsInput = document.getElementById("utensils-input") ;
 export let allTags = document.getElementsByClassName("filter__tag") ;
-let allTagsIcon = document.getElementsByClassName("filter__icon--tag") ;
-export let userSelectedTags = document.getElementById("user-selected-filters") ;
+export let allTagsIcon = document.getElementsByClassName("filter__icon--tag") ;
+export let userSelectedTags = document.getElementById("user-selected-tags") ;
 export let displayedRecipes = document.getElementsByClassName("card") ;
-
 
 //TO CLEAN TEXT
 let stopWords = [" a ", " au ", " aux ", " le ", " la ", " les ", " un ", " une ", " des ", " du ", " dans ", //TODO handle empty space more efficiently
