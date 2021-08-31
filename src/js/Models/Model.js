@@ -28,12 +28,12 @@ export class Model{
         return allRecipes ;
     }
 
-    getMatchedRecipes(userInput){ //TODO refactor userSearch
+    getRecipes(userSearch){ //TODO refactor userSearch
         let matchedRecipes = [] ;
         let allRecipes = this.getAllRecipes() ;
 
         for (let i = 0; i < allRecipes.length; i++) {
-            let recipeScore = this.defineScore(userInput, allRecipes[i]) ;
+            let recipeScore = this.defineRecipeScore(userSearch, allRecipes[i]) ;
             if (recipeScore.recipeScore > 0){
                 matchedRecipes.push(allRecipes[i]) ;
             }
@@ -42,7 +42,7 @@ export class Model{
         return this.sortRecipesByScore(matchedRecipes) ;
     }
 
-    getMatchedRecipesByTag(userTag, tagType){
+    getRecipesByTag(userTag, tagType){
 
         console.log(userTag, tagType)
 
@@ -50,18 +50,18 @@ export class Model{
         let matchRecipesByTag = [] ;
 
         if (tagType ==="ingredient"){
-            this.getMatchedRecipesByIngredient(userTag) ;
+            this.getRecipesByIngredient(userTag) ;
 
         } else if (tagType === "device"){
             console.log("device")
         } else if (tagType === "utensil"){
             console.log("utensil")
         }
-        
+
         return matchRecipesByTag ;
     }
 
-    getMatchedRecipesByIngredient(ingredient){
+    getRecipesByIngredient(ingredient){
         let allRecipes = this.getAllRecipes() ;
         let matchRecipesByTag = [] ;
 
@@ -107,7 +107,7 @@ export class Model{
         return description ;
     }
 
-    defineScore(userSearch, oneRecipe){
+    defineRecipeScore(userSearch, oneRecipe){
         let recipeScore = 0 ;
         let recipeName = this.formatName(oneRecipe) ;
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
