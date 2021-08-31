@@ -7,37 +7,44 @@ export class Controller{
     }
 
     displayHomePage(){
-        let recipesList = this._model.getAllRecipes() ;
+        let allRecipes = this._model.getAllRecipes() ;
+        let matchedIngredients = this._model.getAllIngredients(allRecipes) ;
+        let matchedDevices = this._model.getAllDevices(allRecipes) ;
+        let matchedUtensils = this._model.getAllUtensils(allRecipes) ;
 
-        /*let matchedIngredients = this._model.getAllIngredients(recipesList) ; //TODO ask if it's good to see all tags in default homePage
-        let matchedDevices = this._model.getAllDevices(recipesList) ;*/
-
-        this._view.displayRecipes(recipesList) ;
+        this._view.displayRecipes(allRecipes) ;
+        this._view.displayTagsList(matchedIngredients, "ingredient") ;
+        this._view.displayTagsList(matchedDevices, "device") ;
+        this._view.displayTagsList(matchedUtensils, "utensil") ;
 
         this._view.onSearchBar(this.handleSearchRecipe) ;
         this._view.onSubmitButton(this.handleSearchRecipe) ;
-        this._view.onIngredientsInput(this.handleSearchByIngredient) ;
+        this._view.onTags(this.handlerTags) ;
+
 
     }
 
     handleSearchRecipe = (userSearch) => {
-
-        let matchedRecipes = this._model.getMatchedRecipes(userSearch) ;
+        let matchedRecipes = this._model.getRecipes(userSearch) ;
         let matchedIngredients = this._model.getAllIngredients(matchedRecipes) ;
         let matchedDevices = this._model.getAllDevices(matchedRecipes) ;
         let matchedUtensils = this._model.getAllUtensils(matchedRecipes) ;
 
         this._view.displayRecipes(matchedRecipes) ;
 
-        this._view.displayTagsList(matchedIngredients, "ingredients") ;
-        this._view.displayTagsList(matchedDevices, "devices") ;
-        this._view.displayTagsList(matchedUtensils, "utensils") ;
+        this._view.displayTagsList(matchedIngredients, "ingredient") ;
+        this._view.displayTagsList(matchedDevices, "device") ;
+        this._view.displayTagsList(matchedUtensils, "utensil") ;
 
     }
 
-    handleSearchByIngredient = (userSearch) => {
-        let matchedRecipesByIngredient = this._model.getMatchedRecipesByIngredient(userSearch) ;
+    handlerTags = (tagType, userTag) => {
 
-        this._view.displayRecipes(matchedRecipesByIngredient) ;
+        let displayedRecipesId = this._view.getDisplayedRecipesId() ;
+
+        let matchedRecipesByTag = this._model.getRecipesByTag(userTag, tagType) ;
+        let matchedRecipesId = this._model.getRecipesId(matchedRecipesByTag) ;
+
+        this._view.displayUserSelectedTag(userTag, tagType) ;
     }
 }
