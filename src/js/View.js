@@ -9,7 +9,7 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    ingredientsInput, allTags, displayedRecipes
+    ingredientsInput, allTags, displayedRecipes, userSelectedTags
 } from "./helpers.js";
 
 export class View{
@@ -55,6 +55,10 @@ export class View{
             utensilsList.innerHTML = htmlLists ;
         }
 
+    }
+
+    displayUserSelectedTag(tag){
+        userSelectedTags.innerHTML += tag ;
     }
 
     createHTMLIngredientsList(ingredients){
@@ -165,7 +169,7 @@ export class View{
         for (let i = 0; i < allTags.length; i++) {
             allTags[i].addEventListener("click", event => {
                 let tagType = cleanText(event.target.dataset.tagType) ;
-                let userTag = [cleanText(event.target.dataset.value)] ;
+                let userTag = cleanText(event.target.dataset.value) ;
 
                 handlerTags(tagType, userTag) ;
             })

@@ -44,22 +44,19 @@ export class Model{
 
     getRecipesByTag(userTag, tagType){
 
-        /*console.log(userTag, tagType)*/
+        console.log(userTag)
 
         let allRecipes = this.getAllRecipes() ;
-        let matchRecipesByTag = [] ;
 
         if (tagType ==="ingredient"){
-            this.getRecipesByIngredient(userTag) ;
+            return this.getRecipesByIngredient(userTag) ;
 
         } else if (tagType === "device"){
-            this.getRecipesByDevice(userTag) ;
+            return this.getRecipesByDevice(userTag) ;
 
         } else if (tagType === "utensil"){
-            this.getRecipesByUtensil(userTag) ;
+            return this.getRecipesByUtensil(userTag) ;
         }
-
-        return matchRecipesByTag ;
     }
 
     getRecipesByIngredient(ingredient){
@@ -70,11 +67,9 @@ export class Model{
             for (let j = 0; j < allRecipes[i].ingredients.length; j++) {
                 let recipeIngredient = cleanText(allRecipes[i].ingredients[j].ingredient) ;
 
-                for (let k = 0; k < ingredient.length; k++) {
-                    if (searchTextPattern(recipeIngredient, ingredient[k])){
-                        if (!matchRecipesByTag.includes(allRecipes[i])){
-                            matchRecipesByTag.push(allRecipes[i]) ;
-                        }
+                if (searchTextPattern(recipeIngredient, ingredient)){
+                    if (!matchRecipesByTag.includes(allRecipes[i])){
+                        matchRecipesByTag.push(allRecipes[i]) ;
                     }
                 }
             }
@@ -87,16 +82,13 @@ export class Model{
         let matchedRecipes = [] ;
 
         for (let i = 0; i < allRecipes.length; i++) {
-            for (let j = 0; j < device.length; j++) {
-                let recipeDevice = cleanText(allRecipes[i].appliance) ;
-                if (searchTextPattern(recipeDevice, device[j])){
-                    if (!matchedRecipes.includes(allRecipes[i])){
-                        matchedRecipes.push(allRecipes[i]) ;
-                    }
+            let recipeDevice = cleanText(allRecipes[i].appliance) ;
+            if (searchTextPattern(recipeDevice, device)){
+                if (!matchedRecipes.includes(allRecipes[i])){
+                    matchedRecipes.push(allRecipes[i]) ;
                 }
             }
         }
-
         return matchedRecipes ;
     }
 
@@ -106,18 +98,24 @@ export class Model{
 
         for (let i = 0; i < allRecipes.length; i++) {
             for (let j = 0; j < allRecipes[i].utensils.length; j++) {
-                for (let k = 0; k < utensil.length; k++) {
-                    let recipeUtensil = cleanText(allRecipes[i].utensils[j]) ;
-                    if (searchTextPattern(recipeUtensil, utensil[k])){
-                        if (!matchedRecipes.includes(allRecipes[i])){
-                            matchedRecipes.push(allRecipes[i]) ;
-                        }
+                let recipeUtensil = cleanText(allRecipes[i].utensils[j]) ;
+                if (searchTextPattern(recipeUtensil, utensil)){
+                    if (!matchedRecipes.includes(allRecipes[i])){
+                        matchedRecipes.push(allRecipes[i]) ;
                     }
                 }
             }
         }
-        
         return matchedRecipes ;
+    }
+
+    getRecipesId(recipesList){
+        let recipesId = [] ;
+
+        for (let i = 0; i < recipesList.length; i++) {
+            recipesId.push(recipesList[i].id) ;
+        }
+        return recipesId ;
     }
 
 
