@@ -9,13 +9,7 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    ingredientsInput,
-    allTags,
-    allTagsIcon,
-    displayedRecipes,
-    userSelectedTags,
-    userSelectedIngredient,
-    userSelectedDevice, userSelectedUtensil
+    ingredientsInput, allTags, allTagsIcon, displayedRecipes, userSelectedTags
 } from "./helpers.js";
 
 export class View{
@@ -66,20 +60,14 @@ export class View{
         let displayedUserSelectedTags = this.getDisplayedUserSelectedTags() ;
 
         for (let i = 0; i < displayedUserSelectedTags.length; i++) {
-            if (displayedUserSelectedTags[i].dataset.tagValue === tag){
+            if (displayedUserSelectedTags[i].tagValue === tag){
                 return false
             }
         }
 
         let htmlTag = this.createHTMLUserSelectedTag(tag, tagType) ;
 
-        if (tagType === "ingredient"){
-            userSelectedIngredient.innerHTML += htmlTag ;
-        } else if (tagType === "device"){
-            userSelectedDevice.innerHTML += htmlTag ;
-        } else if (tagType === "utensil"){
-            userSelectedUtensil.innerHTML += htmlTag ;
-        }
+        userSelectedTags.innerHTML += htmlTag ;
     }
 
     createHTMLIngredientsList(ingredients){
@@ -181,7 +169,18 @@ export class View{
     }
 
     getDisplayedUserSelectedTags(){
-        return document.getElementsByClassName("filter--selected") ;
+        let userSelectedTags = document.getElementsByClassName("filter--selected") ;
+        let userSelectedTagsValue = [] ;
+
+        for (let i = 0; i < userSelectedTags.length; i++) {
+            let tag = {
+                tagType: `${userSelectedTags[i].dataset.tagType}`,
+                tagValue: `${userSelectedTags[i].dataset.tagValue}`
+            }
+            userSelectedTagsValue.push(tag) ;
+        }
+
+        return userSelectedTagsValue ;
     }
 
    onSearchBar(handlerOnSearch){ //TODO merger this with onSubmitButton in onSearch method

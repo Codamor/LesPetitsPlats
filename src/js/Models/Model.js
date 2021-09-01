@@ -55,6 +55,15 @@ export class Model{
         }
     }
 
+    getRecipeById(recipeId){
+        let allRecipes = this.getAllRecipes() ;
+        for (let i = 0; i < allRecipes.length; i++) {
+            if (allRecipes[i].id === recipeId){
+                return allRecipes[i] ;
+            }
+        }
+    }
+
     getRecipesByIngredient(ingredient){
         let allRecipes = this.getAllRecipes() ;
         let matchRecipesByTag = [] ;
@@ -112,6 +121,47 @@ export class Model{
             recipesId.push(recipesList[i].id) ;
         }
         return recipesId ;
+    }
+
+    isRecipeHasTag(recipeId, tagType, userTag){
+        let recipe = this.getRecipeById(recipeId) ;
+
+        if (tagType === "ingredient"){
+            for (let i = 0; i < recipe.ingredients.length; i++) {
+                let recipeIngredient = cleanText(recipe.ingredients[i].ingredient) ; //TODO rename cleanText => formatText
+                if (recipeIngredient === userTag){
+                    return true ;
+                }
+            }
+
+        } else if (tagType === "device"){
+            let recipeDevice = cleanText(recipe.appliance) ;
+            if (recipeDevice === userTag){
+                return true ;
+            }
+
+        } else if (tagType === "utensil"){
+            for (let i = 0; i < recipe.utensils.length; i++) {
+                let recipeUtensil = cleanText(recipe.utensils[i]) ;
+                if (recipeUtensil === userTag){
+                    return true ;
+                }
+            }
+        }
+
+        return false ;
+    }
+
+    getRecipesWithTag(recipesIdList, userTag, tag){
+        let matchedTagRecipesIdList = [] ;
+        for (let i = 0; i < recipesIdList.length; i++) {
+            let recipeId = recipesIdList[i] ;
+            if (this.isRecipeHasTag(recipeId,userTag, tag)){
+                matchedTagRecipesIdList.push(recipeId) ;
+            } ;
+        }
+
+        return matchedTagRecipesIdList ;
     }
 
 
