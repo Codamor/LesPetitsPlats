@@ -57,6 +57,19 @@ export class Model{
 
     getRecipeById(recipeId){
         let allRecipes = this.getAllRecipes() ;
+        let recipes = [] ;
+
+        if (typeof recipeId === Array){
+            for (let i = 0; i < allRecipes[i].length; i++) {
+                for (let j = 0; j < recipeId.length; j++) {
+                    if (allRecipes[i] === recipeId[j]){
+                        recipes.push(allRecipes[i]) ;
+                    }
+                }
+            }
+            return recipes ;
+        }
+
         for (let i = 0; i < allRecipes.length; i++) {
             if (allRecipes[i].id === recipeId){
                 return allRecipes[i] ;
@@ -123,27 +136,40 @@ export class Model{
         return recipesId ;
     }
 
-    isRecipeHasTag(recipeId, tagType, userTag){
+    isRecipeHasAllTagsList(recipeId, tagList){
+
+        for (let i = 0; i < tagList.length; i++) {
+            let tagType = tagList[i].tagType ;
+            let tagValue = tagList[i].tagValue ;
+
+            if (!this.isRecipeHasTag(recipeId, tagType, tagValue)) {
+                return false;
+            }
+        }
+        return true ;
+    }
+
+    isRecipeHasTag(recipeId, tagType, tag){
         let recipe = this.getRecipeById(recipeId) ;
 
         if (tagType === "ingredient"){
             for (let i = 0; i < recipe.ingredients.length; i++) {
                 let recipeIngredient = cleanText(recipe.ingredients[i].ingredient) ; //TODO rename cleanText => formatText
-                if (recipeIngredient === userTag){
+                if (recipeIngredient === tag){
                     return true ;
                 }
             }
 
         } else if (tagType === "device"){
             let recipeDevice = cleanText(recipe.appliance) ;
-            if (recipeDevice === userTag){
+            if (recipeDevice === tag){
                 return true ;
             }
 
         } else if (tagType === "utensil"){
             for (let i = 0; i < recipe.utensils.length; i++) {
                 let recipeUtensil = cleanText(recipe.utensils[i]) ;
-                if (recipeUtensil === userTag){
+                if (recipeUtensil === tag){
                     return true ;
                 }
             }
@@ -152,7 +178,20 @@ export class Model{
         return false ;
     }
 
-    getRecipesWithTag(recipesIdList, userTag, tag){
+    getRecipesMatchedWithAllTags(allUserSelectedTags, displayedRecipesId){
+        let matchedRecipesId = [] ;
+
+        for (let i = 0; i < displayedRecipesId.length; i++) {
+
+            if (this.isRecipeHasAllTagsList(displayedRecipesId[i], allUserSelectedTags) === true){
+                matchedRecipesId.push(displayedRecipesId[i]) ;
+            };
+        }
+
+        return matchedRecipesId ;
+    }
+
+   /* getRecipesWithTag(recipesIdList, userTag, tag){
         let matchedTagRecipesIdList = [] ;
         for (let i = 0; i < recipesIdList.length; i++) {
             let recipeId = recipesIdList[i] ;
@@ -162,7 +201,7 @@ export class Model{
         }
 
         return matchedTagRecipesIdList ;
-    }
+    }*/
 
 
     formatName(oneRecipe){
