@@ -133,6 +133,9 @@ body {
   border-radius: 5px;
   overflow: hidden;
 }
+.card[data-visible=false] {
+  display: none;
+}
 .card__media {
   height: 50%;
   background-color: #c6bebe;

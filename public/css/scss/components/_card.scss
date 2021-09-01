@@ -8,6 +8,9 @@
   height: 364px;
   border-radius: 5px;
   overflow: hidden;
+  &[data-visible="false"]{
+    display: none;
+  }
     &__media{
     height: 50%;
     background-color: $color-dark-grey;
