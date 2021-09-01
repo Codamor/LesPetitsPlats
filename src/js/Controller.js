@@ -36,15 +36,31 @@ export class Controller{
         this._view.displayTagsList(matchedDevices, "device") ;
         this._view.displayTagsList(matchedUtensils, "utensil") ;
 
+        this._view.onTags(this.handlerTags) ;
+
     }
 
-    handlerTags = (tagType, userTag) => {
+    handlerTags = () => {
 
-        let displayedRecipesId = this._view.getDisplayedRecipesId() ;
+        let allUserSelectedTags = this._view.getDisplayedUserSelectedTags() ;
+        let allRecipesId = this._view.getDisplayedRecipesId() ;
+        let recipesToEnable = this._model.getRecipesIDMatchedWithAllTags(allUserSelectedTags, allRecipesId) ;
+        let recipesToDisable = [] ;
 
-        let matchedRecipesByTag = this._model.getRecipesByTag(userTag, tagType) ;
-        let matchedRecipesId = this._model.getRecipesId(matchedRecipesByTag) ;
+        for (let i = 0; i < allRecipesId.length; i++) {
+            if(!recipesToEnable.includes(allRecipesId[i])){
+                recipesToDisable.push(allRecipesId[i]) ;
+            }
+        }
 
-        this._view.displayUserSelectedTag(userTag, tagType) ;
+        for (let i = 0; i < recipesToEnable.length; i++) {
+            this._view.enableRecipe(recipesToEnable[i]) ;
+        }
+
+        for (let i = 0; i < recipesToDisable.length; i++) {
+            this._view.disableRecipe(recipesToDisable[i]) ;
+        }
+
+        this._view.onFilterTagsIcon(this.handlerTags) ;
     }
 }

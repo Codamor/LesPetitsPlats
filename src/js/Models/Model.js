@@ -129,15 +129,6 @@ export class Model{
         return matchedRecipes ;
     }
 
-    getRecipesId(recipesList){
-        let recipesId = [] ;
-
-        for (let i = 0; i < recipesList.length; i++) {
-            recipesId.push(recipesList[i].id) ;
-        }
-        return recipesId ;
-    }
-
     isRecipeHasAllTagsList(recipeId, tagList){
 
         for (let i = 0; i < tagList.length; i++) {
@@ -180,7 +171,7 @@ export class Model{
         return false ;
     }
 
-    getRecipesMatchedWithAllTags(allUserSelectedTags, displayedRecipesId){
+    getRecipesIDMatchedWithAllTags(allUserSelectedTags, displayedRecipesId){
         let matchedRecipesId = [] ;
 
         for (let i = 0; i < displayedRecipesId.length; i++) {
@@ -192,19 +183,6 @@ export class Model{
 
         return matchedRecipesId ;
     }
-
-   /* getRecipesWithTag(recipesIdList, userTag, tag){
-        let matchedTagRecipesIdList = [] ;
-        for (let i = 0; i < recipesIdList.length; i++) {
-            let recipeId = recipesIdList[i] ;
-            if (this.isRecipeHasTag(recipeId,userTag, tag)){
-                matchedTagRecipesIdList.push(recipeId) ;
-            } ;
-        }
-
-        return matchedTagRecipesIdList ;
-    }*/
-
 
     formatName(oneRecipe){
         let name = splitText(cleanText(oneRecipe._name)) ;

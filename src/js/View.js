@@ -70,6 +70,16 @@ export class View{
         userSelectedTags.innerHTML += htmlTag ;
     }
 
+    enableRecipe(recipeId){
+        let recipe = document.querySelector(`[data-recipe-id="${recipeId}"]`) ;
+        recipe.dataset.visible = "true" ;
+    }
+
+    disableRecipe(recipeId){
+        let recipe = document.querySelector(`[data-recipe-id="${recipeId}"]`) ;
+        recipe.dataset.visible = "false" ;
+    }
+
     createHTMLIngredientsList(ingredients){
         let htmlIngredients = `` ;
 
@@ -211,18 +221,23 @@ export class View{
                 let tagType = cleanText(event.target.dataset.tagType) ;
                 let userTag = cleanText(event.target.dataset.value) ;
 
-                handlerTags(tagType, userTag) ;
+                this.displayUserSelectedTag(userTag, tagType) ;
+
+                handlerTags() ;
             })
         }
     }
 
-    onFilterTagsIcon(){
+    onFilterTagsIcon(handlerTags){
         for (let i = 0; i < allTagsIcon.length; i++) {
-            allTagsIcon[i].addEventListener("click", event => {
+            allTagsIcon[i].addEventListener("click", event => { //TODO fix bug
                 let parentNode = event.target.parentNode.parentNode ;
                 let childNode = event.target.parentNode ;
-                parentNode.removeChild(childNode)
+                parentNode.removeChild(childNode) ;
+
+                handlerTags() ;
             })
         }
+
     }
 }
