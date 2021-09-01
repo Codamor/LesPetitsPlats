@@ -57,18 +57,6 @@ export class Model{
 
     getRecipeById(recipeId){
         let allRecipes = this.getAllRecipes() ;
-        let recipes = [] ;
-
-        if (typeof recipeId === Array){
-            for (let i = 0; i < allRecipes[i].length; i++) {
-                for (let j = 0; j < recipeId.length; j++) {
-                    if (allRecipes[i] === recipeId[j]){
-                        recipes.push(allRecipes[i]) ;
-                    }
-                }
-            }
-            return recipes ;
-        }
 
         for (let i = 0; i < allRecipes.length; i++) {
             if (allRecipes[i].id === recipeId){
