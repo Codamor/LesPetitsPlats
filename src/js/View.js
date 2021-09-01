@@ -9,7 +9,13 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    ingredientsInput, allTags, allTagsIcon, displayedRecipes, userSelectedTags
+    ingredientsInput,
+    allTags,
+    allTagsIcon,
+    displayedRecipes,
+    userSelectedTags,
+    userSelectedIngredient,
+    userSelectedDevice, userSelectedUtensil
 } from "./helpers.js";
 
 export class View{
@@ -61,13 +67,19 @@ export class View{
 
         for (let i = 0; i < displayedUserSelectedTags.length; i++) {
             if (displayedUserSelectedTags[i].dataset.tagValue === tag){
-                return
+                return false
             }
         }
-        
+
         let htmlTag = this.createHTMLUserSelectedTag(tag, tagType) ;
 
-        userSelectedTags.innerHTML += htmlTag ;
+        if (tagType === "ingredient"){
+            userSelectedIngredient.innerHTML += htmlTag ;
+        } else if (tagType === "device"){
+            userSelectedDevice.innerHTML += htmlTag ;
+        } else if (tagType === "utensil"){
+            userSelectedUtensil.innerHTML += htmlTag ;
+        }
     }
 
     createHTMLIngredientsList(ingredients){

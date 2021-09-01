@@ -47,6 +47,7 @@ body {
 }
 .filters-container--selected {
   order: 1;
+  flex-wrap: wrap;
 }
 
 /*-----------------------*\
@@ -223,18 +224,6 @@ body {
 /*-----------------------*\
          FILTERS
 \*---------------------- */
-.filters {
-  display: flex;
-  height: auto;
-  margin-bottom: 20px;
-}
-.filters--default {
-  order: 2;
-}
-.filters--selected {
-  order: 1;
-}
-
 .filter {
   position: relative;
   width: 170px;
@@ -338,6 +327,7 @@ body {
   align-items: center;
   width: 110px;
   height: 40px;
+  margin: 7px;
 }
 .filter--selected .filter__icon::before {
   margin-left: 10px;
