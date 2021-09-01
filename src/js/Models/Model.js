@@ -65,6 +65,20 @@ export class Model{
         }
     }
 
+    getRecipesByIdList(idList){
+        let allRecipes = this.getAllRecipes() ;
+        let recipes = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < idList.length; j++) {
+                if (Number(allRecipes[i].id) === idList[j]){
+                    recipes.push(allRecipes[i]) ;
+                }
+            }
+        }
+        return recipes ;
+    }
+
     getRecipesByIngredient(ingredient){
         let allRecipes = this.getAllRecipes() ;
         let matchRecipesByTag = [] ;
