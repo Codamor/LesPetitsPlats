@@ -52,7 +52,7 @@ export class Model{
         return recipesByIdList ;
     }
 
-    getRecipes(userSearch){ //TODO refactor userSearch
+    searchRecipes(userSearch){ //TODO refactor userSearch
         let matchedRecipes = [] ;
         let allRecipes = this.getAllRecipesFromAPI() ;
 
@@ -64,6 +64,44 @@ export class Model{
         }
 
         return this.sortRecipesByScore(matchedRecipes) ;
+    }
+
+    defineRecipeScore(userSearch, oneRecipe){
+        let recipeScore = 0 ;
+        let recipeName = this.formatName(oneRecipe) ;
+        let recipeIngredients = this.formatIngredients(oneRecipe) ;
+        let recipeDescription = this.formatDescription(oneRecipe) ;
+
+        let nameScore = compareUserSearchWithData(recipeName, userSearch) * 3 ;
+        let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) * 0.2  ;
+        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ;
+
+        recipeScore =  nameScore + ingredientScore  ;
+
+        oneRecipe.recipeScore = recipeScore ;
+
+        return oneRecipe ;
+    }
+
+    sortRecipesByScore(recipesArray){
+        recipesArray.sort((a,b) => {
+            return b.recipeScore - a.recipeScore ;
+        }) ;
+
+        return recipesArray ;
+    }
+
+    getRecipesIDMatchedWithAllTags(allUserSelectedTags, displayedRecipesId){
+        let matchedRecipesId = [] ;
+
+        for (let i = 0; i < displayedRecipesId.length; i++) {
+
+            if (this.isRecipeHasAllTags(displayedRecipesId[i], allUserSelectedTags) === true){
+                matchedRecipesId.push(displayedRecipesId[i]) ;
+            };
+        }
+
+        return matchedRecipesId ;
     }
 
 
@@ -107,69 +145,6 @@ export class Model{
         }
 
         return false ;
-    }
-
-    getRecipesIDMatchedWithAllTags(allUserSelectedTags, displayedRecipesId){
-        let matchedRecipesId = [] ;
-
-        for (let i = 0; i < displayedRecipesId.length; i++) {
-
-            if (this.isRecipeHasAllTags(displayedRecipesId[i], allUserSelectedTags) === true){
-                matchedRecipesId.push(displayedRecipesId[i]) ;
-            };
-        }
-
-        return matchedRecipesId ;
-    }
-
-    formatName(oneRecipe){
-        let name = splitText(cleanText(oneRecipe._name)) ;
-
-        return name ;
-    }
-
-    formatIngredients(oneRecipe) {
-        let allIngredients = [];
-
-        for (let i = 0; i < oneRecipe.ingredients.length; i++) {
-            let ingredient = splitText(cleanText(oneRecipe.ingredients[i].ingredient)) ;
-            for (let j = 0; j < ingredient.length; j++) {
-                allIngredients.push(ingredient[j]) ;
-            }
-        }
-
-        return allIngredients;
-    }
-
-    formatDescription(oneRecipe){
-        let description = splitText(cleanText(oneRecipe.description)) ;
-
-        return description ;
-    }
-
-    defineRecipeScore(userSearch, oneRecipe){
-        let recipeScore = 0 ;
-        let recipeName = this.formatName(oneRecipe) ;
-        let recipeIngredients = this.formatIngredients(oneRecipe) ;
-        let recipeDescription = this.formatDescription(oneRecipe) ;
-
-        let nameScore = compareUserSearchWithData(recipeName, userSearch) * 3 ;
-        let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) * 0.2  ;
-        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ;
-
-        recipeScore =  nameScore + ingredientScore  ;
-
-        oneRecipe.recipeScore = recipeScore ;
-
-        return oneRecipe ;
-    }
-
-    sortRecipesByScore(recipesArray){
-        recipesArray.sort((a,b) => {
-            return b.recipeScore - a.recipeScore ;
-        }) ;
-
-        return recipesArray ;
     }
 
     getIngredients(oneMatchedRecipe){
@@ -223,6 +198,34 @@ export class Model{
 
         return allUtensilsWithoutDuplicates.sort() ;
     }
+
+
+    formatName(oneRecipe){
+        let name = splitText(cleanText(oneRecipe._name)) ;
+
+        return name ;
+    }
+
+    formatIngredients(oneRecipe) {
+        let allIngredients = [];
+
+        for (let i = 0; i < oneRecipe.ingredients.length; i++) {
+            let ingredient = splitText(cleanText(oneRecipe.ingredients[i].ingredient)) ;
+            for (let j = 0; j < ingredient.length; j++) {
+                allIngredients.push(ingredient[j]) ;
+            }
+        }
+
+        return allIngredients;
+    }
+
+    formatDescription(oneRecipe){
+        let description = splitText(cleanText(oneRecipe.description)) ;
+
+        return description ;
+    }
+
+
 
     //TODO remove these methods if useless when finished
     /*getRecipesByIngredient(ingredient){
