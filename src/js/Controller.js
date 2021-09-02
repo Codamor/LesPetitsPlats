@@ -7,7 +7,7 @@ export class Controller{
     }
 
     displayHomePage(){
-        let allRecipes = this._model.getAllRecipes() ;
+        let allRecipes = this._model.getAllRecipesFromAPI() ;
         let matchedIngredientsWithRecipes = this._model.getAllIngredients(allRecipes) ;
         let matchedDevicesWithRecipes = this._model.getAllDevices(allRecipes) ;
         let matchedUtensilsWithRecipes = this._model.getAllUtensils(allRecipes) ;

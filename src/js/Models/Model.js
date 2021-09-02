@@ -1,7 +1,7 @@
 "use strict"
 
 import {Recipe} from "../Entity/Recipe.js";
-import {arrayMatch, cleanText, removeDuplicatesFromArray, searchTextPattern, splitText} from "../helpers.js";
+import {compareUserSearchWithData, cleanText, removeDuplicatesFromArray, searchTextPatternAlgorithm, splitText} from "../helpers.js";
 
 export class Model{
 
@@ -153,9 +153,9 @@ export class Model{
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let recipeDescription = this.formatDescription(oneRecipe) ;
 
-        let nameScore = arrayMatch(recipeName, userSearch) * 3 ;
-        let ingredientScore = arrayMatch(recipeIngredients, userSearch) * 0.2  ;
-        let descriptionScore = arrayMatch(recipeDescription, userSearch) ;
+        let nameScore = compareUserSearchWithData(recipeName, userSearch) * 3 ;
+        let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) * 0.2  ;
+        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ;
 
         recipeScore =  nameScore + ingredientScore  ;
 
