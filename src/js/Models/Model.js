@@ -5,11 +5,11 @@ import {arrayMatch, cleanText, removeDuplicatesFromArray, searchTextPattern, spl
 
 export class Model{
 
-    constructor(db, search) {
+    constructor(db) {
         this._db = db ;
     }
 
-    getAllRecipes(){
+    getAllRecipesFromAPI(){
         let allRecipes = [] ;
 
         for (let i = 0; i < this._db.length; i++) {
@@ -28,9 +28,33 @@ export class Model{
         return allRecipes ;
     }
 
+    getRecipeById(recipeId){
+        let allRecipes = this.getAllRecipesFromAPI() ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            if (allRecipes[i].id === recipeId){
+                return allRecipes[i] ;
+            }
+        }
+    }
+
+    getRecipesByIdList(idList){
+        let allRecipes = this.getAllRecipesFromAPI() ;
+        let recipesByIdList = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < idList.length; j++) {
+                if (Number(allRecipes[i].id) === idList[j]){
+                    recipesByIdList.push(allRecipes[i]) ;
+                }
+            }
+        }
+        return recipesByIdList ;
+    }
+
     getRecipes(userSearch){ //TODO refactor userSearch
         let matchedRecipes = [] ;
-        let allRecipes = this.getAllRecipes() ;
+        let allRecipes = this.getAllRecipesFromAPI() ;
 
         for (let i = 0; i < allRecipes.length; i++) {
             let recipeScore = this.defineRecipeScore(userSearch, allRecipes[i]) ;
@@ -42,98 +66,12 @@ export class Model{
         return this.sortRecipesByScore(matchedRecipes) ;
     }
 
-    getRecipesByTag(userTag, tagType){
 
-        if (tagType ==="ingredient"){
-            return this.getRecipesByIngredient(userTag) ;
+    isRecipeHasAllTags(recipeId, allUserSelectedTags){
 
-        } else if (tagType === "device"){
-            return this.getRecipesByDevice(userTag) ;
-
-        } else if (tagType === "utensil"){
-            return this.getRecipesByUtensil(userTag) ;
-        }
-    }
-
-    getRecipeById(recipeId){
-        let allRecipes = this.getAllRecipes() ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            if (allRecipes[i].id === recipeId){
-                return allRecipes[i] ;
-            }
-        }
-    }
-
-    getRecipesByIdList(idList){
-        let allRecipes = this.getAllRecipes() ;
-        let recipes = [] ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            for (let j = 0; j < idList.length; j++) {
-                if (Number(allRecipes[i].id) === idList[j]){
-                    recipes.push(allRecipes[i]) ;
-                }
-            }
-        }
-        return recipes ;
-    }
-
-    getRecipesByIngredient(ingredient){
-        let allRecipes = this.getAllRecipes() ;
-        let matchRecipesByTag = [] ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            for (let j = 0; j < allRecipes[i].ingredients.length; j++) {
-                let recipeIngredient = cleanText(allRecipes[i].ingredients[j].ingredient) ;
-
-                if (searchTextPattern(recipeIngredient, ingredient)){
-                    if (!matchRecipesByTag.includes(allRecipes[i])){
-                        matchRecipesByTag.push(allRecipes[i]) ;
-                    }
-                }
-            }
-        }
-        return matchRecipesByTag ;
-    }
-
-    getRecipesByDevice(device){
-        let allRecipes = this.getAllRecipes() ;
-        let matchedRecipes = [] ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            let recipeDevice = cleanText(allRecipes[i].appliance) ;
-            if (searchTextPattern(recipeDevice, device)){
-                if (!matchedRecipes.includes(allRecipes[i])){
-                    matchedRecipes.push(allRecipes[i]) ;
-                }
-            }
-        }
-        return matchedRecipes ;
-    }
-
-    getRecipesByUtensil(utensil){
-        let allRecipes = this.getAllRecipes() ;
-        let matchedRecipes = [] ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            for (let j = 0; j < allRecipes[i].utensils.length; j++) {
-                let recipeUtensil = cleanText(allRecipes[i].utensils[j]) ;
-                if (searchTextPattern(recipeUtensil, utensil)){
-                    if (!matchedRecipes.includes(allRecipes[i])){
-                        matchedRecipes.push(allRecipes[i]) ;
-                    }
-                }
-            }
-        }
-        return matchedRecipes ;
-    }
-
-    isRecipeHasAllTagsList(recipeId, tagList){
-
-        for (let i = 0; i < tagList.length; i++) {
-            let tagType = tagList[i].tagType ;
-            let tagValue = tagList[i].tagValue ;
+        for (let i = 0; i < allUserSelectedTags.length; i++) {
+            let tagType = allUserSelectedTags[i].tagType ;
+            let tagValue = allUserSelectedTags[i].tagValue ;
 
             if (!this.isRecipeHasTag(recipeId, tagType, tagValue)) {
                 return false;
@@ -142,27 +80,27 @@ export class Model{
         return true ;
     }
 
-    isRecipeHasTag(recipeId, tagType, tag){
+    isRecipeHasTag(recipeId, tagType, oneUserSelectedTag){
         let recipe = this.getRecipeById(recipeId) ;
 
         if (tagType === "ingredient"){
             for (let i = 0; i < recipe.ingredients.length; i++) {
                 let recipeIngredient = cleanText(recipe.ingredients[i].ingredient) ; //TODO rename cleanText => formatText
-                if (recipeIngredient === tag){
+                if (recipeIngredient === oneUserSelectedTag){
                     return true ;
                 }
             }
 
         } else if (tagType === "device"){
             let recipeDevice = cleanText(recipe.appliance) ;
-            if (recipeDevice === tag){
+            if (recipeDevice === oneUserSelectedTag){
                 return true ;
             }
 
         } else if (tagType === "utensil"){
             for (let i = 0; i < recipe.utensils.length; i++) {
                 let recipeUtensil = cleanText(recipe.utensils[i]) ;
-                if (recipeUtensil === tag){
+                if (recipeUtensil === oneUserSelectedTag){
                     return true ;
                 }
             }
@@ -176,7 +114,7 @@ export class Model{
 
         for (let i = 0; i < displayedRecipesId.length; i++) {
 
-            if (this.isRecipeHasAllTagsList(displayedRecipesId[i], allUserSelectedTags) === true){
+            if (this.isRecipeHasAllTags(displayedRecipesId[i], allUserSelectedTags) === true){
                 matchedRecipesId.push(displayedRecipesId[i]) ;
             };
         }
@@ -285,4 +223,55 @@ export class Model{
 
         return allUtensilsWithoutDuplicates.sort() ;
     }
+
+    //TODO remove these methods if useless when finished
+    /*getRecipesByIngredient(ingredient){
+        let allRecipes = this.getAllRecipesFromAPI() ;
+        let recipesByIngredient = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < allRecipes[i].ingredients.length; j++) {
+                let recipeIngredient = cleanText(allRecipes[i].ingredients[j].ingredient) ;
+
+                if (searchTextPattern(recipeIngredient, ingredient)){
+                    if (!recipesByIngredient.includes(allRecipes[i])){
+                        recipesByIngredient.push(allRecipes[i]) ;
+                    }
+                }
+            }
+        }
+        return recipesByIngredient ;
+    }
+
+    getRecipesByDevice(device){
+        let allRecipes = this.getAllRecipesFromAPI() ;
+        let recipesByDevice = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            let recipeDevice = cleanText(allRecipes[i].appliance) ;
+            if (searchTextPattern(recipeDevice, device)){
+                if (!recipesByDevice.includes(allRecipes[i])){
+                    recipesByDevice.push(allRecipes[i]) ;
+                }
+            }
+        }
+        return recipesByDevice ;
+    }
+
+    getRecipesByUtensil(utensil){
+        let allRecipes = this.getAllRecipesFromAPI() ;
+        let recipesByUtensil = [] ;
+
+        for (let i = 0; i < allRecipes.length; i++) {
+            for (let j = 0; j < allRecipes[i].utensils.length; j++) {
+                let recipeUtensil = cleanText(allRecipes[i].utensils[j]) ;
+                if (searchTextPattern(recipeUtensil, utensil)){
+                    if (!recipesByUtensil.includes(allRecipes[i])){
+                        recipesByUtensil.push(allRecipes[i]) ;
+                    }
+                }
+            }
+        }
+        return recipesByUtensil ;
+    }*/
 }
