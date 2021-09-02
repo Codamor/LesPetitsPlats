@@ -8,59 +8,58 @@ export class Controller{
 
     displayHomePage(){
         let allRecipes = this._model.getAllRecipes() ;
-        let matchedIngredients = this._model.getAllIngredients(allRecipes) ;
-        let matchedDevices = this._model.getAllDevices(allRecipes) ;
-        let matchedUtensils = this._model.getAllUtensils(allRecipes) ;
+        let matchedIngredientsWithRecipes = this._model.getAllIngredients(allRecipes) ;
+        let matchedDevicesWithRecipes = this._model.getAllDevices(allRecipes) ;
+        let matchedUtensilsWithRecipes = this._model.getAllUtensils(allRecipes) ;
 
         this._view.displayRecipes(allRecipes) ;
-        this._view.displayTagsList(matchedIngredients, "ingredient") ;
-        this._view.displayTagsList(matchedDevices, "device") ;
-        this._view.displayTagsList(matchedUtensils, "utensil") ;
+        this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
+        this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
+        this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
 
-        this._view.onSearchBar(this.handleSearchRecipe) ;
-        this._view.onSubmitButton(this.handleSearchRecipe) ;
-        this._view.onTags(this.handlerTags) ;
+        this._view.onSearchBar(this.searchRecipes) ;
+        this._view.onSubmitButton(this.searchRecipes) ;
+        this._view.onTags(this.filterRecipesByTag) ;
 
-
-    }
-
-    handleSearchRecipe = (userSearch) => {
-        let matchedRecipes = this._model.getRecipes(userSearch) ;
-        let matchedIngredients = this._model.getAllIngredients(matchedRecipes) ;
-        let matchedDevices = this._model.getAllDevices(matchedRecipes) ;
-        let matchedUtensils = this._model.getAllUtensils(matchedRecipes) ;
-
-        this._view.displayRecipes(matchedRecipes) ;
-
-        this._view.displayTagsList(matchedIngredients, "ingredient") ;
-        this._view.displayTagsList(matchedDevices, "device") ;
-        this._view.displayTagsList(matchedUtensils, "utensil") ;
-
-        this._view.onTags(this.handlerTags) ;
 
     }
 
-    handlerTags = () => {
+    searchRecipes = (userSearch) => {
+        let matchedRecipesWithSearch = this._model.getRecipes(userSearch) ;
+        let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithSearch) ;
+        let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithSearch) ;
+        let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithSearch) ;
+
+        this._view.displayRecipes(matchedRecipesWithSearch) ;
+
+        this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
+        this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
+        this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
+        this._view.onTags(this.filterRecipesByTag) ;
+
+    }
+
+    filterRecipesByTag = () => {
 
         let allUserSelectedTags = this._view.getDisplayedUserSelectedTags() ;
         let allRecipesId = this._view.getDisplayedRecipesId() ;
-        let recipesToEnable = this._model.getRecipesIDMatchedWithAllTags(allUserSelectedTags, allRecipesId) ;
-        let recipesToDisable = [] ;
 
-        for (let i = 0; i < allRecipesId.length; i++) {
-            if(!recipesToEnable.includes(allRecipesId[i])){
-                recipesToDisable.push(allRecipesId[i]) ;
-            }
-        }
+        let recipesIDToEnable = this._model.getRecipesIDMatchedWithAllTags(allUserSelectedTags, allRecipesId) ;
+        let recipesIDToDisable = [] ;
 
-        for (let i = 0; i < recipesToEnable.length; i++) {
-            this._view.enableRecipe(recipesToEnable[i]) ;
-        }
+        let recipesToDisplay = this._model.getRecipesByIdList(recipesIDToEnable) ;
+        let matchedIngredientsWithRecipes = this._model.getAllIngredients(recipesToDisplay) ;
+        let matchedDevicesWithRecipes = this._model.getAllDevices(recipesToDisplay) ;
+        let matchedUtensilsWithRecipes = this._model.getAllUtensils(recipesToDisplay) ;
 
-        for (let i = 0; i < recipesToDisable.length; i++) {
-            this._view.disableRecipe(recipesToDisable[i]) ;
-        }
 
-        this._view.onFilterTagsIcon(this.handlerTags) ;
+        this._view.filterRecipesByTags(allRecipesId, recipesIDToEnable, recipesIDToDisable) ;
+
+        this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
+        this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
+        this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
+
+        this._view.onFilterTagsIcon(this.filterRecipesByTag) ;
+        this._view.onTags(this.filterRecipesByTag) ;
     }
 }
