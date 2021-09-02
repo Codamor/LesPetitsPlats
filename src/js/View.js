@@ -3,9 +3,9 @@
 import {
     cleanText,
     gallery,
-    search,
+    searchBar,
     splitText,
-    submit,
+    submitSearchButton,
     ingredientsList,
     devicesList,
     utensilsList,
