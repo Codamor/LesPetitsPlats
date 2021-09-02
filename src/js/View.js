@@ -9,7 +9,7 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    ingredientsInput, allTags, allTagsIcon, displayedRecipes, userSelectedTags
+    allTags, allTagsIcon, displayedRecipes, userSelectedTags
 } from "./helpers.js";
 
 export class View{
@@ -26,16 +26,16 @@ export class View{
         gallery.innerHTML = htmlAllRecipes ;
     }
 
-    displayTagsList(matchedElements, tagType){
+    displayTagsList(matchedTags, tagType){
         let htmlLists = `` ;
 
-        while (matchedElements.length){
-            let elementsBatch = matchedElements.splice(0, 10) ;
+        while (matchedTags.length){
+            let elementsBatch = matchedTags.splice(0, 10) ;
             let liElement = `` ;
             let ulElement = `` ;
 
             for (let i = 0; i < elementsBatch.length; i++) {
-                liElement += this.createHTMLTagForHTMLTagList(elementsBatch[i], tagType)
+                liElement += this.createHTMLTag(elementsBatch[i], tagType)
             }
 
             ulElement =
@@ -57,10 +57,10 @@ export class View{
     }
 
     displayUserSelectedTag(tag, tagType){
-        let displayedUserSelectedTags = this.getDisplayedUserSelectedTags() ;
+        let alreadyDisplayedTags = this.getDisplayedUserSelectedTags() ;
 
-        for (let i = 0; i < displayedUserSelectedTags.length; i++) {
-            if (displayedUserSelectedTags[i].tagValue === tag){
+        for (let i = 0; i < alreadyDisplayedTags.length; i++) {
+            if (alreadyDisplayedTags[i].tagValue === tag){
                 return false
             }
         }
@@ -149,7 +149,7 @@ export class View{
         return htmlRecipe ;
     }
 
-    createHTMLTagForHTMLTagList(oneTag, tagType){
+    createHTMLTag(oneTag, tagType){
         let htmlTag =
             `<li data-tag-name="${oneTag}">
                 <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__tag">${oneTag}</span>
@@ -209,29 +209,29 @@ export class View{
         return userSelectedTagsValue ;
     }
 
-   onSearchBar(handlerOnSearch){ //TODO merger this with onSubmitButton in onSearch method
+   onSearchBar(searchRecipes){ //TODO merger this with onSubmitButton in onSearch method
         search.addEventListener("input", event => {
             event.preventDefault() ;
 
             let userInput = event.target.value ;
             let userSearch = splitText(cleanText(userInput)) ;
 
-            handlerOnSearch(userSearch) ;
+            searchRecipes(userSearch) ;
         }) ;
 
     }
 
-    onSubmitButton(handlerOnSearch){
+    onSubmitButton(searchRecipes){
         submit.addEventListener("click", event => {
             event.preventDefault() ;
             let userInput = search.value ;
             let userSearch = splitText(cleanText(userInput)) ;
 
-            handlerOnSearch(userSearch) ;
+            searchRecipes(userSearch) ;
         }) ;
     }
 
-    onTags(handlerTags){
+    onTags(filterRecipesByTag){
         for (let i = 0; i < allTags.length; i++) {
             allTags[i].addEventListener("click", event => {
                 let tagType = cleanText(event.target.dataset.tagType) ;
@@ -239,21 +239,20 @@ export class View{
 
                 this.displayUserSelectedTag(userTag, tagType) ;
 
-                handlerTags() ;
+                filterRecipesByTag() ;
             })
         }
     }
 
-    onFilterTagsIcon(handlerTags){
+    onFilterTagsIcon(filterRecipesByTag){
         for (let i = 0; i < allTagsIcon.length; i++) {
             allTagsIcon[i].addEventListener("click", event => { //TODO fix bug
                 let parentNode = event.target.parentNode.parentNode ;
                 let childNode = event.target.parentNode ;
                 parentNode.removeChild(childNode) ;
 
-                handlerTags() ;
+                filterRecipesByTag() ;
             })
         }
-
     }
 }
