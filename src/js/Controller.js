@@ -25,7 +25,7 @@ export class Controller{
     }
 
     searchRecipes = (userSearch) => {
-        let matchedRecipesWithSearch = this._model.getRecipes(userSearch) ;
+        let matchedRecipesWithSearch = this._model.searchRecipes(userSearch) ;
         let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithSearch) ;
         let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithSearch) ;
         let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithSearch) ;
