@@ -70,6 +70,22 @@ export class View{
         userSelectedTags.innerHTML += htmlTag ;
     }
 
+    filterRecipesByTags(allRecipesId, recipesIDToEnable, recipesIDToDisable){
+        for (let i = 0; i < allRecipesId.length; i++) {
+            if(!recipesIDToEnable.includes(allRecipesId[i])){
+                recipesIDToDisable.push(allRecipesId[i]) ;
+            }
+        }
+        for (let i = 0; i < recipesIDToEnable.length; i++) {
+            this.enableRecipe(recipesIDToEnable[i]) ;
+        }
+
+        for (let i = 0; i < recipesIDToDisable.length; i++) {
+            this.disableRecipe(recipesIDToDisable[i]) ;
+        }
+    }
+
+
     enableRecipe(recipeId){
         let recipe = document.querySelector(`[data-recipe-id="${recipeId}"]`) ;
         recipe.dataset.visible = "true" ;
