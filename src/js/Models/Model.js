@@ -52,7 +52,7 @@ export class Model{
         return recipesByIdList ;
     }
 
-    searchRecipes(userSearch){ //TODO refactor userSearch
+    searchRecipesOnApi(userSearch){ //TODO refactor userSearch
         let matchedRecipes = [] ;
         let allRecipes = this.getAllRecipesFromAPI() ;
 
@@ -63,7 +63,7 @@ export class Model{
             }
         }
 
-        return this.sortRecipesByScore(matchedRecipes) ;
+        return this.sortRecipes("score", matchedRecipes) ;
     }
 
     defineRecipeScore(userSearch, oneRecipe){
@@ -83,12 +83,14 @@ export class Model{
         return oneRecipe ;
     }
 
-    sortRecipesByScore(recipesArray){
-        recipesArray.sort((a,b) => {
-            return b.recipeScore - a.recipeScore ;
-        }) ;
+    sortRecipes(sortType, recipesArray){
+        if(sortType === "score"){
+            recipesArray.sort((a,b) => {
+                return b.recipeScore - a.recipeScore ;
+            }) ;
 
-        return recipesArray ;
+            return recipesArray ;
+        }
     }
 
     getRecipesIDMatchedWithAllTags(allUserSelectedTags, displayedRecipesId){

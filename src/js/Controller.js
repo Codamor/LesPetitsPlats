@@ -21,11 +21,13 @@ export class Controller{
         this._view.onSubmitButton(this.searchRecipes) ;
         this._view.onTags(this.filterRecipesByTag) ;
 
+        this._view.onFiltersInput() ;
+
 
     }
 
     searchRecipes = (userSearch) => {
-        let matchedRecipesWithSearch = this._model.searchRecipes(userSearch) ;
+        let matchedRecipesWithSearch = this._model.searchRecipesOnApi(userSearch) ;
         let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithSearch) ;
         let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithSearch) ;
         let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithSearch) ;
