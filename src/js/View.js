@@ -210,7 +210,7 @@ export class View{
     }
 
    onSearchBar(searchRecipes){ //TODO merger this with onSubmitButton in onSearch method
-        search.addEventListener("input", event => {
+        searchBar.addEventListener("input", event => {
             event.preventDefault() ;
 
             let userInput = event.target.value ;
@@ -222,7 +222,7 @@ export class View{
     }
 
     onSubmitButton(searchRecipes){
-        submit.addEventListener("click", event => {
+        submitSearchButton.addEventListener("click", event => {
             event.preventDefault() ;
             let userInput = search.value ;
             let userSearch = splitText(cleanText(userInput)) ;
