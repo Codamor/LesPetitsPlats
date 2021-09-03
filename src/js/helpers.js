@@ -7,6 +7,9 @@ export let submitSearchButton = document.getElementById("submit") ;
 export let ingredientsList = document.getElementById("ingredients-list") ;
 export let devicesList = document.getElementById("devices-list") ;
 export let utensilsList = document.getElementById("utensils-list") ;
+export let ingredientsInput = document.getElementById("ingredients-input") ;
+export let devicesInput = document.getElementById("devices-input") ;
+export let utensilsInput = document.getElementById("utensils-input") ;
 export let allTags = document.getElementsByClassName("filter__tag") ;
 export let allTagsIcon = document.getElementsByClassName("filter__icon--tag") ;
 export let userSelectedTags = document.getElementById("user-selected-tags") ;
@@ -27,7 +30,7 @@ export function searchTextPatternAlgorithm(text, word) {
         }
 
         if (j == wordLength) {
-            return true
+            return true ;
         }
     }
 }
