@@ -9,7 +9,7 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    allTags, allTagsIcon, displayedRecipes, userSelectedTags
+    allTags, allTagsIcon, displayedRecipes, userSelectedTags, ingredientsInput, devicesInput, utensilsInput
 } from "./helpers.js";
 
 export class View{
@@ -254,5 +254,20 @@ export class View{
                 filterRecipesByTag() ;
             })
         }
+    }
+
+    onFiltersInput(){
+        ingredientsInput
+            .addEventListener("click", event => {
+                ingredientsInput.placeholder = "" ;
+            }) ;
+        devicesInput
+            .addEventListener("click", event => {
+                devicesInput.placeholder = "" ;
+            }) ;
+        utensilsInput
+            .addEventListener("click", event => {
+                utensilsInput.placeholder = "" ;
+            }) ;
     }
 }
