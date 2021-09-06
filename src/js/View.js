@@ -295,5 +295,13 @@ export class View{
             .addEventListener("click", event => {
                 utensilsInput.placeholder = "" ;
             }) ;
+
+        utensilsInput
+            .addEventListener("input", event => {
+                let userInput = utensilsInput.value ;
+                let userSearch = splitText(cleanText(userInput)) ;
+
+                searchRecipes(userSearch, "utensil") ;
+            }) ;
     }
 }
