@@ -219,11 +219,10 @@ export class View{
     displayUserSearchedTags(userSearch, tagType){
 
         if (tagType === "ingredient"){
-            let allIngredients = document.querySelectorAll(`[data-tag-type="ingredient"]`) ;
-
+            let allIngredients = document.querySelectorAll(`[data-tag-type="ingredient"]:not(.filter--selected)`) ;
             for (let i = 0; i < allIngredients.length; i++) {
+
                 let ingredient = cleanText(allIngredients[i].dataset.value) ;
-                /*console.log(userSearch, ingredient) ;*/
 
                 if(!searchTextPatternAlgorithm(ingredient, userSearch)){
                     allIngredients[i].dataset.visible = "false" ;
@@ -232,7 +231,7 @@ export class View{
                 }
             }
         } else if (tagType === "device"){
-            let devices = document.querySelectorAll(`[data-tag-type="device"]`) ;
+            let devices = document.querySelectorAll(`[data-tag-type="device"]:not(.filter--selected)`) ;
 
             for (let i = 0; i < devices.length; i++) {
                 let ingredient = cleanText(devices[i].dataset.value) ;
@@ -246,7 +245,7 @@ export class View{
             }
         } else if (tagType === "utensil"){
 
-            let utensil = document.querySelectorAll(`[data-tag-type="utensil"]`) ;
+            let utensil = document.querySelectorAll(`[data-tag-type="utensil"]:not(.filter--selected)`) ;
 
             for (let i = 0; i < utensil.length; i++) {
                 let ingredient = cleanText(utensil[i].dataset.value) ;
@@ -319,10 +318,11 @@ export class View{
             .addEventListener("input", event => {
                 event.preventDefault() ; //TODO remove if useless
                 let userInput = ingredientsInput.value ;
-                let userSearch = splitText(cleanText(userInput)) ;
+                /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
 
-                searchRecipes(userSearch, "ingredient") ;
-                this.displayUserSearchedTags(cleanText(userInput), "ingredient") ;
+                searchRecipes(userSearch, "ingredient") ;*/
+                let userSearch = cleanText(userInput) ;
+                this.displayUserSearchedTags(userSearch, "ingredient") ;
             }) ;
 
         devicesInput
@@ -333,10 +333,10 @@ export class View{
         devicesInput
             .addEventListener("input", event => {
                 let userInput = devicesInput.value ;
-                let userSearch = splitText(cleanText(userInput)) ;
+                /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
 
-                searchRecipes(userSearch, "device") ;
-                this.displayUserSearchedTags(cleanText(userInput), "device") ;
+                searchRecipes(userSearch, "device") ;*/let userSearch = cleanText(userInput) ;
+                this.displayUserSearchedTags(userSearch, "device") ;
             }) ;
 
         utensilsInput
@@ -347,10 +347,10 @@ export class View{
         utensilsInput
             .addEventListener("input", event => {
                 let userInput = utensilsInput.value ;
-                let userSearch = splitText(cleanText(userInput)) ;
+                /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
 
-                searchRecipes(userSearch, "utensil") ;
-                this.displayUserSearchedTags(cleanText(userInput), "utensil") ;
+                searchRecipes(userSearch, "utensil") ;*/let userSearch = cleanText(userInput) ;
+                this.displayUserSearchedTags(userSearch, "utensil") ;
             }) ;
     }
 }
