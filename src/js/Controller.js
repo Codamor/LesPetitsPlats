@@ -19,25 +19,27 @@ export class Controller{
 
         this._view.onSearchBar(this.searchRecipes) ;
         this._view.onSubmitButton(this.searchRecipes) ;
-        this._view.onTags(this.filterRecipesByTag) ;
 
-        this._view.onFiltersInput() ;
+        this._view.onTags(this.filterRecipesByTag) ;
+        this._view.onFiltersInput(this.searchRecipes) ;
 
 
     }
 
-    searchRecipes = (userSearch) => {
-        let matchedRecipesWithSearch = this._model.searchRecipesOnApi(userSearch) ;
-        let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithSearch) ;
-        let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithSearch) ;
-        let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithSearch) ;
+    searchRecipes = (userSearch, searchType) => {
+        let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
+        let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithUserSearch) ;
+        let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithUserSearch) ;
+        let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithUserSearch) ;
 
-        this._view.displayRecipes(matchedRecipesWithSearch) ;
+        this._view.displayRecipes(matchedRecipesWithUserSearch) ;
 
         this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
         this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
         this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
+
         this._view.onTags(this.filterRecipesByTag) ;
+        this._view.onFiltersInput(this.searchRecipes) ;
 
     }
 
@@ -62,6 +64,6 @@ export class Controller{
         this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
 
         this._view.onFilterTagsIcon(this.filterRecipesByTag) ;
-        this._view.onTags(this.filterRecipesByTag) ;
+        this._view.onFiltersInput(this.searchRecipes) ;
     }
 }
