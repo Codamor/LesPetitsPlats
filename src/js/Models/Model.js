@@ -75,6 +75,10 @@ export class Model{
 
             return this.defineRecipeIngredientScore(userSearch, oneRecipe) ;
 
+        } else if (searchType === "device"){
+
+            return this.defineRecipeDeviceScore(userSearch, oneRecipe) ;
+
         }
     }
 
@@ -103,6 +107,15 @@ export class Model{
         recipeScore =  ingredientScore  ;
 
         oneRecipe.recipeScore = recipeScore ;
+
+        return oneRecipe ;
+    }
+
+    defineRecipeDeviceScore(userSearch, oneRecipe){
+        let recipeDevice = this.formatDevice(oneRecipe) ;
+        let deviceScore = compareUserSearchWithData(recipeDevice, userSearch) ;
+
+        oneRecipe.recipeScore = deviceScore ;
 
         return oneRecipe ;
     }
@@ -249,6 +262,12 @@ export class Model{
         let description = splitText(cleanText(oneRecipe.description)) ;
 
         return description ;
+    }
+
+    formatDevice(oneRecipe){
+        let device = splitText(cleanText(oneRecipe.appliance)) ;
+
+        return device ;
     }
 
 
