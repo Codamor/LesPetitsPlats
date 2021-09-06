@@ -52,12 +52,12 @@ export class Model{
         return recipesByIdList ;
     }
 
-    searchRecipesOnApi(userSearch){ //TODO refactor userSearch
+    searchRecipesOnApi(userSearch, searchType){ //TODO refactor userSearch
         let matchedRecipes = [] ;
         let allRecipes = this.getAllRecipesFromAPI() ;
 
         for (let i = 0; i < allRecipes.length; i++) {
-            let recipeScore = this.defineRecipeScore(userSearch, allRecipes[i]) ;
+            let recipeScore = this.defineRecipeScore(userSearch, searchType, allRecipes[i]) ;
             if (recipeScore.recipeScore > 0){
                 matchedRecipes.push(allRecipes[i]) ;
             }
@@ -66,7 +66,19 @@ export class Model{
         return this.sortRecipes("score", matchedRecipes) ;
     }
 
-    defineRecipeScore(userSearch, oneRecipe){
+    defineRecipeScore(userSearch, searchType, oneRecipe){
+        if (searchType === "global"){
+
+            return this.defineRecipeGlobalScore(userSearch, oneRecipe) ;
+
+        } else if (searchType === "ingredient"){
+
+            return this.defineRecipeIngredientScore(userSearch, oneRecipe) ;
+
+        }
+    }
+
+    defineRecipeGlobalScore(userSearch, oneRecipe){
         let recipeScore = 0 ;
         let recipeName = this.formatName(oneRecipe) ;
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
@@ -74,9 +86,21 @@ export class Model{
 
         let nameScore = compareUserSearchWithData(recipeName, userSearch) * 3 ;
         let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) * 0.2  ;
-        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ;
+        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ; //TODO remove if useless when finished
 
         recipeScore =  nameScore + ingredientScore  ;
+
+        oneRecipe.recipeScore = recipeScore ;
+
+        return oneRecipe ;
+    }
+
+    defineRecipeIngredientScore(userSearch, oneRecipe){
+        let recipeScore = 0
+        let recipeIngredients = this.formatIngredients(oneRecipe) ;
+        let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) ;
+
+        recipeScore =  ingredientScore  ;
 
         oneRecipe.recipeScore = recipeScore ;
 
