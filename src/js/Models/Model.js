@@ -100,13 +100,10 @@ export class Model{
     }
 
     defineRecipeIngredientScore(userSearch, oneRecipe){
-        let recipeScore = 0
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) ;
 
-        recipeScore =  ingredientScore  ;
-
-        oneRecipe.recipeScore = recipeScore ;
+        oneRecipe.recipeScore = ingredientScore ;
 
         return oneRecipe ;
     }
