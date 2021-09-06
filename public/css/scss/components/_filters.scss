@@ -67,6 +67,9 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  &__tag[data-visible="false"]{
+    display: none;
+  }
   &--option-one &__tag:hover{
     background-color: hsl(216, 92%, 48%);
     transition: 0.2s;

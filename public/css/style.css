@@ -291,6 +291,9 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+.filter__tag[data-visible=false] {
+  display: none;
+}
 .filter--option-one .filter__tag:hover {
   background-color: #0a64eb;
   transition: 0.2s;
