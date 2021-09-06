@@ -58,7 +58,7 @@ export class Controller{
         let matchedDevicesWithRecipes = this._model.getAllDevices(recipesToDisplay) ;
         let matchedUtensilsWithRecipes = this._model.getAllUtensils(recipesToDisplay) ;
 
-        this._view.filterRecipesByTags(allRecipesId, recipesIDToEnable, recipesIDToDisable) ;
+        this._view.filterDisplayedRecipesBySelectedTags(allRecipesId, recipesIDToEnable, recipesIDToDisable) ;
 
         this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
         this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;

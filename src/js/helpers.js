@@ -15,7 +15,7 @@ export let allTagsIcon = document.getElementsByClassName("filter__icon--tag") ;
 export let userSelectedTags = document.getElementById("user-selected-tags") ;
 export let displayedRecipes = document.getElementsByClassName("card") ;
 
-//TO SEARCH
+//SEARCH function
 export function searchTextPatternAlgorithm(text, word) {
     let wordLength = word.length;
     let textLength = text.length;
@@ -35,6 +35,7 @@ export function searchTextPatternAlgorithm(text, word) {
     }
 }
 
+//UTILITARIES
 export function compareUserSearchWithData(array1, array2){
     let matchNumber = 0 ;
 
