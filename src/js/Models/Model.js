@@ -79,6 +79,9 @@ export class Model{
 
             return this.defineRecipeDeviceScore(userSearch, oneRecipe) ;
 
+        } else if (searchType === "utensil"){
+
+            return this.defineRecipeUtensilScore(userSearch, oneRecipe) ;
         }
     }
 
@@ -113,6 +116,15 @@ export class Model{
         let deviceScore = compareUserSearchWithData(recipeDevice, userSearch) ;
 
         oneRecipe.recipeScore = deviceScore ;
+
+        return oneRecipe ;
+    }
+
+    defineRecipeUtensilScore(userSearch, oneRecipe){
+        let recipeUtensils = this.formatUtensils(oneRecipe) ;
+        let utensilScore = compareUserSearchWithData(recipeUtensils, userSearch) ;
+
+        oneRecipe.recipeScore = utensilScore ;
 
         return oneRecipe ;
     }
@@ -265,6 +277,17 @@ export class Model{
         let device = splitText(cleanText(oneRecipe.appliance)) ;
 
         return device ;
+    }
+
+    formatUtensils(oneRecipe){
+        let allUtensils = [] ;
+
+        for (let i = 0; i < oneRecipe.utensils.length; i++) {
+            let ingredient = splitText(cleanText(oneRecipe.utensils[i])) ;
+            allUtensils.push(oneRecipe.utensils[i]) ;
+        }
+
+        return allUtensils ;
     }
 
 
