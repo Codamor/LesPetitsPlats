@@ -9,7 +9,14 @@ import {
     ingredientsList,
     devicesList,
     utensilsList,
-    allTags, allTagsIcon, displayedRecipes, userSelectedTags, ingredientsInput, devicesInput, utensilsInput
+    allTags,
+    allTagsIcon,
+    displayedRecipes,
+    userSelectedTags,
+    ingredientsInput,
+    devicesInput,
+    utensilsInput,
+    ingredientsTags, devicesTags
 } from "./helpers.js";
 
 export class View{
@@ -209,25 +216,25 @@ export class View{
         return userSelectedTagsValue ;
     }
 
-   onSearchBar(searchRecipes){ //TODO merger this with onSubmitButton in onSearch method
+   onSearchBar(searchRecipesFromApi){ //TODO merger this with onSubmitButton in onSearch method
         searchBar.addEventListener("input", event => {
             event.preventDefault() ;
 
             let userInput = event.target.value ;
             let userSearch = splitText(cleanText(userInput)) ;
 
-            searchRecipes(userSearch) ;
+            searchRecipesFromApi(userSearch, "global") ;
         }) ;
 
     }
 
-    onSubmitButton(searchRecipes){
+    onSubmitButton(searchRecipesFromApi){
         submitSearchButton.addEventListener("click", event => {
             event.preventDefault() ;
-            let userInput = search.value ;
+            let userInput = searchBar.value ;
             let userSearch = splitText(cleanText(userInput)) ;
 
-            searchRecipes(userSearch) ;
+            searchRecipesFromApi(userSearch, "global") ;
         }) ;
     }
 
@@ -252,15 +259,25 @@ export class View{
                 parentNode.removeChild(childNode) ;
 
                 filterRecipesByTag() ;
-            })
+            }) ;
         }
     }
 
-    onFiltersInput(){
+    onFiltersInput(searchRecipes){
         ingredientsInput
             .addEventListener("click", event => {
                 ingredientsInput.placeholder = "" ;
             }) ;
+
+        ingredientsInput
+            .addEventListener("input", event => {
+                event.preventDefault() ;
+                let userInput = ingredientsInput.value ;
+                let userSearch = splitText(cleanText(userInput)) ;
+
+                searchRecipes(userSearch, "ingredient") ;
+            }) ;
+
         devicesInput
             .addEventListener("click", event => {
                 devicesInput.placeholder = "" ;
