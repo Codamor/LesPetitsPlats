@@ -21,25 +21,27 @@ export class Controller{
         this._view.onSubmitButton(this.searchRecipes) ;
 
         this._view.onTags(this.filterRecipesByTag) ;
+        this._view.onFilterTagsIcon(this.filterRecipesByTag) ;
         this._view.onFiltersInput(this.searchRecipes) ;
-
 
     }
 
     searchRecipes = (userSearch, searchType) => {
+
         let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
+
+        this._view.displayRecipes(matchedRecipesWithUserSearch) ;
+
         let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithUserSearch) ;
         let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithUserSearch) ;
         let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithUserSearch) ;
-
-        this._view.displayRecipes(matchedRecipesWithUserSearch) ;
 
         this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
         this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
         this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
 
         this._view.onTags(this.filterRecipesByTag) ;
-        this._view.onFiltersInput(this.searchRecipes) ;
+        this._view.onFilterTagsIcon(this.filterRecipesByTag) ;
 
     }
 
@@ -56,14 +58,13 @@ export class Controller{
         let matchedDevicesWithRecipes = this._model.getAllDevices(recipesToDisplay) ;
         let matchedUtensilsWithRecipes = this._model.getAllUtensils(recipesToDisplay) ;
 
-
         this._view.filterRecipesByTags(allRecipesId, recipesIDToEnable, recipesIDToDisable) ;
 
         this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
         this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
         this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
 
+        this._view.onTags(this.filterRecipesByTag) ;
         this._view.onFilterTagsIcon(this.filterRecipesByTag) ;
-        this._view.onFiltersInput(this.searchRecipes) ;
     }
 }
