@@ -221,9 +221,12 @@ export class View{
             event.preventDefault() ;
 
             let userInput = event.target.value ;
-            let userSearch = splitText(cleanText(userInput)) ;
 
-            searchRecipesFromApi(userSearch, "global") ;
+            if (userInput.length >= 3){
+                let userSearch = splitText(cleanText(userInput)) ;
+                searchRecipesFromApi(userSearch, "global") ;
+            }
+
         }) ;
 
     }
