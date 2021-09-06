@@ -16,7 +16,7 @@ import {
     ingredientsInput,
     devicesInput,
     utensilsInput,
-    ingredientsTags, devicesTags
+    ingredientsTags, devicesTags, searchTextPatternAlgorithm
 } from "./helpers.js";
 
 export class View{
@@ -216,6 +216,51 @@ export class View{
         return userSelectedTagsValue ;
     }
 
+    displayUserSearchedTags(userSearch, tagType){
+
+        if (tagType === "ingredient"){
+            let allIngredients = document.querySelectorAll(`[data-tag-type="ingredient"]`) ;
+
+            for (let i = 0; i < allIngredients.length; i++) {
+                let ingredient = cleanText(allIngredients[i].dataset.value) ;
+                /*console.log(userSearch, ingredient) ;*/
+
+                if(!searchTextPatternAlgorithm(ingredient, userSearch)){
+                    allIngredients[i].dataset.visible = "false" ;
+                } else {
+                    allIngredients[i].dataset.visible = "true" ;
+                }
+            }
+        } else if (tagType === "device"){
+            let devices = document.querySelectorAll(`[data-tag-type="device"]`) ;
+
+            for (let i = 0; i < devices.length; i++) {
+                let ingredient = cleanText(devices[i].dataset.value) ;
+                /*console.log(userSearch, ingredient) ;*/
+
+                if(!searchTextPatternAlgorithm(ingredient, userSearch)){
+                    devices[i].dataset.visible = "false" ;
+                } else {
+                    devices[i].dataset.visible = "true" ;
+                }
+            }
+        } else if (tagType === "utensil"){
+
+            let utensil = document.querySelectorAll(`[data-tag-type="utensil"]`) ;
+
+            for (let i = 0; i < utensil.length; i++) {
+                let ingredient = cleanText(utensil[i].dataset.value) ;
+                /*console.log(userSearch, ingredient) ;*/
+
+                if(!searchTextPatternAlgorithm(ingredient, userSearch)){
+                    utensil[i].dataset.visible = "false" ;
+                } else {
+                    utensil[i].dataset.visible = "true" ;
+                }
+            }
+        }
+    }
+
    onSearchBar(searchRecipesFromApi){ //TODO merger this with onSubmitButton in onSearch method
         searchBar.addEventListener("input", event => {
             event.preventDefault() ;
@@ -226,9 +271,7 @@ export class View{
                 let userSearch = splitText(cleanText(userInput)) ;
                 searchRecipesFromApi(userSearch, "global") ;
             }
-
         }) ;
-
     }
 
     onSubmitButton(searchRecipesFromApi){
@@ -279,6 +322,7 @@ export class View{
                 let userSearch = splitText(cleanText(userInput)) ;
 
                 searchRecipes(userSearch, "ingredient") ;
+                this.displayUserSearchedTags(cleanText(userInput), "ingredient") ;
             }) ;
 
         devicesInput
@@ -292,6 +336,7 @@ export class View{
                 let userSearch = splitText(cleanText(userInput)) ;
 
                 searchRecipes(userSearch, "device") ;
+                this.displayUserSearchedTags(cleanText(userInput), "device") ;
             }) ;
 
         utensilsInput
@@ -305,6 +350,7 @@ export class View{
                 let userSearch = splitText(cleanText(userInput)) ;
 
                 searchRecipes(userSearch, "utensil") ;
+                this.displayUserSearchedTags(cleanText(userInput), "utensil") ;
             }) ;
     }
 }
