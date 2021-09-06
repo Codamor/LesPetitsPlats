@@ -271,7 +271,7 @@ export class View{
 
         ingredientsInput
             .addEventListener("input", event => {
-                event.preventDefault() ;
+                event.preventDefault() ; //TODO remove if useless
                 let userInput = ingredientsInput.value ;
                 let userSearch = splitText(cleanText(userInput)) ;
 
@@ -282,6 +282,15 @@ export class View{
             .addEventListener("click", event => {
                 devicesInput.placeholder = "" ;
             }) ;
+
+        devicesInput
+            .addEventListener("input", event => {
+                let userInput = devicesInput.value ;
+                let userSearch = splitText(cleanText(userInput)) ;
+
+                searchRecipes(userSearch, "device") ;
+            }) ;
+
         utensilsInput
             .addEventListener("click", event => {
                 utensilsInput.placeholder = "" ;
