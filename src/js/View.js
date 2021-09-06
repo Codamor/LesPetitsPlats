@@ -15,8 +15,7 @@ import {
     userSelectedTags,
     ingredientsInput,
     devicesInput,
-    utensilsInput,
-    ingredientsTags, devicesTags, searchTextPatternAlgorithm
+    utensilsInput, searchTextPatternAlgorithm
 } from "./helpers.js";
 
 export class View{
@@ -28,7 +27,7 @@ export class View{
 
         let htmlAllRecipes = `` ;
         for (let i = 0; i < recipesObjectsList.length; i++) {
-            htmlAllRecipes += this.createHTMLRecipe(recipesObjectsList[i]) ;
+            htmlAllRecipes += this.createHTMLRecipeCard(recipesObjectsList[i]) ;
         }
         gallery.innerHTML = htmlAllRecipes ;
     }
@@ -77,7 +76,21 @@ export class View{
         userSelectedTags.innerHTML += htmlTag ;
     }
 
-    filterRecipesByTags(allRecipesId, recipesIDToEnable, recipesIDToDisable){
+    filterTagsByUserSearch(userSearch, tagType){
+        let allTags = document.querySelectorAll(`[data-tag-type="${tagType}"]:not(.filter--selected)`);
+        for (let i = 0; i < allTags.length; i++) {
+
+            let tag = cleanText(allTags[i].dataset.value);
+
+            if (!searchTextPatternAlgorithm(tag, userSearch)) {
+                allTags[i].dataset.visible = "false";
+            } else {
+                allTags[i].dataset.visible = "true";
+            }
+        }
+    }
+
+    filterDisplayedRecipesBySelectedTags(allRecipesId, recipesIDToEnable, recipesIDToDisable){
         for (let i = 0; i < allRecipesId.length; i++) {
             if(!recipesIDToEnable.includes(allRecipesId[i])){
                 recipesIDToDisable.push(allRecipesId[i]) ;
@@ -92,7 +105,6 @@ export class View{
         }
     }
 
-
     enableRecipe(recipeId){
         let recipe = document.querySelector(`[data-recipe-id="${recipeId}"]`) ;
         recipe.dataset.visible = "true" ;
@@ -103,21 +115,7 @@ export class View{
         recipe.dataset.visible = "false" ;
     }
 
-    createHTMLIngredientsList(ingredients){
-        let htmlIngredients = `` ;
-
-        for (let i = 0; i < ingredients.length; i++) {
-            htmlIngredients +=
-                `<li class="card__ingredient">
-                    ${ingredients[i].quantity ? `<h3 class="card__ingredient-title">${ingredients[i].ingredient}</h3>:` : `<span class="card__ingredient-title">${ingredients[i].ingredient}</span>`}
-                    ${ingredients[i].quantity ? `<span className="card__ingredient-value">${ingredients[i].quantity}</span>` : `<span className="card__ingredient-value"></span>` }
-                    ${ingredients[i].unit ? `<span class="card__ingredient-unit">${ingredients[i].unit}</span>` : `<span class="card__ingredient-unit"></span>` }
-                </li>` ;
-        }
-        return htmlIngredients ;
-    }
-
-    createHTMLRecipe(recipeObject){
+    createHTMLRecipeCard(recipeObject){
         let htmlRecipe = `` ;
         let htmlIngredientsList = this.createHTMLIngredientsList(recipeObject.ingredients) ;
 
@@ -154,6 +152,20 @@ export class View{
             </div>` ;
 
         return htmlRecipe ;
+    }
+
+    createHTMLIngredientsList(ingredients){
+        let htmlIngredients = `` ;
+
+        for (let i = 0; i < ingredients.length; i++) {
+            htmlIngredients +=
+                `<li class="card__ingredient">
+                    ${ingredients[i].quantity ? `<h3 class="card__ingredient-title">${ingredients[i].ingredient}</h3>:` : `<span class="card__ingredient-title">${ingredients[i].ingredient}</span>`}
+                    ${ingredients[i].quantity ? `<span className="card__ingredient-value">${ingredients[i].quantity}</span>` : `<span className="card__ingredient-value"></span>` }
+                    ${ingredients[i].unit ? `<span class="card__ingredient-unit">${ingredients[i].unit}</span>` : `<span class="card__ingredient-unit"></span>` }
+                </li>` ;
+        }
+        return htmlIngredients ;
     }
 
     createHTMLTag(oneTag, tagType){
@@ -214,50 +226,6 @@ export class View{
         }
 
         return userSelectedTagsValue ;
-    }
-
-    displayUserSearchedTags(userSearch, tagType){
-
-        if (tagType === "ingredient"){
-            let allIngredients = document.querySelectorAll(`[data-tag-type="ingredient"]:not(.filter--selected)`) ;
-            for (let i = 0; i < allIngredients.length; i++) {
-
-                let ingredient = cleanText(allIngredients[i].dataset.value) ;
-
-                if(!searchTextPatternAlgorithm(ingredient, userSearch)){
-                    allIngredients[i].dataset.visible = "false" ;
-                } else {
-                    allIngredients[i].dataset.visible = "true" ;
-                }
-            }
-        } else if (tagType === "device"){
-            let devices = document.querySelectorAll(`[data-tag-type="device"]:not(.filter--selected)`) ;
-
-            for (let i = 0; i < devices.length; i++) {
-                let ingredient = cleanText(devices[i].dataset.value) ;
-                /*console.log(userSearch, ingredient) ;*/
-
-                if(!searchTextPatternAlgorithm(ingredient, userSearch)){
-                    devices[i].dataset.visible = "false" ;
-                } else {
-                    devices[i].dataset.visible = "true" ;
-                }
-            }
-        } else if (tagType === "utensil"){
-
-            let utensil = document.querySelectorAll(`[data-tag-type="utensil"]:not(.filter--selected)`) ;
-
-            for (let i = 0; i < utensil.length; i++) {
-                let ingredient = cleanText(utensil[i].dataset.value) ;
-                /*console.log(userSearch, ingredient) ;*/
-
-                if(!searchTextPatternAlgorithm(ingredient, userSearch)){
-                    utensil[i].dataset.visible = "false" ;
-                } else {
-                    utensil[i].dataset.visible = "true" ;
-                }
-            }
-        }
     }
 
    onSearchBar(searchRecipesFromApi){ //TODO merger this with onSubmitButton in onSearch method
@@ -322,7 +290,7 @@ export class View{
 
                 searchRecipes(userSearch, "ingredient") ;*/
                 let userSearch = cleanText(userInput) ;
-                this.displayUserSearchedTags(userSearch, "ingredient") ;
+                this.filterTagsByUserSearch(userSearch, "ingredient") ;
             }) ;
 
         devicesInput
@@ -336,7 +304,7 @@ export class View{
                 /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
 
                 searchRecipes(userSearch, "device") ;*/let userSearch = cleanText(userInput) ;
-                this.displayUserSearchedTags(userSearch, "device") ;
+                this.filterTagsByUserSearch(userSearch, "device") ;
             }) ;
 
         utensilsInput
@@ -350,7 +318,7 @@ export class View{
                 /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
 
                 searchRecipes(userSearch, "utensil") ;*/let userSearch = cleanText(userInput) ;
-                this.displayUserSearchedTags(userSearch, "utensil") ;
+                this.filterTagsByUserSearch(userSearch, "utensil") ;
             }) ;
     }
 }
