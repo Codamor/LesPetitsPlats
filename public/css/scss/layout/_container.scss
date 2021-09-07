@@ -12,6 +12,11 @@
   padding: 50px 100px;
 }
 
+.main{
+  width: 100%;
+  height: auto;
+}
+
 .filters-container{
   display: flex;
   height: auto;
@@ -22,5 +27,21 @@
   &--selected{
     order: 1;
     flex-wrap: wrap;
+  }
+}
+
+.message{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: $color-medium-grey;
+  border-radius: 5px;
+  font-size: 1.2em;
+  &[data-visible="true"]{
+    display: flex;
   }
 }
