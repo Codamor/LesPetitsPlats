@@ -115,6 +115,16 @@ export class View{
         recipe.dataset.visible = "false" ;
     }
 
+    enableNoSearchResultsMessage(){
+        document
+            .getElementById("no-search-results").dataset.visible = "true" ;
+    }
+
+    disableNoSearchResultsMessage(){
+        document
+            .getElementById("no-search-results").dataset.visible = "false" ;
+    }
+
     createHTMLRecipeCard(recipeObject){
         let htmlRecipe = `` ;
         let htmlIngredientsList = this.createHTMLIngredientsList(recipeObject.ingredients) ;
