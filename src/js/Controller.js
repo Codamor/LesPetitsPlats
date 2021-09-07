@@ -24,11 +24,18 @@ export class Controller{
         this._view.onFilterTagsIcon(this.filterRecipesByTag) ;
         this._view.onFiltersInput(this.searchRecipes) ;
 
+
     }
 
     searchRecipes = (userSearch, searchType) => {
 
         let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
+
+        if (matchedRecipesWithUserSearch.length === 0){
+            this._view.enableNoSearchResultsMessage() ;
+        } else {
+            this._view.disableNoSearchResultsMessage() ;
+        }
 
         this._view.displayRecipes(matchedRecipesWithUserSearch) ;
 
