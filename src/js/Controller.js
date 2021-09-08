@@ -17,9 +17,10 @@ export class Controller{
         this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
         this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
 
-        this._view.onSearch(this.searchRecipes) ;
+        this._view.onSearch(this.searchRecipes)
         this._view.onTags(this.filterRecipesByTag) ;
-        this._view.onFilterTagsIcon(this.filterRecipesByTag) ;
+        this._view.onFiltersInput() ;
+
     }
 
     searchRecipes = (userSearch, searchType) => {
