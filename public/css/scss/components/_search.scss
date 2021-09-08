@@ -20,6 +20,9 @@
     justify-content: space-between;
     border-radius: 5px;
     overflow: hidden;
+    &:focus-within input:focus-visible{
+      border: solid 4px lightgreen;
+    }
   }
   &__input, &__button{
     width: 100%;
@@ -30,6 +33,11 @@
   &__input {
     padding: 0 20px;
     font-size: 1.1em;
+  }
+  &__button{
+    &:focus-visible{
+      border: solid 4px lightgreen;
+    }
   }
   &__input:focus::placeholder {
     color: transparent;

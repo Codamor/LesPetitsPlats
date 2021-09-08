@@ -9,6 +9,10 @@
   margin-right: 20px;
   border-radius: 5px;
   color: hsl(0, 0%, 100%);
+  &:focus-within{
+    outline: solid 4px lightgreen;
+    border-radius: 5px;
+  }
   &__interaction {
     display: flex;
     align-items: center;
@@ -55,11 +59,11 @@
     }
   }
   &--option{
-    &:hover{
+    &:hover, &:focus-within{
       width: 400px;
       cursor: pointer;
     }
-    &:hover .filter__content{
+    &:hover .filter__content, &:focus-within .filter__content{
       display: block;
       overflow-x: scroll;
     }

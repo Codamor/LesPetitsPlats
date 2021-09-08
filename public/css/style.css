@@ -91,6 +91,10 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.header__link:focus-visible {
+  outline: solid 4px lightgreen;
+  border-radius: 5px;
+}
 .header__logo {
   width: 50px;
   height: 50px;
@@ -113,6 +117,10 @@ body {
   margin: 0;
   padding: 0;
   font-size: 1em;
+}
+
+* :focus-visible {
+  outline: none;
 }
 
 img {
@@ -154,6 +162,10 @@ body {
 .card[data-visible=false] {
   display: none;
 }
+.card:focus-visible {
+  outline: solid 4px lightgreen;
+  border-radius: 5px;
+}
 .card__media {
   height: 192px;
   background-color: #c6bebe;
@@ -173,6 +185,10 @@ body {
   font-size: 1.2em;
   font-weight: 500;
 }
+.card__title:focus-visible, .card__time:focus-visible {
+  outline: solid 4px lightgreen;
+  border-radius: 5px;
+}
 .card__time:before {
   content: "";
   font-family: "Font Awesome 5 Free";
@@ -181,6 +197,13 @@ body {
 .card__ingredient-title {
   font-weight: 500;
   display: inline;
+}
+.card__ingredient-title:focus-visible {
+  outline: solid 4px lightgreen;
+}
+.card__ingredient:focus-visible, .card__description:focus-visible {
+  outline: solid 4px lightgreen;
+  border-radius: 5px;
 }
 .card__cols-box {
   display: flex;
@@ -223,6 +246,9 @@ body {
   border-radius: 5px;
   overflow: hidden;
 }
+.search__bar:focus-within input:focus-visible {
+  border: solid 4px lightgreen;
+}
 .search__input, .search__button {
   width: 100%;
   height: 70px;
@@ -232,6 +258,9 @@ body {
 .search__input {
   padding: 0 20px;
   font-size: 1.1em;
+}
+.search__button:focus-visible {
+  border: solid 4px lightgreen;
 }
 .search__input:focus::placeholder {
   color: transparent;
@@ -258,6 +287,10 @@ body {
   margin-right: 20px;
   border-radius: 5px;
   color: white;
+}
+.filter:focus-within {
+  outline: solid 4px lightgreen;
+  border-radius: 5px;
 }
 .filter__interaction {
   display: flex;
@@ -304,11 +337,11 @@ body {
 .filter__list li {
   padding: 0 20px;
 }
-.filter--option:hover {
+.filter--option:hover, .filter--option:focus-within {
   width: 400px;
   cursor: pointer;
 }
-.filter--option:hover .filter__content {
+.filter--option:hover .filter__content, .filter--option:focus-within .filter__content {
   display: block;
   overflow-x: scroll;
 }

@@ -126,29 +126,29 @@ export class View{
         let htmlIngredientsList = this.createHTMLIngredientsList(recipeObject.ingredients) ;
 
         htmlRecipe =
-            `<div class="card" aria-label="Recette de cuisine" data-recipe-id="${recipeObject.id}">
+            `<div class="card" aria-label="Recette de cuisine" data-recipe-id="${recipeObject.id}" tabindex="0">
                 <div class="card__media">
 
                 </div>
                 
                 <div class="card__data">
                     <div class="card__header">
-                        <h2 class="card__title">
+                        <h2 class="card__title" aria-label="Nom de la recette" tabindex="0">
                             ${recipeObject.name}
                         </h2>
 
-                        <div class="card__time">
+                        <div class="card__time" aria-label="Durée de préparation de la recette" tabindex="0">
                             ${recipeObject.time}
                         </div>
                     </div>
 
                     <div class="card__cols-box">
-                        <ul class="card__col card__col--col-1">
+                        <ul class="card__col card__col--col-1" aria-label="Liste des ingrédients de la recette">
                             ${htmlIngredientsList}
                         </ul>
 
-                        <div class="card__col card__col--col-2">
-                            <p class="card__description">
+                        <div class="card__col card__col--col-2" aria-label="Description de la recette">
+                            <p class="card__description" tabindex="0">
                                 ${recipeObject.description}
                             </p>
                         </div>
@@ -165,10 +165,10 @@ export class View{
 
         for (let i = 0; i < ingredients.length; i++) {
             htmlIngredients +=
-                `<li class="card__ingredient">
-                    ${ingredients[i].quantity ? `<h3 class="card__ingredient-title">${ingredients[i].ingredient}</h3>:` : `<span class="card__ingredient-title">${ingredients[i].ingredient}</span>`}
-                    ${ingredients[i].quantity ? `<span className="card__ingredient-value">${ingredients[i].quantity}</span>` : `<span className="card__ingredient-value"></span>` }
-                    ${ingredients[i].unit ? `<span class="card__ingredient-unit">${ingredients[i].unit}</span>` : `<span class="card__ingredient-unit"></span>` }
+                `<li class="card__ingredient" aria-label="Ingrédient" tabindex="0">
+                    ${ingredients[i].quantity ? `<h3 class="card__ingredient-title" aria-label="Nom de l'ingrédient">${ingredients[i].ingredient}</h3>:` : `<span class="card__ingredient-title">${ingredients[i].ingredient}</span>`}
+                    ${ingredients[i].quantity ? `<span className="card__ingredient-value" aria-label="Quantité de l'ingrédient">${ingredients[i].quantity}</span>` : `<span className="card__ingredient-value"></span>` }
+                    ${ingredients[i].unit ? `<span class="card__ingredient-unit" aria-label="Unité de mesure de la quantité">${ingredients[i].unit}</span>` : `<span class="card__ingredient-unit"></span>` }
                 </li>` ;
         }
         return htmlIngredients ;
