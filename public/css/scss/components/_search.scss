@@ -12,8 +12,7 @@
     height: auto;
     margin-bottom: 20px;
     &--advanced{
-      display: flex;
-      flex-direction: column;
+      position: relative;
     }
   }
   &__bar{

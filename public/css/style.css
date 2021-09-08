@@ -40,6 +40,7 @@ body {
 .main {
   width: 100%;
   height: auto;
+  margin-top: 70px;
 }
 
 .filters-container {
@@ -49,11 +50,7 @@ body {
   margin-bottom: 20px;
 }
 .filters-container--default {
-  order: 2;
-}
-.filters-container--selected {
-  order: 1;
-  flex-wrap: wrap;
+  position: absolute;
 }
 
 .message {
@@ -216,8 +213,7 @@ body {
   margin-bottom: 20px;
 }
 .search__container--advanced {
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 .search__bar {
   display: flex;
