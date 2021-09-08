@@ -44,6 +44,7 @@ body {
 
 .filters-container {
   display: flex;
+  align-items: flex-start;
   height: auto;
   margin-bottom: 20px;
 }
@@ -289,9 +290,11 @@ body {
 }
 .filter__list {
   flex-shrink: 0;
-  width: 200px;
-  padding: 0 0 20px 20px;
+  width: auto;
   color: white;
+}
+.filter__list li {
+  padding: 0 20px;
 }
 .filter--option:hover {
   width: auto;
@@ -351,21 +354,21 @@ body {
   background-color: #981e10;
   transition: 0.2s;
 }
-.filter--option-one, .filter--option-one input, .filter--option-one ul {
+.filter--option-one, .filter--option-one input, .filter--option-one ul, .filter--option-one .filter__content {
   background-color: #3180f6;
 }
 .filter--option-one:hover, .filter--option-one:hover .filter--option-one__interaction, .filter--option-one:hover input {
   background-color: #0a64eb;
   transition: 0.2s;
 }
-.filter--option-two, .filter--option-two input, .filter--option-two ul {
+.filter--option-two, .filter--option-two input, .filter--option-two ul, .filter--option-two .filter__content {
   background-color: #68d9a4;
 }
 .filter--option-two:hover, .filter--option-two:hover .filter--option-two__interaction, .filter--option-two:hover input {
   background-color: #3fcf8c;
   transition: 0.2s;
 }
-.filter--option-three, .filter--option-three input, .filter--option-three ul {
+.filter--option-three, .filter--option-three input, .filter--option-three ul, .filter--option-three .filter__content {
   background-color: #ed6454;
 }
 .filter--option-three:hover, .filter--option-three:hover .filter--option-three__interaction, .filter--option-three:hover input {

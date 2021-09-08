@@ -41,9 +41,11 @@
   }
   &__list{
     flex-shrink: 0;
-    width: 200px;
-    padding: 0 0 20px 20px;
+    width: auto;
     color: hsl(0, 0%, 100%);
+    & li {
+      padding: 0 20px;
+    }
   }
   &--option{
     &:hover{
@@ -108,7 +110,7 @@
    }
 
 
-  &--option-one, &--option-one input, &--option-one ul{
+  &--option-one, &--option-one input, &--option-one ul, &--option-one .filter__content {
     background-color: hsl(216, 92%, 58%);
   }
   &--option-one{
@@ -118,7 +120,7 @@
     }
   }
 
-  &--option-two, &--option-two input, &--option-two ul{
+  &--option-two, &--option-two input, &--option-two ul, &--option-two .filter__content{
     background-color: hsl(152, 60%, 63%);
   }
   &--option-two{
@@ -128,7 +130,7 @@
     }
   }
 
-  &--option-three, &--option-three input, &--option-three ul{
+  &--option-three, &--option-three input, &--option-three ul, &--option-three .filter__content{
     background-color: hsl(6, 81%, 63%);
   }
   &--option-three{
