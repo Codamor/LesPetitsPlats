@@ -234,7 +234,7 @@ export class View{
         return userSelectedTagsValue ;
     }
 
-   onSearchBar(searchRecipesFromApi, displayHomePage){ //TODO merger this with onSubmitButton in onSearch method
+   onSearchBar(searchRecipesFromApi){ //TODO merger this with onSubmitButton in onSearch method
         searchBar
             .addEventListener("input", event => {
             event.preventDefault() ;
@@ -244,11 +244,34 @@ export class View{
             if (userInput.length >= 3){
                 let userSearch = splitText(cleanText(userInput)) ;
                 searchRecipesFromApi(userSearch, "global") ;
+            } else {
+                console.log("hp")
             }
         }) ;
     }
 
     onSubmitButton(searchRecipesFromApi){
+        submitSearchButton.addEventListener("click", event => {
+            event.preventDefault() ;
+            let userInput = searchBar.value ;
+            let userSearch = splitText(cleanText(userInput)) ;
+
+            searchRecipesFromApi(userSearch, "global") ;
+        }) ;
+    }
+
+    onSearch(searchRecipesFromApi){
+        searchBar
+            .addEventListener("input", event => {
+                event.preventDefault() ;
+                let userInput = event.target.value ;
+
+                if (userInput.length >= 3){
+                    let userSearch = splitText(cleanText(userInput)) ;
+                    searchRecipesFromApi(userSearch, "global") ;
+                }
+            }) ;
+
         submitSearchButton.addEventListener("click", event => {
             event.preventDefault() ;
             let userInput = searchBar.value ;
@@ -290,7 +313,6 @@ export class View{
                 event.preventDefault() ; //TODO remove if useless
                 let userInput = ingredientsInput.value ;
                 /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
-
                 searchRecipes(userSearch, "ingredient") ;*/
                 let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "ingredient") ;
@@ -300,7 +322,6 @@ export class View{
             .addEventListener("input", event => {
                 let userInput = devicesInput.value ;
                 /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
-
                 searchRecipes(userSearch, "device") ;*/let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "device") ;
             }) ;
@@ -309,7 +330,6 @@ export class View{
             .addEventListener("input", event => {
                 let userInput = utensilsInput.value ;
                 /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
-
                 searchRecipes(userSearch, "utensil") ;*/let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "utensil") ;
             }) ;
