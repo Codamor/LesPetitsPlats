@@ -40,8 +40,12 @@
     overflow: hidden;
   }
   &__list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     flex-shrink: 0;
-    width: auto;
+    height: auto;
+    max-height: 400px;
     color: hsl(0, 0%, 100%);
     & li {
       padding: 0 20px;
@@ -49,11 +53,12 @@
   }
   &--option{
     &:hover{
-      width: auto;
+      width: 400px;
       cursor: pointer;
     }
     &:hover .filter__content{
-      display: flex;
+      display: block;
+      overflow-x: scroll;
     }
     &:hover .filter__icon:before{
       content: "\f077";
@@ -82,10 +87,6 @@
     display: none;
   }
 
-  &--option-one:hover .filter__content{
-    max-width: 800px;
-    overflow-x: scroll;
-  }
   &--option-one &__tag:hover{
     background-color: hsl(216, 92%, 48%);
   }

@@ -289,19 +289,24 @@ body {
   overflow: hidden;
 }
 .filter__list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   flex-shrink: 0;
-  width: auto;
+  height: auto;
+  max-height: 400px;
   color: white;
 }
 .filter__list li {
   padding: 0 20px;
 }
 .filter--option:hover {
-  width: auto;
+  width: 400px;
   cursor: pointer;
 }
 .filter--option:hover .filter__content {
-  display: flex;
+  display: block;
+  overflow-x: scroll;
 }
 .filter--option:hover .filter__icon:before {
   content: "";
@@ -327,10 +332,6 @@ body {
 }
 .filter__tag[data-visible=false] {
   display: none;
-}
-.filter--option-one:hover .filter__content {
-  max-width: 800px;
-  overflow-x: scroll;
 }
 .filter--option-one .filter__tag:hover {
   background-color: #0a64eb;
