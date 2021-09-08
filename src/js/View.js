@@ -15,7 +15,7 @@ import {
     userSelectedTags,
     ingredientsInput,
     devicesInput,
-    utensilsInput, searchTextPatternAlgorithm, filtersList
+    utensilsInput, searchTextPatternAlgorithm
 } from "./helpers.js";
 
 export class View{
@@ -47,7 +47,7 @@ export class View{
              </ul>`
 
         htmlList += ulElement ;
-        
+
         if (tagType === "ingredient"){
             ingredientsList.innerHTML = htmlList ;
         } else if (tagType === "device"){
@@ -234,8 +234,9 @@ export class View{
         return userSelectedTagsValue ;
     }
 
-   onSearchBar(searchRecipesFromApi){ //TODO merger this with onSubmitButton in onSearch method
-        searchBar.addEventListener("input", event => {
+   onSearchBar(searchRecipesFromApi, displayHomePage){ //TODO merger this with onSubmitButton in onSearch method
+        searchBar
+            .addEventListener("input", event => {
             event.preventDefault() ;
 
             let userInput = event.target.value ;
@@ -283,10 +284,6 @@ export class View{
     }
 
     onFiltersInput(searchRecipes){
-        ingredientsInput
-            .addEventListener("click", event => {
-                ingredientsInput.placeholder = "" ;
-            }) ;
 
         ingredientsInput
             .addEventListener("input", event => {
@@ -300,22 +297,12 @@ export class View{
             }) ;
 
         devicesInput
-            .addEventListener("click", event => {
-                devicesInput.placeholder = "" ;
-            }) ;
-
-        devicesInput
             .addEventListener("input", event => {
                 let userInput = devicesInput.value ;
                 /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
 
                 searchRecipes(userSearch, "device") ;*/let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "device") ;
-            }) ;
-
-        utensilsInput
-            .addEventListener("click", event => {
-                utensilsInput.placeholder = "" ;
             }) ;
 
         utensilsInput

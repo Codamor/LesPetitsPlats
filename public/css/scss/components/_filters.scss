@@ -24,6 +24,9 @@
         font-weight: 500;
         color: hsl(0, 0%, 100%);
       }
+      &:focus::placeholder{
+        color: transparent;
+      }
     }
   }
   &__icon::before{

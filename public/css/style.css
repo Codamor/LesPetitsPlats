@@ -235,6 +235,9 @@ body {
   padding: 0 20px;
   font-size: 1.1em;
 }
+.search__input:focus::placeholder {
+  color: transparent;
+}
 .search__button {
   width: 70px;
 }
@@ -274,6 +277,9 @@ body {
   opacity: 1;
   font-weight: 500;
   color: white;
+}
+.filter__interaction input:focus::placeholder {
+  color: transparent;
 }
 .filter__icon::before {
   content: "";
