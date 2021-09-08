@@ -15,7 +15,7 @@ import {
     userSelectedTags,
     ingredientsInput,
     devicesInput,
-    utensilsInput, searchTextPatternAlgorithm
+    utensilsInput, searchTextPatternAlgorithm, filtersList
 } from "./helpers.js";
 
 export class View{
@@ -33,31 +33,27 @@ export class View{
     }
 
     displayTagsList(matchedTags, tagType){
-        let htmlLists = `` ;
+        let htmlList = `` ;
+        let liElement = `` ;
+        let ulElement = `` ;
 
-        while (matchedTags.length){
-            let elementsBatch = matchedTags.splice(0, 10) ;
-            let liElement = `` ;
-            let ulElement = `` ;
-
-            for (let i = 0; i < elementsBatch.length; i++) {
-                liElement += this.createHTMLTag(elementsBatch[i], tagType)
-            }
-
-            ulElement =
-                `<ul class="filter__list">
-                    ${liElement}
-                 </ul>`
-
-            htmlLists += ulElement ;
+        for (let i = 0; i < matchedTags.length; i++) {
+            liElement += this.createHTMLTag(matchedTags[i], tagType)
         }
 
+        ulElement =
+            `<ul class="filter__list">
+                ${liElement}
+             </ul>`
+
+        htmlList += ulElement ;
+        
         if (tagType === "ingredient"){
-            ingredientsList.innerHTML = htmlLists ;
+            ingredientsList.innerHTML = htmlList ;
         } else if (tagType === "device"){
-            devicesList.innerHTML = htmlLists ;
+            devicesList.innerHTML = htmlList ;
         } else if (tagType === "utensil"){
-            utensilsList.innerHTML = htmlLists ;
+            utensilsList.innerHTML = htmlList ;
         }
 
     }
