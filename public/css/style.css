@@ -83,11 +83,13 @@ body {
           HEADER
 \*---------------------- */
 .header {
+  width: 270px;
+  height: 100px;
+}
+.header__link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 270px;
-  height: 100px;
 }
 .header__logo {
   width: 50px;
