@@ -337,4 +337,14 @@ export class View{
                 this.filterTagsByUserSearch(userSearch, "utensil") ;
             }) ;
     }
+
+    onAllInputs(){
+        let allInputs = document.querySelectorAll("input") ;
+
+        for (let i = 0; i < allInputs.length; i++) {
+            allInputs[i].addEventListener("focusout", event => {
+                allInputs[i].value = "" ;
+            })
+        }
+    }
 }
