@@ -20,12 +20,10 @@ export class Controller{
         this._view.onSearch(this.searchRecipes)
         this._view.onTags(this.filterRecipesByTag) ;
         this._view.onFiltersInput() ;
-        this._view.onAllInputs() ;
 
     }
 
     searchRecipes = (userSearch, searchType) => {
-
         let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
 
         if (matchedRecipesWithUserSearch.length === 0){

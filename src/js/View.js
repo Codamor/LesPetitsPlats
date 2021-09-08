@@ -234,32 +234,6 @@ export class View{
         return userSelectedTagsValue ;
     }
 
-   onSearchBar(searchRecipesFromApi){ //TODO merger this with onSubmitButton in onSearch method
-        searchBar
-            .addEventListener("input", event => {
-            event.preventDefault() ;
-
-            let userInput = event.target.value ;
-
-            if (userInput.length >= 3){
-                let userSearch = splitText(cleanText(userInput)) ;
-                searchRecipesFromApi(userSearch, "global") ;
-            } else {
-                console.log("hp")
-            }
-        }) ;
-    }
-
-    onSubmitButton(searchRecipesFromApi){
-        submitSearchButton.addEventListener("click", event => {
-            event.preventDefault() ;
-            let userInput = searchBar.value ;
-            let userSearch = splitText(cleanText(userInput)) ;
-
-            searchRecipesFromApi(userSearch, "global") ;
-        }) ;
-    }
-
     onSearch(searchRecipesFromApi){
         searchBar
             .addEventListener("input", event => {
@@ -336,15 +310,12 @@ export class View{
                 searchRecipes(userSearch, "utensil") ;*/let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "utensil") ;
             }) ;
-    }
 
-    onAllInputs(){
-        let allInputs = document.querySelectorAll("input") ;
-
-        for (let i = 0; i < allInputs.length; i++) {
-            allInputs[i].addEventListener("focusout", event => {
-                allInputs[i].value = "" ;
-            })
-        }
+        let allFiltersInputs = document.querySelectorAll(".filter__interaction input") ;
+            for (let i = 0; i < allFiltersInputs.length; i++) {
+                allFiltersInputs[i].addEventListener("focusout", event => {
+                    allFiltersInputs[i].value = "" ;
+                })
+            }
     }
 }
