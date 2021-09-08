@@ -297,16 +297,19 @@ export class View{
     onFilterTagsIcon(filterRecipesByTag){
         for (let i = 0; i < allTagsIcon.length; i++) {
             allTagsIcon[i].addEventListener("click", event => { //TODO fix bug
+
                 let parentNode = event.target.parentNode.parentNode ;
                 let childNode = event.target.parentNode ;
-                parentNode.removeChild(childNode) ;
 
+                if(parentNode !== null){
+                    parentNode.removeChild(childNode) ;
+                }
                 filterRecipesByTag() ;
             }) ;
         }
     }
 
-    onFiltersInput(searchRecipes){
+    onFiltersInput(){
 
         ingredientsInput
             .addEventListener("input", event => {
