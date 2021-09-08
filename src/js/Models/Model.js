@@ -102,7 +102,7 @@ export class Model{
         return oneRecipe ;
     }
 
-    defineRecipeIngredientScore(userSearch, oneRecipe){
+    /*defineRecipeIngredientScore(userSearch, oneRecipe){ //TODO remove if useless (activate filter searching)
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) ;
 
@@ -127,7 +127,7 @@ export class Model{
         oneRecipe.recipeScore = utensilScore ;
 
         return oneRecipe ;
-    }
+    }*/
 
     sortRecipes(sortType, recipesArray){
         if(sortType === "score"){
@@ -154,7 +154,6 @@ export class Model{
 
 
     isRecipeHasAllTags(recipeId, allUserSelectedTags){
-
         for (let i = 0; i < allUserSelectedTags.length; i++) {
             let tagType = allUserSelectedTags[i].tagType ;
             let tagValue = allUserSelectedTags[i].tagValue ;
