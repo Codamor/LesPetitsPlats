@@ -1,5 +1,7 @@
 "use strict"
 
+import {userSelectedTags} from "./helpers.js";
+
 export class Controller{
     constructor(model, view) {
         this._model = model ;
@@ -25,7 +27,11 @@ export class Controller{
 
     searchRecipes = (userSearch, searchType) => {
 
-        if (userSearch.join("").length < 3 ){
+        userSelectedTags.innerHTML = "" ;
+
+        let userSearchLength = userSearch.join("").length
+
+        if (userSearchLength < 3 ){
             let allRecipes = this._model.getAllRecipesFromAPI() ;
             this._view.displayRecipes(allRecipes) ;
 
@@ -37,12 +43,12 @@ export class Controller{
                 this._view.enableNoSearchResultsMessage() ;
 
             } else {
-
-                this._view.disableNoSearchResultsMessage() ;
-                this._view.displayRecipes(matchedRecipesWithUserSearch) ;
                 let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithUserSearch) ;
                 let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithUserSearch) ;
                 let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithUserSearch) ;
+
+                this._view.disableNoSearchResultsMessage() ;
+                this._view.displayRecipes(matchedRecipesWithUserSearch) ;
                 this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
                 this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
                 this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
