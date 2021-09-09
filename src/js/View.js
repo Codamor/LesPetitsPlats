@@ -239,14 +239,14 @@ export class View{
             .addEventListener("input", event => {
                 event.preventDefault() ;
                 let userInput = event.target.value ;
+                let userSearch = splitText(cleanText(userInput)) ;
 
-                if (userInput.length >= 3){
-                    let userSearch = splitText(cleanText(userInput)) ;
-                    searchRecipesFromApi(userSearch, "global") ;
-                }
+                searchRecipesFromApi(userSearch, "global") ;
+
             }) ;
 
-        submitSearchButton.addEventListener("click", event => {
+        submitSearchButton
+            .addEventListener("click", event => {
             event.preventDefault() ;
             let userInput = searchBar.value ;
             let userSearch = splitText(cleanText(userInput)) ;

@@ -24,27 +24,33 @@ export class Controller{
     }
 
     searchRecipes = (userSearch, searchType) => {
-        let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
 
-        if (matchedRecipesWithUserSearch.length === 0){
-            this._view.enableNoSearchResultsMessage() ;
+        if (userSearch.join("").length < 3 ){
+            let allRecipes = this._model.getAllRecipesFromAPI() ;
+            this._view.displayRecipes(allRecipes) ;
+
         } else {
-            this._view.disableNoSearchResultsMessage() ;
+
+            let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
+
+            if (matchedRecipesWithUserSearch.length === 0){
+                this._view.enableNoSearchResultsMessage() ;
+
+            } else {
+
+                this._view.disableNoSearchResultsMessage() ;
+                this._view.displayRecipes(matchedRecipesWithUserSearch) ;
+                let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithUserSearch) ;
+                let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithUserSearch) ;
+                let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithUserSearch) ;
+                this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
+                this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
+                this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
+            }
         }
-
-        this._view.displayRecipes(matchedRecipesWithUserSearch) ;
-
-        let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithUserSearch) ;
-        let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithUserSearch) ;
-        let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithUserSearch) ;
-
-        this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
-        this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
-        this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
 
         this._view.onTags(this.filterRecipesByTag) ;
         this._view.onFiltersInput() ;
-
     }
 
     filterRecipesByTag = () => {
