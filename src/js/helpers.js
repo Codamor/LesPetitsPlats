@@ -17,6 +17,26 @@ export let displayedRecipes = document.getElementsByClassName("card") ;
 
 //SEARCH function
 export function searchPatternAlgorithm(text, pattern) {
+    let wordLength = pattern.length;
+    let textLength = text.length;
+
+    for (let i = 0; i <= textLength - wordLength; i++) {
+        let j;
+
+        for (j = 0; j < wordLength; j++) {
+            if (text[i + j] !== pattern[j]) {
+                break;
+            }
+        }
+
+        if (j == wordLength) {
+            return true ;
+        }
+    }
+}
+
+function searchPatternAlgorithmTwo(text, pattern) {
+    /*console.log(text, pattern)*/
     let matchNumber = 0 ;
     let wordLength = pattern.length;
     let textLength = text.length;
@@ -31,12 +51,13 @@ export function searchPatternAlgorithm(text, pattern) {
         }
 
         if (j == wordLength) {
+            /*console.log("match")*/
             matchNumber += 1 ;
         }
     }
-
     return matchNumber ;
 }
+
 
 //UTILITARIES
 export function compareUserSearchWithData(dataWordsArray, userSearchWordsArray){
@@ -49,6 +70,16 @@ export function compareUserSearchWithData(dataWordsArray, userSearchWordsArray){
             }
         }
     }
+    return matchNumber ;
+}
+
+export function compareUserSearchWithDataTwo(dataText, userSearchWordsArray){
+    let matchNumber = 0 ;
+
+    for (let i = 0; i < userSearchWordsArray.length; i++) {
+        matchNumber += searchPatternAlgorithmTwo(dataText, userSearchWordsArray[i])
+    }
+
     return matchNumber ;
 }
 

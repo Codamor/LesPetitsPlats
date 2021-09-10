@@ -4,8 +4,7 @@ import {Recipe} from "./Entity/Recipe.js";
 import {
     cleanText,
     removeDuplicatesFromArray,
-    splitText,
-    searchPatternAlgorithm
+    splitText, compareUserSearchWithDataTwo
 } from "./helpers.js";
 
 export class Model{
@@ -96,9 +95,9 @@ export class Model{
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let recipeDescription = this.formatDescription(oneRecipe) ;
 
-        let nameScore = searchPatternAlgorithm(recipeName, userSearch) * 3 ;
-        let ingredientScore = searchPatternAlgorithm(recipeIngredients, userSearch) * 0.2  ;
-        let descriptionScore = searchPatternAlgorithm(recipeDescription, userSearch) ;
+        let nameScore = compareUserSearchWithDataTwo(recipeName, userSearch) ;
+        let ingredientScore = compareUserSearchWithDataTwo(recipeIngredients, userSearch) ;
+        let descriptionScore = compareUserSearchWithDataTwo(recipeDescription, userSearch) ;
 
         recipeScore =  nameScore + ingredientScore  ;
 
@@ -109,7 +108,7 @@ export class Model{
 
     defineRecipeIngredientScore(userSearch, oneRecipe){
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
-        let ingredientScore = searchPatternAlgorithm(recipeIngredients, userSearch) ;
+        let ingredientScore = compareUserSearchWithDataTwo(recipeIngredients, userSearch) ;
 
         oneRecipe.recipeScore = ingredientScore ;
 
@@ -118,7 +117,7 @@ export class Model{
 
     defineRecipeDeviceScore(userSearch, oneRecipe){
         let recipeDevice = this.formatDevice(oneRecipe) ;
-        let deviceScore = searchPatternAlgorithm(recipeDevice, userSearch) ;
+        let deviceScore = compareUserSearchWithDataTwo(recipeDevice, userSearch) ;
 
         oneRecipe.recipeScore = deviceScore ;
 
@@ -127,7 +126,7 @@ export class Model{
 
     defineRecipeUtensilScore(userSearch, oneRecipe){
         let recipeUtensils = this.formatUtensils(oneRecipe) ;
-        let utensilScore = searchPatternAlgorithm(recipeUtensils, userSearch) ;
+        let utensilScore = compareUserSearchWithDataTwo(recipeUtensils, userSearch) ;
 
         oneRecipe.recipeScore = utensilScore ;
 

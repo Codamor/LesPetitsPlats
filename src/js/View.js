@@ -239,7 +239,7 @@ export class View{
             .addEventListener("input", event => {
                 event.preventDefault() ;
                 let userInput = event.target.value ;
-                let userSearch = cleanText(userInput) ;
+                let userSearch = splitText(cleanText(userInput)) ;
 
                 searchRecipesFromApi(userSearch, "global") ;
 
@@ -249,7 +249,7 @@ export class View{
             .addEventListener("click", event => {
             event.preventDefault() ;
             let userInput = searchBar.value ;
-            let userSearch = cleanText(userInput) ;
+            let userSearch = splitText(cleanText(userInput)) ;
 
             searchRecipesFromApi(userSearch, "global") ;
         }) ;
