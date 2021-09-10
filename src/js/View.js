@@ -15,7 +15,7 @@ import {
     userSelectedTags,
     ingredientsInput,
     devicesInput,
-    utensilsInput, searchTextPatternAlgorithm
+    utensilsInput, searchPatternAlgorithm
 } from "./helpers.js";
 
 export class View{
@@ -78,7 +78,7 @@ export class View{
 
             let tag = cleanText(allTags[i].dataset.value);
 
-            if (!searchTextPatternAlgorithm(tag, userSearch)) {
+            if (!searchPatternAlgorithm(tag, userSearch)) {
                 allTags[i].dataset.visible = "false";
             } else {
                 allTags[i].dataset.visible = "true";

@@ -16,16 +16,16 @@ export let userSelectedTags = document.getElementById("user-selected-tags") ;
 export let displayedRecipes = document.getElementsByClassName("card") ;
 
 //SEARCH function
-export function searchTextPatternAlgorithm(text, word) {
+export function searchPatternAlgorithm(text, pattern) {
     let matchNumber = 0 ;
-    let wordLength = word.length;
+    let wordLength = pattern.length;
     let textLength = text.length;
 
     for (let i = 0; i <= textLength - wordLength; i++) {
         let j;
 
         for (j = 0; j < wordLength; j++) {
-            if (text[i + j] !== word[j]) {
+            if (text[i + j] !== pattern[j]) {
                 break;
             }
         }
@@ -39,12 +39,12 @@ export function searchTextPatternAlgorithm(text, word) {
 }
 
 //UTILITARIES
-export function compareUserSearchWithData(array1, array2){
+export function compareUserSearchWithData(userSearchWordsArray, dataWordsArray){
     let matchNumber = 0 ;
 
-    for (let i = 0; i < array1.length; i++) {
-        for (let j = 0; j < array2.length; j++) {
-            if (searchTextPatternAlgorithm(array1[i], array2[j])){
+    for (let i = 0; i < userSearchWordsArray.length; i++) {
+        for (let j = 0; j < dataWordsArray.length; j++) {
+            if (searchPatternAlgorithm(userSearchWordsArray[i], dataWordsArray[j])){
                 matchNumber += 1 ;
             }
         }

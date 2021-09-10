@@ -5,7 +5,7 @@ import {
     cleanText,
     removeDuplicatesFromArray,
     splitText,
-    searchTextPatternAlgorithm
+    searchPatternAlgorithm
 } from "./helpers.js";
 
 export class Model{
@@ -96,9 +96,9 @@ export class Model{
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let recipeDescription = this.formatDescription(oneRecipe) ;
 
-        let nameScore = searchTextPatternAlgorithm(recipeName, userSearch) * 3 ;
-        let ingredientScore = searchTextPatternAlgorithm(recipeIngredients, userSearch) * 0.2  ;
-        let descriptionScore = searchTextPatternAlgorithm(recipeDescription, userSearch) ;
+        let nameScore = searchPatternAlgorithm(recipeName, userSearch) * 3 ;
+        let ingredientScore = searchPatternAlgorithm(recipeIngredients, userSearch) * 0.2  ;
+        let descriptionScore = searchPatternAlgorithm(recipeDescription, userSearch) ;
 
         recipeScore =  nameScore + ingredientScore  ;
 
@@ -109,7 +109,7 @@ export class Model{
 
     defineRecipeIngredientScore(userSearch, oneRecipe){
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
-        let ingredientScore = searchTextPatternAlgorithm(recipeIngredients, userSearch) ;
+        let ingredientScore = searchPatternAlgorithm(recipeIngredients, userSearch) ;
 
         oneRecipe.recipeScore = ingredientScore ;
 
@@ -118,7 +118,7 @@ export class Model{
 
     defineRecipeDeviceScore(userSearch, oneRecipe){
         let recipeDevice = this.formatDevice(oneRecipe) ;
-        let deviceScore = searchTextPatternAlgorithm(recipeDevice, userSearch) ;
+        let deviceScore = searchPatternAlgorithm(recipeDevice, userSearch) ;
 
         oneRecipe.recipeScore = deviceScore ;
 
@@ -127,7 +127,7 @@ export class Model{
 
     defineRecipeUtensilScore(userSearch, oneRecipe){
         let recipeUtensils = this.formatUtensils(oneRecipe) ;
-        let utensilScore = searchTextPatternAlgorithm(recipeUtensils, userSearch) ;
+        let utensilScore = searchPatternAlgorithm(recipeUtensils, userSearch) ;
 
         oneRecipe.recipeScore = utensilScore ;
 
