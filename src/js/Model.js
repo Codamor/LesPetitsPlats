@@ -1,7 +1,7 @@
 "use strict"
 
-import {Recipe} from "../Entity/Recipe.js";
-import {compareUserSearchWithData, cleanText, removeDuplicatesFromArray, searchTextPatternAlgorithm, splitText} from "../helpers.js";
+import {Recipe} from "./Entity/Recipe.js";
+import {compareUserSearchWithData, cleanText, removeDuplicatesFromArray, splitText} from "./helpers.js";
 
 export class Model{
 
@@ -71,7 +71,7 @@ export class Model{
 
             return this.defineRecipeGlobalScore(userSearch, oneRecipe) ;
 
-        } else if (searchType === "ingredient"){
+        } else if (searchType === "ingredient"){  //see View onFilters input listener to activate search by Tag
 
             return this.defineRecipeIngredientScore(userSearch, oneRecipe) ;
 
@@ -93,7 +93,7 @@ export class Model{
 
         let nameScore = compareUserSearchWithData(recipeName, userSearch) * 3 ;
         let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) * 0.2  ;
-        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ; //TODO remove if useless when finished
+        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ;
 
         recipeScore =  nameScore + ingredientScore  ;
 
@@ -102,7 +102,7 @@ export class Model{
         return oneRecipe ;
     }
 
-    /*defineRecipeIngredientScore(userSearch, oneRecipe){ //TODO remove if useless (activate filter searching)
+    defineRecipeIngredientScore(userSearch, oneRecipe){
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) ;
 
@@ -127,7 +127,7 @@ export class Model{
         oneRecipe.recipeScore = utensilScore ;
 
         return oneRecipe ;
-    }*/
+    }
 
     sortRecipes(sortType, recipesArray){
         if(sortType === "score"){
@@ -282,63 +282,10 @@ export class Model{
         let allUtensils = [] ;
 
         for (let i = 0; i < oneRecipe.utensils.length; i++) {
-            let ingredient = splitText(cleanText(oneRecipe.utensils[i])) ;
-            allUtensils.push(oneRecipe.utensils[i]) ;
+            let utensil = splitText(cleanText(oneRecipe.utensils[i])) ;
+            allUtensils.push(utensil) ;
         }
 
         return allUtensils ;
     }
-
-
-
-    //TODO remove these methods if useless when finished
-    /*getRecipesByIngredient(ingredient){
-        let allRecipes = this.getAllRecipesFromAPI() ;
-        let recipesByIngredient = [] ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            for (let j = 0; j < allRecipes[i].ingredients.length; j++) {
-                let recipeIngredient = cleanText(allRecipes[i].ingredients[j].ingredient) ;
-
-                if (searchTextPattern(recipeIngredient, ingredient)){
-                    if (!recipesByIngredient.includes(allRecipes[i])){
-                        recipesByIngredient.push(allRecipes[i]) ;
-                    }
-                }
-            }
-        }
-        return recipesByIngredient ;
-    }
-
-    getRecipesByDevice(device){
-        let allRecipes = this.getAllRecipesFromAPI() ;
-        let recipesByDevice = [] ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            let recipeDevice = cleanText(allRecipes[i].appliance) ;
-            if (searchTextPattern(recipeDevice, device)){
-                if (!recipesByDevice.includes(allRecipes[i])){
-                    recipesByDevice.push(allRecipes[i]) ;
-                }
-            }
-        }
-        return recipesByDevice ;
-    }
-
-    getRecipesByUtensil(utensil){
-        let allRecipes = this.getAllRecipesFromAPI() ;
-        let recipesByUtensil = [] ;
-
-        for (let i = 0; i < allRecipes.length; i++) {
-            for (let j = 0; j < allRecipes[i].utensils.length; j++) {
-                let recipeUtensil = cleanText(allRecipes[i].utensils[j]) ;
-                if (searchTextPattern(recipeUtensil, utensil)){
-                    if (!recipesByUtensil.includes(allRecipes[i])){
-                        recipesByUtensil.push(allRecipes[i]) ;
-                    }
-                }
-            }
-        }
-        return recipesByUtensil ;
-    }*/
 }
