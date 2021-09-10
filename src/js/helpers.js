@@ -54,10 +54,10 @@ export function removeDuplicatesFromArray(array){
     let arrayWithoutDuplicates = [] ;
 
     for (let i = 0; i < array.length; i++) {
-        let ingredient = cleanText(array[i]) ; //TODO generalize element
+        let element = cleanText(array[i]) ;
 
-        if (!normalizedElements.includes(ingredient)){
-            normalizedElements.push(ingredient) ;
+        if (!normalizedElements.includes(element)){
+            normalizedElements.push(element) ;
             arrayWithoutDuplicates.push(array[i]) ;
         }
     }
@@ -92,7 +92,6 @@ function removePunctuation(text){
 }
 
 function removeMultipleSpaces(text){
-    /*return text.replace(/\s\s+/g, ' ');*/ //TODO remove after testing results
     return text.trim() ;
 }
 
