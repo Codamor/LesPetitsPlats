@@ -38,7 +38,7 @@ export class View{
         let ulElement = `` ;
 
         for (let i = 0; i < matchedTags.length; i++) {
-            liElement += this.createHTMLTag(matchedTags[i], tagType)
+            liElement += this.createHTMLTagForList(matchedTags[i], tagType)
         }
 
         ulElement =
@@ -58,7 +58,7 @@ export class View{
 
     }
 
-    displayUserSelectedTag(tag, tagType){
+    displayTag(tag, tagType){
         let alreadyDisplayedTags = this.getDisplayedUserSelectedTags() ;
 
         for (let i = 0; i < alreadyDisplayedTags.length; i++) {
@@ -67,7 +67,7 @@ export class View{
             }
         }
 
-        let htmlTag = this.createHTMLUserSelectedTag(tag, tagType) ;
+        let htmlTag = this.createHTMLTagForSelection(tag, tagType) ;
 
         userSelectedTags.innerHTML += htmlTag ;
     }
@@ -86,7 +86,7 @@ export class View{
         }
     }
 
-    filterDisplayedRecipesBySelectedTags(allRecipesId, recipesIDToEnable, recipesIDToDisable){
+    filterRecipesBySelectedTags(allRecipesId, recipesIDToEnable, recipesIDToDisable){
         for (let i = 0; i < allRecipesId.length; i++) {
             if(!recipesIDToEnable.includes(allRecipesId[i])){
                 recipesIDToDisable.push(allRecipesId[i]) ;
@@ -174,7 +174,7 @@ export class View{
         return htmlIngredients ;
     }
 
-    createHTMLTag(oneTag, tagType){
+    createHTMLTagForList(oneTag, tagType){
         let htmlTag =
             `<li data-tag-name="${oneTag}">
                 <span data-tag-type="${tagType}" data-value="${oneTag}" class="filter__tag">${oneTag}</span>
@@ -183,7 +183,7 @@ export class View{
         return htmlTag ;
     }
 
-    createHTMLUserSelectedTag(oneTag, tagType){
+    createHTMLTagForSelection(oneTag, tagType){
         let htmlUserSelectedTag = `` ;
         let filterOption ;
 
@@ -261,7 +261,7 @@ export class View{
                 let tagType = cleanText(event.target.dataset.tagType) ;
                 let userTag = cleanText(event.target.dataset.value) ;
 
-                this.displayUserSelectedTag(userTag, tagType) ;
+                this.displayTag(userTag, tagType) ;
 
                 filterRecipesByTag() ;
             })
@@ -270,7 +270,7 @@ export class View{
 
     onFilterTagsIcon(filterRecipesByTag){
         for (let i = 0; i < allTagsIcon.length; i++) {
-            allTagsIcon[i].addEventListener("click", event => { //TODO fix bug
+            allTagsIcon[i].addEventListener("click", event => {
 
                 let parentNode = event.target.parentNode.parentNode ;
                 let childNode = event.target.parentNode ;
@@ -287,10 +287,11 @@ export class View{
 
         ingredientsInput
             .addEventListener("input", event => {
-                event.preventDefault() ; //TODO remove if useless
                 let userInput = ingredientsInput.value ;
-                /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
+
+                /*let userSearch = splitText(cleanText(userInput)) ; //enable to activate search recipes by Tag (cf Model also)
                 searchRecipes(userSearch, "ingredient") ;*/
+
                 let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "ingredient") ;
             }) ;
@@ -298,16 +299,22 @@ export class View{
         devicesInput
             .addEventListener("input", event => {
                 let userInput = devicesInput.value ;
-                /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
-                searchRecipes(userSearch, "device") ;*/let userSearch = cleanText(userInput) ;
+
+                /*let userSearch = splitText(cleanText(userInput)) ; //enable to activate search recipes by Tag (cf Model also)
+                searchRecipes(userSearch, "device") ;*/
+
+                let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "device") ;
             }) ;
 
         utensilsInput
             .addEventListener("input", event => {
                 let userInput = utensilsInput.value ;
-                /*let userSearch = splitText(cleanText(userInput)) ; //TODO remove if useless when finished
-                searchRecipes(userSearch, "utensil") ;*/let userSearch = cleanText(userInput) ;
+
+                /*let userSearch = splitText(cleanText(userInput)) ; //enable to activate search recipes by Tag (cf Model also)
+                searchRecipes(userSearch, "utensil") ;*/
+
+                let userSearch = cleanText(userInput) ;
                 this.filterTagsByUserSearch(userSearch, "utensil") ;
             }) ;
 
