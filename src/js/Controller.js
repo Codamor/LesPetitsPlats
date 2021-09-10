@@ -19,42 +19,57 @@ export class Controller{
         this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
         this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
 
-        this._view.onSearch(this.searchRecipes)
+        this._view.onSearch(this.displaySearchResults)
         this._view.onTags(this.filterRecipesByTag) ;
         this._view.onFiltersInput() ;
 
     }
 
-    searchRecipes = (userSearch, searchType) => {
-
+    displaySearchResults = (userSearch, searchType) => {
         userSelectedTags.innerHTML = "" ;
 
-        if (userSearch.join().length < 3 ){
-            let allRecipes = this._model.getAllRecipesFromAPI() ;
-            this._view.displayRecipes(allRecipes) ;
+        let userSearchLength = userSearch.join("").length
+
+        if (userSearchLength < 3 ){
+            this.displayDefaultsResults() ;
 
         } else {
-
-            let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
-
-            if (matchedRecipesWithUserSearch.length === 0){
-                this._view.enableNoSearchResultsMessage() ;
-
-            } else {
-                let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithUserSearch) ;
-                let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithUserSearch) ;
-                let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithUserSearch) ;
-
-                this._view.disableNoSearchResultsMessage() ;
-                this._view.displayRecipes(matchedRecipesWithUserSearch) ;
-                this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
-                this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
-                this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
-            }
+            this.searchRecipes(userSearch, searchType) ;
         }
 
         this._view.onTags(this.filterRecipesByTag) ;
         this._view.onFiltersInput() ;
+    }
+
+    displayDefaultsResults(){
+        let allRecipes = this._model.getAllRecipesFromAPI() ;
+        let matchedIngredientsWithRecipes = this._model.getAllIngredients(allRecipes) ;
+        let matchedDevicesWithRecipes = this._model.getAllDevices(allRecipes) ;
+        let matchedUtensilsWithRecipes = this._model.getAllUtensils(allRecipes) ;
+
+        this._view.displayRecipes(allRecipes) ;
+        this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
+        this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
+        this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
+    }
+
+    searchRecipes(userSearch, searchType){
+        let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
+
+        if (matchedRecipesWithUserSearch.length === 0){
+            this._view.enableNoSearchResultsMessage() ;
+
+        } else {
+            let matchedIngredientsWithRecipes = this._model.getAllIngredients(matchedRecipesWithUserSearch) ;
+            let matchedDevicesWithRecipes = this._model.getAllDevices(matchedRecipesWithUserSearch) ;
+            let matchedUtensilsWithRecipes = this._model.getAllUtensils(matchedRecipesWithUserSearch) ;
+
+            this._view.disableNoSearchResultsMessage() ;
+            this._view.displayRecipes(matchedRecipesWithUserSearch) ;
+            this._view.displayTagsList(matchedIngredientsWithRecipes, "ingredient") ;
+            this._view.displayTagsList(matchedDevicesWithRecipes, "device") ;
+            this._view.displayTagsList(matchedUtensilsWithRecipes, "utensil") ;
+        }
     }
 
     filterRecipesByTag = () => {
