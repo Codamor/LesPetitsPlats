@@ -9,6 +9,10 @@
     font-size: 1em;
 }
 
+* :focus-visible{
+    outline: none;
+}
+
 img{
     width: 100%;
     height: 100%;

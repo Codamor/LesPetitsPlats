@@ -8,25 +8,35 @@
   height: 364px;
   border-radius: 5px;
   overflow: hidden;
+  &[data-visible="false"]{
+    display: none;
+  }
+  &:focus-visible{
+    outline: solid 4px lightgreen;
+    border-radius: 5px;
+  }
     &__media{
-    height: 50%;
+    height: 192px;
     background-color: $color-dark-grey;
   }
   &__data{
     width: 100%;
-    height: 50%;
-
+    height: 192px;
     background-color: $color-medium-grey;
   }
   &__header{
     display: flex;
     justify-content: space-between;
-    height: auto;
+    height: 40px;
     padding:  10px;
   }
   &__title, &__time{
     font-size: 1.2em;
     font-weight: 500;
+    &:focus-visible{
+      outline: solid 4px lightgreen;
+      border-radius: 5px;
+    }
   }
   &__time:before{
     content: "\f017";
@@ -35,11 +45,21 @@
   }
   &__ingredient-title{
     font-weight: 500;
+    display: inline;
+    &:focus-visible{
+      outline: solid 4px lightgreen;
+    }
+  }
+  &__ingredient, &__description{
+    &:focus-visible{
+      outline: solid 4px lightgreen;
+      border-radius: 5px;
+    }
   }
   &__cols-box{
     display: flex;
     width: 100%;
-    height: auto;
+    height: 140px;
   }
   &__col{
     width: 50%;
@@ -50,6 +70,7 @@
     &--col-1{
     }
     &--col-2{
+      overflow: scroll;
     }
   }
 }

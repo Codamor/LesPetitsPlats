@@ -12,8 +12,7 @@
     height: auto;
     margin-bottom: 20px;
     &--advanced{
-      display: flex;
-      flex-direction: column;
+      position: relative;
     }
   }
   &__bar{
@@ -21,6 +20,9 @@
     justify-content: space-between;
     border-radius: 5px;
     overflow: hidden;
+    &:focus-within input:focus-visible{
+      border: solid 4px lightgreen;
+    }
   }
   &__input, &__button{
     width: 100%;
@@ -33,13 +35,21 @@
     font-size: 1.1em;
   }
   &__button{
+    &:focus-visible{
+      border: solid 4px lightgreen;
+    }
+  }
+  &__input:focus::placeholder {
+    color: transparent;
+  }
+  &__button{
     width: 70px;
     &:before{
       content: "\f002";
       font-family: "Font Awesome 5 Free";
       font-size: 1.7em;
       font-weight: 700;
-      color: #000;
+      color: hsl(0, 0%, 100%);
       cursor: pointer;
     }
   }

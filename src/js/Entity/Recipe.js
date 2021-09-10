@@ -1,7 +1,7 @@
 "use strict"
 export class Recipe{
     constructor(id, name, servings, ingredients, time,
-                description, appliance, ustensils) {
+                description, appliance, utensils) {
 
         this._id = id ;
         this._name = name ;
@@ -10,7 +10,8 @@ export class Recipe{
         this._time = time ;
         this._description = description ;
         this._appliance = appliance ;
-        this._ustensils = ustensils ;
+        this._utensils = utensils ;
+        this._recipeScore = 0 ;
     }
 
     get id() {
@@ -69,12 +70,21 @@ export class Recipe{
         this._appliance = value;
     }
 
-    get ustensils() {
-        return this._ustensils;
+    get utensils() {
+        return this._utensils;
     }
 
-    set ustensils(value) {
-        this._ustensils = value;
+    set utensils(value) {
+        this._utensils = value;
+    }
+
+
+    get recipeScore() {
+        return this._recipeScore;
+    }
+
+    set recipeScore(value) {
+        this._recipeScore = value;
     }
 }
 
