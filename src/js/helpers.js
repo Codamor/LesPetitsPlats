@@ -39,12 +39,12 @@ export function searchPatternAlgorithm(text, pattern) {
 }
 
 //UTILITARIES
-export function compareUserSearchWithData(userSearchWordsArray, dataWordsArray){
+export function compareUserSearchWithData(dataWordsArray, userSearchWordsArray){
     let matchNumber = 0 ;
 
-    for (let i = 0; i < userSearchWordsArray.length; i++) {
-        for (let j = 0; j < dataWordsArray.length; j++) {
-            if (searchPatternAlgorithm(userSearchWordsArray[i], dataWordsArray[j])){
+    for (let i = 0; i < dataWordsArray.length; i++) {
+        for (let j = 0; j < userSearchWordsArray.length; j++) {
+            if (searchPatternAlgorithm(dataWordsArray[i], userSearchWordsArray[j])){
                 matchNumber += 1 ;
             }
         }
