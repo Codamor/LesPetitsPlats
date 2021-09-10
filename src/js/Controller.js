@@ -29,9 +29,7 @@ export class Controller{
 
         userSelectedTags.innerHTML = "" ;
 
-        let userSearchLength = userSearch.join("").length
-
-        if (userSearchLength < 3 ){
+        if (userSearch.length < 3 ){
             let allRecipes = this._model.getAllRecipesFromAPI() ;
             this._view.displayRecipes(allRecipes) ;
 

@@ -1,7 +1,12 @@
 "use strict"
 
 import {Recipe} from "./Entity/Recipe.js";
-import {compareUserSearchWithData, cleanText, removeDuplicatesFromArray, splitText} from "./helpers.js";
+import {
+    cleanText,
+    removeDuplicatesFromArray,
+    splitText,
+    searchTextPatternAlgorithm
+} from "./helpers.js";
 
 export class Model{
 
@@ -91,9 +96,9 @@ export class Model{
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
         let recipeDescription = this.formatDescription(oneRecipe) ;
 
-        let nameScore = compareUserSearchWithData(recipeName, userSearch) * 3 ;
-        let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) * 0.2  ;
-        let descriptionScore = compareUserSearchWithData(recipeDescription, userSearch) ;
+        let nameScore = searchTextPatternAlgorithm(recipeName, userSearch) * 3 ;
+        let ingredientScore = searchTextPatternAlgorithm(recipeIngredients, userSearch) * 0.2  ;
+        let descriptionScore = searchTextPatternAlgorithm(recipeDescription, userSearch) ;
 
         recipeScore =  nameScore + ingredientScore  ;
 
@@ -104,7 +109,7 @@ export class Model{
 
     defineRecipeIngredientScore(userSearch, oneRecipe){
         let recipeIngredients = this.formatIngredients(oneRecipe) ;
-        let ingredientScore = compareUserSearchWithData(recipeIngredients, userSearch) ;
+        let ingredientScore = searchTextPatternAlgorithm(recipeIngredients, userSearch) ;
 
         oneRecipe.recipeScore = ingredientScore ;
 
@@ -113,7 +118,7 @@ export class Model{
 
     defineRecipeDeviceScore(userSearch, oneRecipe){
         let recipeDevice = this.formatDevice(oneRecipe) ;
-        let deviceScore = compareUserSearchWithData(recipeDevice, userSearch) ;
+        let deviceScore = searchTextPatternAlgorithm(recipeDevice, userSearch) ;
 
         oneRecipe.recipeScore = deviceScore ;
 
@@ -122,7 +127,7 @@ export class Model{
 
     defineRecipeUtensilScore(userSearch, oneRecipe){
         let recipeUtensils = this.formatUtensils(oneRecipe) ;
-        let utensilScore = compareUserSearchWithData(recipeUtensils, userSearch) ;
+        let utensilScore = searchTextPatternAlgorithm(recipeUtensils, userSearch) ;
 
         oneRecipe.recipeScore = utensilScore ;
 
@@ -248,26 +253,24 @@ export class Model{
 
 
     formatName(oneRecipe){
-        let name = splitText(cleanText(oneRecipe._name)) ;
+        let name = cleanText(oneRecipe._name) ;
 
         return name ;
     }
 
     formatIngredients(oneRecipe) {
-        let allIngredients = [];
+        let allIngredients = "";
 
         for (let i = 0; i < oneRecipe.ingredients.length; i++) {
-            let ingredient = splitText(cleanText(oneRecipe.ingredients[i].ingredient)) ;
-            for (let j = 0; j < ingredient.length; j++) {
-                allIngredients.push(ingredient[j]) ;
-            }
+            let ingredient = cleanText(oneRecipe.ingredients[i].ingredient) ;
+            allIngredients += `${ingredient} ` ;
         }
 
         return allIngredients;
     }
 
     formatDescription(oneRecipe){
-        let description = splitText(cleanText(oneRecipe.description)) ;
+        let description = cleanText(oneRecipe.description) ;
 
         return description ;
     }

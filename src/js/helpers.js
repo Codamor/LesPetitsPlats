@@ -17,6 +17,7 @@ export let displayedRecipes = document.getElementsByClassName("card") ;
 
 //SEARCH function
 export function searchTextPatternAlgorithm(text, word) {
+    let matchNumber = 0 ;
     let wordLength = word.length;
     let textLength = text.length;
 
@@ -30,9 +31,11 @@ export function searchTextPatternAlgorithm(text, word) {
         }
 
         if (j == wordLength) {
-            return true ;
+            matchNumber += 1 ;
         }
     }
+
+    return matchNumber ;
 }
 
 //UTILITARIES
