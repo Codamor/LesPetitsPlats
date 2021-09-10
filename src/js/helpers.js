@@ -49,6 +49,21 @@ export function compareUserSearchWithData(array1, array2){
     return matchNumber ;
 }
 
+export function removeDuplicatesFromArray(array){
+    let normalizedElements = [] ;
+    let arrayWithoutDuplicates = [] ;
+
+    for (let i = 0; i < array.length; i++) {
+        let ingredient = cleanText(array[i]) ; //TODO generalize element
+
+        if (!normalizedElements.includes(ingredient)){
+            normalizedElements.push(ingredient) ;
+            arrayWithoutDuplicates.push(array[i]) ;
+        }
+    }
+    return arrayWithoutDuplicates ;
+}
+
 //TO CLEAN TEXT
 let stopWords = [" a ", " au ", " aux ", " le ", " la ", " les ", " un ", " une ", " des ", " du ", " dans ", //TODO handle empty space more efficiently
     " l'", " d'", " en ", " de ", " et ", " pour ", " que ", " avec ", " plus ", " sans ", " ce ",
@@ -92,17 +107,3 @@ export function splitText(text){
     return text.split(" ") ;
 }
 
-export function removeDuplicatesFromArray(array){
-    let normalizedElements = [] ;
-    let arrayWithoutDuplicates = [] ;
-
-    for (let i = 0; i < array.length; i++) {
-        let ingredient = cleanText(array[i]) ; //TODO generalize element
-
-        if (!normalizedElements.includes(ingredient)){
-            normalizedElements.push(ingredient) ;
-            arrayWithoutDuplicates.push(array[i]) ;
-        }
-    }
-    return arrayWithoutDuplicates ;
-}
