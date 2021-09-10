@@ -35,9 +35,7 @@ export class Controller{
 
         } else {
 
-            console.time()
             let matchedRecipesWithUserSearch = this._model.searchRecipesOnApi(userSearch, searchType) ;
-            console.timeEnd()
 
             if (matchedRecipesWithUserSearch.length === 0){
                 this._view.enableNoSearchResultsMessage() ;
