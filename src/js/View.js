@@ -112,6 +112,9 @@ export class View{
     }
 
     enableNoSearchResultsMessage(){
+
+        gallery.innerHTML = "" ;
+
         document
             .getElementById("no-search-results").dataset.visible = "true" ;
     }
