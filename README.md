@@ -1,94 +1,127 @@
-[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
-
 # Les Petits Plats
 
 ![Les Petits Plats](LesPetitsPlats_capture.png "Les Petits Plats")
 
-## Présentation du contexte
+## Table of contents
 
-**Les Petits Plats** est un site de recettes de cuisine à l’instar de Marmiton ou 750g.
-Il propose un moteur de recherche permettant de rechercher les recettes.
-
-
-## Ce que ce projet m'a permis de pratiquer
-
-### Compétences
-
-* découper et intégrer une maquette,
-* structurer une page web avec HTML5,
-* mettre en forme une page web avec CSS3,
-* manipuler le DOM,
-* écouter les évènements,
-* générer du contenu dynamiquement depuis un fichier JSON,
-* rendre le site accessible,
-* élaborer un algorithme de recherche de motif dans un texte,
-
-### Technologies / méthodes
-
-* HTML5 / CSS3,
-* positionnement avec Grid et FlexBox,
-* responsive design avec les medias queries,
-* convention de nommage BEM,
-* Fetch / Json,
-* CSS avec Sass,
-* OOP design,
-* MVC pattern,
-* référentiel WCAG 2.0.
-
-## Livrables attendus
-
-### Scénario nominal
-
-* Le cas d’utilisation commence lorsque l’utilisateur entre au moins 3 caractères dans la barre de recherche principale,  
-* le système recherche des recettes correspondant à l’entrée utilisateur dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette,
-* l’interface est actualisée avec les résultats de recherche,
-* les champs de recherche avancée sont actualisés avec les informations ingrédients, ustensiles, appareil des différentes recettes restantes, 
-* l’utilisateur précise sa recherche grâce à l’un des champs : ingrédients, ustensiles, appareil,
-* au fur et à mesure du remplissage les mots clés ne correspondant pas à la frappe dans le champ disparaissent,
-* l’utilisateur choisit un mot clé dans le champ,
-* le mot clé apparaît sous forme de tag sous la recherche principale,
-* les résultats de recherche sont actualisés, ainsi que les éléments disponibles dans les champs de recherche avancée,
-* l’utilisateur sélectionne une recette.
-
-### Scénario alternatif A1
-
-* Aucune recette correspondante à la recherche,
-* l'enchaînement A1 commence au point 3 du scénario nominal,
-* l’interface affiche « Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.
-
-### Scénario alternatif A2
-
-* L’utilisateur commence sa recherche par un tag,
-* l'enchaînement A2 commence au point 1 du scénario nominal et reprend au point 9 du scénario nominal,
-* l’utilisateur commence la recherche par un tag.
-* les résultats de recherche sont actualisés, ainsi que les éléments disponibles dans les champs de recherche avancée (9 du cas principal).
-
-### Scénario alternatif A3
-
-* L’utilisateur ajoute d’autres tags pour la recherche avancée,
-* l'enchaînement A3 commence au point 9 du scénario nominal. Cet enchaînement peut se répéter autant que nécessaire,
-* l’utilisateur précise sa recherche grâce à l’un des champs : ingrédients, ustensiles, appareil,
-* au fur et à mesure du remplissage les mots clés ne correspondant pas à la frappe dans le champ disparaissent,
-* l’utilisateur choisit un mot clé dans le champ,
-* le mot clé apparaît sous forme de tag sous la recherche principale,
-* les résultats de recherche sont actualisés, ainsi que les éléments disponibles dans les champs de recherche avancée.
-
-## Ressources à ma disposition
-
-J'ai disposé des éléments suivants :
-* maquette desktop,
-* fichier de données Json.
+- [Context](#context)
+- [Demonstration](#demonstration)
+- [What this project allow me to practive](#what-this-project-allowed-me-to-practice)
+  - [Skills](#skills)
+  - [Algorithm](#algorithm)
+- [Technologies / Methods](#technologies--methods)
+- [Expected deliverables](#expected-deliverables)
+  - [Nominal scenario](#nominal-scenario)
+  - [Alternative scenario A1](#alternative-scenario-a1)
+  - [Alternative scenario A2](#alternative-scenario-a2)
+  - [Alternative scenario A3](#alternative-scenario-a3)
+- [Resources](#resources)
+- [Compatibility](#compatibility)
 
 
-## Consignes
+## Context
 
-* le code devait être :
-    * valide aux normes **W3C**,
-    * compatible avec les dernières versions de **Chrome** et **Firefox**
-  
+**Les Petits Plats** is a cooking recipe site like Marmiton or 750g.
+It offers a search engine for recipes.
 
+## Demonstration
+
+**Les Petits Plats** is visible on https://codamor.github.io/LesPetitsPlats/
+
+
+## What this project allowed me to practice
+
+### Skills
+
+* cut and integrate a model,
+* structure a web page with HTML5,
+* format a web page with CSS3,
+* manipulate the DOM,
+* listen to events,
+* generate content dynamically from a JSON file,
+* make the site accessible,
+* implement a pattern search algorithm.
+
+### Algorithm
+
+```
+
+Begin
+   patLen := pattern Size
+   strLen := string size
+
+   for i := 0 to (strLen - patLen), do
+      for j := 0 to patLen, do
+         if text[i+j] ≠ pattern[j], then
+            break the loop
+      done
+
+      if j == patLen, then
+         display the position i, as there pattern found
+   done
+End
+```
+
+
+
+### Technologies / methods
+
+* HTML5/CSS3,
+* positioning with Grid and FlexBox,
+* responsive design with media queries,
+* BEM naming convention,
+* Fetch/Json,
+* CSS with Sass,
+* WCAG 2.0 repository.
+
+## Expected deliverables
+
+### Nominal scenario
+
+* The use case starts when the user enters at least 3 characters in the main search bar,
+* the system searches for recipes matching the user input in: the recipe title, the list of recipe ingredients, the recipe description,
+* the interface is updated with search results,
+* the advanced search fields are updated with the ingredient, utensil and appliance information for the various remaining recipes,
+* the user specifies his search using one of the fields: ingredients, utensils, appliance,
+* as you fill in the keywords that do not correspond to the keystroke in the field disappear,
+* the user chooses a keyword in the field,
+* the keyword appears as a tag under the main search,
+* the search results are updated, as well as the elements available in the advanced search fields,
+* the user selects a recipe.
+
+### Alternative scenario A1
+
+* No recipe matching the search,
+* sequence A1 starts at point 3 of the nominal scenario,
+* the interface displays "No recipe matches your criteria... you can search for "apple pie", "fish", etc.
+
+### Alternative scenario A2
+
+* The user begins his search with a tag,
+* sequence A2 begins at point 1 of the nominal scenario and resumes at point 9 of the nominal scenario,
+* the user begins the search with a tag.
+* the search results are updated, as well as the elements available in the advanced search fields (9 of the main case).
+
+### Alternative scenario A3
+
+* User adds other tags for advanced search,
+* sequence A3 begins at point 9 of the nominal scenario. This sequence can be repeated as often as necessary,
+* the user specifies his search using one of the fields: ingredients, utensils, appliance,
+* as you fill in the keywords that do not correspond to the keystroke in the field disappear,
+* the user chooses a keyword in the field,
+* the keyword appears as a tag under the main search,
+* the search results are updated, as well as the elements available in the advanced search fields.
+
+## Resources
+I have the following items:
+* desktop model,
+* Json data file.
+
+
+## Compatibility
+
+  * valid to **W3C** standards,
+  * compatible with the latest versions of **Chrome** and **Firefox**
 
 
 
